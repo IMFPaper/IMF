@@ -1,0 +1,157 @@
+---
+title: European or American? A re-examination of the transatlantic influence over the IMF
+subtitle: GV499 Dissertation
+header-includes: |
+  \AtBeginDocument{\title[GV499 Dissertation]{European or American? A re-examination of the transatlantic influence over the IMF}}
+date: last-modified
+author: Dianyi Yang
+format:
+  beamer:
+    theme: Madrid
+bibliography: references.bib
+csl: extra/apa.csl
+project:
+  execute-dir: "D:/OneDrive - London School of Economics/Desktop/GV499/IMF"
+---
+
+## Background
+
+-   The International Monetary Fund (IMF) and the World Bank were established toward the end of World War II as part of the Bretton Woods agreement in 1944 [@jensen2004].
+
+-   Believed US dominance in the beginning,
+
+-   "Gentlemen's agreement": the IMF managing director being a European, and the World Bank president being an American [@Keating2024; @Weiss2023].
+
+## Research Question
+
+Who has more influence over the IMF, the US or Europe?
+
+-   US?
+
+    -   HQ in the US
+
+    -   US veto power
+
+    -   US hegemony
+
+    -   US deputy
+
+    -   Case Study: Mexico
+
+-   Europe?
+
+    -   European managing director
+
+    -   Case Study: Euro Crisis
+
+-   Difficulties in comparison
+
+    -   Consensus-based governance
+
+    -   closed-door negotiations
+
+## Empirical Strategy
+
+-   Data source/empirical inspiration: @lipscy2018 (1980-2010)
+
+    -   but their focus is the effect on self-insurance
+
+    -   did not separate Europe from the US - 'Western influence'
+
+-   Proxies for influence (merged through PCA)
+
+    -   IMF direct: nationals employed as economists, IMF quota.
+
+    -   US: UN affinity score with US, trade volume with US, US bank lending
+
+    -   European: UN affinity score with European powers, trade volume with European powers, European bank lending
+
+## Empirical Strategy
+
+-   Dependent variables
+
+    -   IMF loan to GDP ratio
+
+    -   IMF participation rate
+
+    -   IMF loan approval
+
+    -   IMF conditions
+
+-   Independent variables
+
+    -   IMF influence (used by @lipscy2018 and separated by me into EU, US and IMF)
+
+    -   GDP
+
+    -   Growth
+
+    -   Reserves
+
+    -   OECD
+
+-   Hypotheses
+
+    -   $H_0$: No difference in the influence of US and Europe over the IMF.
+
+    -   $H_1$: Either the US or EU has more influence over the IMF.
+
+    -   Test of equality of the US and EU coefficients.
+
+## Results from [@lipscy2018]
+
+![](images/clipboard-2567109775.png)
+
+## Preliminary Results
+
+```{r setup}
+knitr::opts_knit$set(root.dir = 'D:/OneDrive - London School of Economics/Desktop/GV499/IMF')
+need <- c('tidyverse','haven','AER','fixest','modelsummary',
+          'corrplot', 'kableExtra','car','parameters') # list packages needed
+have <- need %in% rownames(installed.packages()) # checks packages you have
+if(any(!have)) install.packages(need[!have]) # install missing packages
+invisible(lapply(need, library, character.only=T))
+```
+
+```{r results}
+load('save/regtable.RData')
+
+#t-tests
+regtable$`Probit: IMF loan approval`$df.residual <- degrees_of_freedom(regtable$`Probit: IMF loan approval`)
+
+glance_custom.tobit <- function(x, ...) {
+  data.frame(
+    'equality'=paste0('[','$p=',round(lht(x, test='F', 'us=eu')[2,4],3),'$]'),
+    'vcov.type' = 'by: Country'
+  )
+}
+
+glance_custom.fixest <- function(x, ...) {
+  data.frame(
+    'equality'=paste0('[','$p=',round(lht(x, test='F', 'us=eu')[2,4],3),'$]'),
+    'vcov.type' = 'by: Country'
+  )
+}
+
+coefmap <- c('us' = 'US Influence',
+             'eu' = 'EU Influence',
+             'imf' = 'IMF Influence',
+             'lnrgdpnew' = 'GDP',
+             'lnrgdpnewsq' = 'GDP$^2$',
+             'rgdpchnew' = 'GDPpc',
+             'rgdpchnewsquare' = "GDPpc$^2$",
+             'growth1new' = 'GDPpc growth',
+             'reserv1' = 'Reserves',
+             'oecd1' = 'OECD',
+              '(Intercept)' = '(Intercept)')
+gof_map <- list(list("raw" = "equality", "clean" = "US=EU", "fmt" = NULL),
+                list("raw" = "nobs", "clean" = "$N$", "fmt" = 0),
+                list('raw' = 'vcov.type', 'clean' = 'Std.Errors', 'fmt' = NULL))
+msummary(regtable, coef_map=coefmap, gof_map=gof_map, stars=T, escape=F) %>% 
+  kable_styling(latex_options="scale_down")
+```
+
+## References {.unnumbered}
+
+::: {#refs}
+:::

@@ -1,0 +1,336 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+%
+\documentclass[
+  letterpaper,
+  abstract=true]{scrartcl}
+
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else  
+    % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[top=30mm,left=30mm,right=30mm,heightrounded]{geometry}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\setcounter{secnumdepth}{5}
+% Make \paragraph and \subparagraph free-standing
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newlength{\csllabelwidth}
+\setlength{\csllabelwidth}{3em}
+\newlength{\cslentryspacingunit} % times entry-spacing
+\setlength{\cslentryspacingunit}{\parskip}
+\newenvironment{CSLReferences}[2] % #1 hanging-ident, #2 entry spacing
+ {% don't indent paragraphs
+  \setlength{\parindent}{0pt}
+  % turn on hanging indent if param 1 is 1
+  \ifodd #1
+  \let\oldpar\par
+  \def\par{\hangindent=\cslhangindent\oldpar}
+  \fi
+  % set entry spacing
+  \setlength{\parskip}{#2\cslentryspacingunit}
+ }%
+ {}
+\usepackage{calc}
+\newcommand{\CSLBlock}[1]{#1\hfill\break}
+\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{#1}}
+\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}\break}
+\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
+
+% TODO: Add custom LaTeX header directives here
+\usepackage{float, booktabs, siunitx, orcidlink}
+\setkomafont{disposition}{\bfseries}
+\providecommand{\keywords}[1]
+{
+  \small	
+  \textbf
+{\textit{Keywords---}} #1
+}
+\makeatletter
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\AtBeginDocument{%
+\ifdefined\contentsname
+  \renewcommand*\contentsname{Table of contents}
+\else
+  \newcommand\contentsname{Table of contents}
+\fi
+\ifdefined\listfigurename
+  \renewcommand*\listfigurename{List of Figures}
+\else
+  \newcommand\listfigurename{List of Figures}
+\fi
+\ifdefined\listtablename
+  \renewcommand*\listtablename{List of Tables}
+\else
+  \newcommand\listtablename{List of Tables}
+\fi
+\ifdefined\figurename
+  \renewcommand*\figurename{Figure}
+\else
+  \newcommand\figurename{Figure}
+\fi
+\ifdefined\tablename
+  \renewcommand*\tablename{Table}
+\else
+  \newcommand\tablename{Table}
+\fi
+}
+\@ifpackageloaded{float}{}{\usepackage{float}}
+\floatstyle{ruled}
+\@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
+\floatname{codelisting}{Listing}
+\newcommand*\listoflistings{\listof{codelisting}{List of Listings}}
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
+\makeatother
+\makeatletter
+\@ifpackageloaded{tcolorbox}{}{\usepackage[skins,breakable]{tcolorbox}}
+\makeatother
+\makeatletter
+\@ifundefined{shadecolor}{\definecolor{shadecolor}{rgb}{.97, .97, .97}}
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\makeatother
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={European or American? A re-examination of the transatlantic influence over the IMF},
+  pdfkeywords={IMF, US hegemony, Europe},
+  colorlinks=true,
+  linkcolor={blue},
+  filecolor={Maroon},
+  citecolor={Blue},
+  urlcolor={Blue},
+  pdfcreator={LaTeX via pandoc}}
+
+\title{European or American? A re-examination of the transatlantic
+influence over the IMF}
+\usepackage{etoolbox}
+\makeatletter
+\providecommand{\subtitle}[1]{% add subtitle to \maketitle
+  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
+}
+\makeatother
+\subtitle{GV499 Dissertation}
+\author{Dianyi Yang~\orcidlink{0009-0004-4652-3429}\textsuperscript{}}
+\date{2024-01-06}
+
+\begin{document}
+\maketitle
+\begin{abstract}
+This is an abstract.
+\end{abstract}
+\begin{center}
+\keywords{IMF, US hegemony, Europe}
+\end{center}
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[enhanced, interior hidden, breakable, boxrule=0pt, borderline west={3pt}{0pt}{shadecolor}, frame hidden, sharp corners]}{\end{tcolorbox}}\fi
+
+\newpage
+
+\hypertarget{introduction}{%
+\section{Introduction}\label{introduction}}
+
+The International Monetary Fund (IMF) and the World Bank\footnote{Familar
+  name for the International Bank for Reconstruction and Development
+  (IBRD), the lending arm of the later created World Bank Group.} were
+established toward the end of World War II as part of the Bretton Woods
+agreement in 1944 (\protect\hyperlink{ref-jensen2004}{Jensen, 2004}).
+While the World Bank specialised in long-term project financing, the IMF
+was initially designed for addressing the short-term balance-of-payment
+crises which would otherwise undermine the fixed exchange rate
+arrangements under the Bretton Woods system
+(\protect\hyperlink{ref-jensen2004}{Jensen, 2004}).
+
+One renowned fact about the IMF and its sister institution, the World
+Bank, is the long-standing ``gentlemen's agreement'' of the IMF managing
+director being a European, and the World Bank president being an
+American (\protect\hyperlink{ref-Keating2024}{Keating, 2024};
+\protect\hyperlink{ref-Weiss2023}{Weiss, 2023}), despite no such
+provisions in either institution's articles of agreements
+(\protect\hyperlink{ref-Fund2020}{IMF, 2020};
+\protect\hyperlink{ref-WorldBank2021}{World Bank, 2021}).
+
+Such arrangements inspire a straightforward question that is yet
+difficult to answer: who has more influence over the IMF, the US or
+Europe? Whereas the US dominance in the World Bank is undisputed
+(\protect\hyperlink{ref-clark2020}{Clark \& Dolan, 2020};
+\protect\hyperlink{ref-wade2002}{Wade, 2002};
+\protect\hyperlink{ref-woods2003}{Woods, 2003}), the case of the IMF is
+much more complicated. As the
+\protect\hyperlink{sec-litreview}{Literature Review} section
+demonstrates, there has been abundant evidence of both European and
+American influence on the IMF, but short of a qualitative or
+quantitative comparison between the two.
+
+Qualitative attempts at this question may have been thwarted by the
+closed-door and consensus-based style of governance of the IMF, as
+epitomised by the ``gentlemen's agreement''. On the one hand, the
+frequent use of conventions and consensus renders any analyses on the
+formal structure of the IMF (e.g.~veto power) insufficient on its own.
+On the other hand, the closed-door negotiations imply that we often
+observe the outcome, but not the process of the bargaining. While
+specific case studies (e.g.~Mexico and European debt crisis, see Lipscy
+\& Lee (\protect\hyperlink{ref-lipscy2018}{2018}) and Hodson
+(\protect\hyperlink{ref-hodson2014}{2014})) may have shed light on the
+influence of the US or Europe, they rarely allow for a transatlantic
+comparison and their representativeness can be questioned.
+
+This dissertation therefore attempts to quantitatively compare the
+influence of the US and Europe on the IMF.
+
+The structure of this dissertation is as follows:
+Section~\ref{sec-litreview} provides a review over the literature on the
+influence of the US and Europe over the IMF.
+
+\hypertarget{sec-litreview}{%
+\section{Literature Review}\label{sec-litreview}}
+
+\begin{itemize}
+\tightlist
+\item
+  IMF chief European (\protect\hyperlink{ref-Kahler2001}{Kahler, 2001})
+\end{itemize}
+
+\hypertarget{references}{%
+\section*{References}\label{references}}
+\addcontentsline{toc}{section}{References}
+
+\hypertarget{refs}{}
+\begin{CSLReferences}{1}{0}
+\leavevmode\vadjust pre{\hypertarget{ref-clark2020}{}}%
+Clark, R., \& Dolan, L. R. (2020). Pleasing the Principal: U.S.
+Influence in World Bank Policymaking. \emph{American Journal of
+Political Science}, \emph{65}(1), 36--51.
+\url{https://doi.org/10.1111/ajps.12531}
+
+\leavevmode\vadjust pre{\hypertarget{ref-hodson2014}{}}%
+Hodson, D. (2014). The IMF as a de facto institution of the EU: A
+multiple supervisor approach. \emph{Review of International Political
+Economy}, \emph{22}(3), 570--598.
+\url{https://doi.org/10.1080/09692290.2014.956136}
+
+\leavevmode\vadjust pre{\hypertarget{ref-Fund2020}{}}%
+IMF. (2020). \emph{{Articles} of {Agreement}}. International Monetary
+Fund.
+
+\leavevmode\vadjust pre{\hypertarget{ref-jensen2004}{}}%
+Jensen, N. M. (2004). Crisis, Conditions, and Capital. \emph{Journal of
+Conflict Resolution}, \emph{48}(2), 194--210.
+\url{https://doi.org/10.1177/0022002703262860}
+
+\leavevmode\vadjust pre{\hypertarget{ref-Kahler2001}{}}%
+Kahler, M. (2001). \emph{Leadership selection in the major
+multilaterals}. Institute for International Economics.
+
+\leavevmode\vadjust pre{\hypertarget{ref-Keating2024}{}}%
+Keating, J. E. (2024). Why {Is} the {IMF} {Chief} {Always} a {European}?
+In \emph{Foreign Policy}.
+\url{https://foreignpolicy.com/2011/05/18/why-is-the-imf-chief-always-a-european/}
+
+\leavevmode\vadjust pre{\hypertarget{ref-lipscy2018}{}}%
+Lipscy, P. Y., \& Lee, H. N.-K. (2018). The IMF As a Biased Global
+Insurance Mechanism: Asymmetrical Moral Hazard, Reserve Accumulation,
+and Financial Crises. \emph{International Organization}, \emph{73}(1),
+35--64. \url{https://doi.org/10.1017/s0020818318000371}
+
+\leavevmode\vadjust pre{\hypertarget{ref-wade2002}{}}%
+Wade, R. H. (2002). US hegemony and the World Bank: the fight over
+people and ideas. \emph{Review of International Political Economy},
+\emph{9}(2), 215--243. \url{https://doi.org/10.1080/09692290110126092}
+
+\leavevmode\vadjust pre{\hypertarget{ref-Weiss2023}{}}%
+Weiss, M. A. (2023). Selecting the world bank president. In
+\emph{Congressional Research Service}.
+\url{https://sgp.fas.org/crs/row/R42463.pdf}
+
+\leavevmode\vadjust pre{\hypertarget{ref-woods2003}{}}%
+Woods, N. (2003). \emph{The united states and the international
+financial institutions: Power and influence within the world bank and
+the IMF} (pp. 92--114). Oxford University PressOxford.
+\url{https://doi.org/10.1093/0199261431.003.0005}
+
+\leavevmode\vadjust pre{\hypertarget{ref-WorldBank2021}{}}%
+World Bank. (2021). \emph{Articles of agreement}.
+\url{https://www.worldbank.org/en/about/articles-of-agreement}
+
+\end{CSLReferences}
+
+
+
+\end{document}
