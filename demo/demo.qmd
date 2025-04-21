@@ -1,6 +1,6 @@
 ---
 title: European or American? A re-examination of the transatlantic influence over the IMF
-subtitle: GV499 Dissertation
+# subtitle: GV499 Dissertation
 header-includes: |
   \AtBeginDocument{\title[GV499 Dissertation]{European or American? A re-examination of the transatlantic influence over the IMF}}
 date: last-modified
