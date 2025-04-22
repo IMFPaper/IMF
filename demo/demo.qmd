@@ -10,6 +10,10 @@ author:
 format:
   beamer:
     theme: Madrid
+    include-in-header: 
+      - text: |
+          \definecolor{myblue}{RGB}{0, 113, 187}
+          \colorlet{beamer@blendedblue}{myblue}
 bibliography: references.bib
 csl: extra/apa.csl
 ---
