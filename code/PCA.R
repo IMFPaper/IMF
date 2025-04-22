@@ -43,30 +43,31 @@ summary(PCA) # show primary components
 plot(PCA, type = "l") # Scree plot - "elbow" shape indicates good representation by the first component 
 autoplot(PCA, loadings = TRUE, loadings.label = TRUE) # shows components of the first two components
 
-#3 components
-IMF <- a |>
-  select(shstaffl,shquotal) |>
+# Break down PCA into IMF, US, and EU components ------------------------------------------------------------------------------------------------------------------------------
+IMF <- data |>
+  select(shstaffl, shquotal) |>
   na.omit() |>
-  prcomp(scale=T)
+  prcomp(scale = T)
 summary(IMF)
 
-US <- a |>
+US <- data |>
   select(frusanew, ustradenew, usq4) |>
   na.omit() |>
-  prcomp(scale=T)
+  prcomp(scale = T)
 summary(US)
 
-EU <- a |>
+EU <- data |>
   select(frdfgnew, eutradenew, avgukfrgmq4) |>
   na.omit() |>
-  prcomp(scale=T)
+  prcomp(scale = T)
 summary(EU)
+plot(EU, type = "l")
 
-#regression
-data$imf <- -predict(IMF, data)[,1]
-data$us <- predict(US, data)[,1]
-data$eu <- predict(EU, data)[,1]
-data$pca <- -predict(PCA, data)[,1]
+# Run regression ---------------------------------------------------------------------------------------------------------------------------------------------------------------
+data$imf <- -predict(IMF, data)[, 1]
+data$us <- predict(US, data)[, 1]
+data$eu <- predict(EU, data)[, 1]
+data$pca <- -predict(PCA, data)[, 1]
 
 #plot correlation
 corr <- data |>
