@@ -187,7 +187,7 @@ regModels <- list(
   'Tobit: number of IMF conditions' = condition
 )
 save(regModels, data, file = 'save/regModels.RData')
-msummary(regModels, stars = T)
+msummary(regModels, stars = T) # Rough regression table with all variables and stars
 
 # Auxiliary F-tests -------------------------------------------------------------------------------------------------------------------------------------------
 # You don't have to run this to replicate the demo.
