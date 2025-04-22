@@ -245,15 +245,22 @@ gof_map <- list(
   list('raw' = 'vcov.type', 'clean' = 'Std.Errors', 'fmt' = NULL)
 )
 
-(resultsTable <- msummary(
-  regModels,
-  coef_map = coefmap,
-  gof_map = gof_map,
-  stars = T,
-  escape = F,
-  output = "kableExtra"
-) |>
-  kable_styling(latex_options = "scale_down"))
+getTable <- function(output = "html") {
+  msummary(
+    regModels,
+    coef_map = coefmap,
+    gof_map = gof_map,
+    stars = T,
+    escape = F,
+    output = output
+  )
+}
+
+getTable() # for previewing the table in IDE
+
+resultsTable <- getTable("latex") |> tinytable::theme_tt("resize", width = 0.95) # LaTeX table or slide/paper presentation
+
+save(resultsTable, file = 'save/regTable.RData') # Save the table
 
 # Auxiliary F-tests -------------------------------------------------------------------------------------------------------------------------------------------
 # You don't have to run this to replicate the demo.
