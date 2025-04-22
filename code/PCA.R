@@ -24,17 +24,24 @@ invisible(lapply(need, library, character.only = T))
 
 data <- read_dta("data/panel_data.dta") # Load data
 
-#PCA
+# Replicate Lipscy & Lee's (2018) original PCA analysis in R ------------------------------------------------------------------------------------------------------------------
 PCA <- data |>
-  select(shstaffl,shquotal,frusanew,
-         frdfgnew,ustradenew,eutradenew,
-         usq4,avgukfrgmq4) |>
+  select(
+    shstaffl,
+    shquotal,
+    frusanew,
+    frdfgnew,
+    ustradenew,
+    eutradenew,
+    usq4,
+    avgukfrgmq4
+  ) |>
   na.omit() |>
-  prcomp(scale=T)
-summary(PCA)
+  prcomp(scale = T)
+summary(PCA) # show primary components
 
-plot(PCA, type="l")
-autoplot(PCA,loadings = TRUE, loadings.label = TRUE,)
+plot(PCA, type = "l") # Scree plot - "elbow" shape indicates good representation by the first component 
+autoplot(PCA, loadings = TRUE, loadings.label = TRUE) # shows components of the first two components
 
 #3 components
 IMF <- a |>
