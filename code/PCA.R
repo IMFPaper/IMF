@@ -41,7 +41,7 @@ PCA <- data |>
   prcomp(scale = T)
 summary(PCA) # show primary components
 
-plot(PCA, type = "l") # Scree plot - "elbow" shape indicates good representation by the first component 
+plot(PCA, type = "l") # Scree plot - "elbow" shape indicates good representation by the first component
 autoplot(PCA, loadings = TRUE, loadings.label = TRUE) # shows components of the first two components
 
 # Break down PCA into IMF, US, and EU components ------------------------------------------------------------------------------------------------------------------------------
