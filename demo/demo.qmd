@@ -98,72 +98,9 @@ Who has more influence over the IMF, the US or Europe?
 
 ## Preliminary Results
 
-```{r setup}
-need <- c('AER', 'car', 'kableExtra', 'modelsummary', 'parameters') # list packages needed
-# have <- need %in% rownames(installed.packages()) # checks packages you have
-# if(any(!have)) install.packages(need[!have]) # install missing packages
-invisible(lapply(need, library, character.only = T))
-```
-
 ```{r results}
-load('save/regtable.RData')
-
-#t-tests
-regtable$`Probit: IMF loan approval`$df.residual <- degrees_of_freedom(
-  regtable$`Probit: IMF loan approval`
-)
-
-glance_custom.tobit <- function(x, ...) {
-  data.frame(
-    'equality' = paste0(
-      '[',
-      '$p=',
-      round(lht(x, test = 'F', 'us=eu')[2, 4], 3),
-      '$]'
-    ),
-    'vcov.type' = 'by: Country'
-  )
-}
-
-glance_custom.fixest <- function(x, ...) {
-  data.frame(
-    'equality' = paste0(
-      '[',
-      '$p=',
-      round(lht(x, test = 'F', 'us=eu')[2, 4], 3),
-      '$]'
-    ),
-    'vcov.type' = 'by: Country'
-  )
-}
-
-coefmap <- c(
-  'us' = 'US Influence',
-  'eu' = 'EU Influence',
-  'imf' = 'IMF Influence',
-  'lnrgdpnew' = 'GDP',
-  'lnrgdpnewsq' = 'GDP$^2$',
-  'rgdpchnew' = 'GDPpc',
-  'rgdpchnewsquare' = "GDPpc$^2$",
-  'growth1new' = 'GDPpc growth',
-  'reserv1' = 'Reserves',
-  'oecd1' = 'OECD',
-  '(Intercept)' = '(Intercept)'
-)
-gof_map <- list(
-  list("raw" = "equality", "clean" = "US=EU", "fmt" = NULL),
-  list("raw" = "nobs", "clean" = "$N$", "fmt" = 0),
-  list('raw' = 'vcov.type', 'clean' = 'Std.Errors', 'fmt' = NULL)
-)
-msummary(
-  regtable,
-  coef_map = coefmap,
-  gof_map = gof_map,
-  stars = T,
-  escape = F,
-  output = "kableExtra"
-) |>
-  kable_styling(latex_options = "scale_down")
+load('save/regTable.RData')
+resultsTable
 ```
 
 ## References {.unnumbered}

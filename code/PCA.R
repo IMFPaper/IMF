@@ -3,8 +3,7 @@
 # R Script
 # Purpose: This script runs PCA and regression analysis for the demo.
 # Inputs: data/panel_data.dta
-# Outputs: save/regtable.RData
-
+# Outputs: save/regModels.RData
 
 # SETUP ----------------------------------------------------------------------------------------------------------------
 rm(list = ls()) # Clear workspace
@@ -14,9 +13,11 @@ need <- c(
   'haven',
   'AER',
   'fixest',
+  "kableExtra",
   'modelsummary',
   'corrplot',
-  "ggfortify"
+  "ggfortify",
+  "parameters"
 ) # list packages needed
 have <- need %in% rownames(installed.packages()) # checks packages you have
 if (any(!have)) install.packages(need[!have]) # install missing packages
@@ -40,7 +41,7 @@ PCA <- data |>
   prcomp(scale = T)
 summary(PCA) # show primary components
 
-plot(PCA, type = "l") # Scree plot - "elbow" shape indicates good representation by the first component 
+plot(PCA, type = "l") # Scree plot - "elbow" shape indicates good representation by the first component
 autoplot(PCA, loadings = TRUE, loadings.label = TRUE) # shows components of the first two components
 
 # Break down PCA into IMF, US, and EU components ------------------------------------------------------------------------------------------------------------------------------
@@ -68,7 +69,7 @@ plot(EU, type = "l")
 # Run regression ---------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ## Create primary component variables for regression ---------------------------------------------------------------------------------------------------------------------------
-data$imf <- -predict(IMF, data)[, 1] 
+data$imf <- -predict(IMF, data)[, 1]
 data$us <- predict(US, data)[, 1]
 data$eu <- predict(EU, data)[, 1]
 data$pca <- -predict(PCA, data)[, 1]
@@ -179,7 +180,9 @@ condition <- tobit(
 )
 summary(condition)
 
-# Save the models --------------------------------------------------------------------------------------------------------------------------------------------
+# Table generation -------------------------------------------------------------------------------------------------------------------------------------------
+
+## Save the models --------------------------------------------------------------------------------------------------------------------------------------------
 regModels <- list(
   'Tobit: IMF loan to GDP ratio' = loan,
   'Tobit: IMF participation rate' = part,
@@ -187,7 +190,77 @@ regModels <- list(
   'Tobit: number of IMF conditions' = condition
 )
 save(regModels, data, file = 'save/regModels.RData')
+
+# load('save/regModels.RData') # Load the models again if needed
 msummary(regModels, stars = T) # Rough regression table with all variables and stars
+
+## t-tests generation -----------------------------------------------------------------------------------------------------------------------------------------
+
+regModels$`Probit: IMF loan approval`$df.residual <- degrees_of_freedom(
+  regModels$`Probit: IMF loan approval`
+)
+
+glance_custom.tobit <- function(x, ...) {
+  data.frame(
+    'equality' = paste0(
+      '[',
+      '$p=',
+      round(lht(x, test = 'F', 'us=eu')[2, 4], 3),
+      '$]'
+    ),
+    'vcov.type' = 'by: Country'
+  )
+}
+
+glance_custom.fixest <- function(x, ...) {
+  data.frame(
+    'equality' = paste0(
+      '[',
+      '$p=',
+      round(lht(x, test = 'F', 'us=eu')[2, 4], 3),
+      '$]'
+    ),
+    'vcov.type' = 'by: Country'
+  )
+}
+
+## Variable renaming -------------------------------------------------------------------------------------------------------------------------------------------
+
+coefmap <- c(
+  'us' = 'US Influence',
+  'eu' = 'EU Influence',
+  'imf' = 'IMF Influence',
+  'lnrgdpnew' = 'GDP',
+  'lnrgdpnewsq' = 'GDP$^2$',
+  'rgdpchnew' = 'GDPpc',
+  'rgdpchnewsquare' = "GDPpc$^2$",
+  'growth1new' = 'GDPpc growth',
+  'reserv1' = 'Reserves',
+  'oecd1' = 'OECD',
+  '(Intercept)' = '(Intercept)'
+)
+gof_map <- list(
+  list("raw" = "equality", "clean" = "US=EU", "fmt" = NULL),
+  list("raw" = "nobs", "clean" = "$N$", "fmt" = 0),
+  list('raw' = 'vcov.type', 'clean' = 'Std.Errors', 'fmt' = NULL)
+)
+
+getTable <- function(output = "html") {
+  msummary(
+    regModels,
+    coef_map = coefmap,
+    gof_map = gof_map,
+    stars = T,
+    escape = F,
+    output = output
+  )
+}
+
+getTable() # for previewing the table in IDE
+
+resultsTable <- getTable("latex") |> tinytable::theme_tt("resize", width = 0.95) # LaTeX table or slide/paper presentation
+
+save(resultsTable, file = 'save/regTable.RData') # Save the table
 
 # Auxiliary F-tests -------------------------------------------------------------------------------------------------------------------------------------------
 # You don't have to run this to replicate the demo.
