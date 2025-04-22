@@ -110,7 +110,7 @@ invisible(lapply(need, library, character.only = T))
 ```
 
 ```{r results}
-load('../save/regtable.RData')
+load('save/regtable.RData')
 
 #t-tests
 regtable$`Probit: IMF loan approval`$df.residual <- degrees_of_freedom(regtable$`Probit: IMF loan approval`)
