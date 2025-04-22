@@ -1,17 +1,21 @@
 ---
 title: European or American? A re-examination of the transatlantic influence over the IMF
-# subtitle: GV499 Dissertation
 header-includes: |
-  \AtBeginDocument{\title[GV499 Dissertation]{European or American? A re-examination of the transatlantic influence over the IMF}}
+  \AtBeginDocument{\title[European or American]{European or American? A re-examination of the transatlantic influence over the IMF}}
 date: last-modified
-author: Dianyi Yang
+author:
+- name: Dianyi Yang
+# - name: Tong Hu // name placeholders subject to change
+# - name: Zhenyi Chen
 format:
   beamer:
     theme: Madrid
+    include-in-header: 
+      - text: |
+          \definecolor{myblue}{RGB}{0, 113, 187}
+          \colorlet{beamer@blendedblue}{myblue}
 bibliography: references.bib
 csl: extra/apa.csl
-project:
-  execute-dir: "D:/OneDrive - London School of Economics/Desktop/GV499/IMF"
 ---
 
 ## Background
@@ -70,25 +74,17 @@ Who has more influence over the IMF, the US or Europe?
 
 -   Dependent variables
 
-    -   IMF loan to GDP ratio
+    -   IMF loan to GDP ratio, IMF participation rate
 
-    -   IMF participation rate
-
-    -   IMF loan approval
-
-    -   IMF conditions
+    -   IMF loan approval, IMF conditions
 
 -   Independent variables
 
     -   IMF influence (used by @lipscy2018 and separated by me into EU, US and IMF)
 
-    -   GDP
+    -   GDP, Growth
 
-    -   Growth
-
-    -   Reserves
-
-    -   OECD
+    -   Reserves, OECD
 
 -   Hypotheses
 
@@ -105,49 +101,71 @@ Who has more influence over the IMF, the US or Europe?
 ## Preliminary Results
 
 ```{r setup}
-need <- c('tidyverse','haven','AER','fixest','modelsummary',
-          'corrplot', 'kableExtra','car','parameters') # list packages needed
-have <- need %in% rownames(installed.packages()) # checks packages you have
-if(any(!have)) install.packages(need[!have]) # install missing packages
-invisible(lapply(need, library, character.only=T))
+need <- c('AER', 'car', 'kableExtra', 'modelsummary', 'parameters') # list packages needed
+# have <- need %in% rownames(installed.packages()) # checks packages you have
+# if(any(!have)) install.packages(need[!have]) # install missing packages
+invisible(lapply(need, library, character.only = T))
 ```
 
 ```{r results}
-load('../save/regtable.RData')
+load('save/regtable.RData')
 
 #t-tests
-regtable$`Probit: IMF loan approval`$df.residual <- degrees_of_freedom(regtable$`Probit: IMF loan approval`)
+regtable$`Probit: IMF loan approval`$df.residual <- degrees_of_freedom(
+  regtable$`Probit: IMF loan approval`
+)
 
 glance_custom.tobit <- function(x, ...) {
   data.frame(
-    'equality'=paste0('[','$p=',round(lht(x, test='F', 'us=eu')[2,4],3),'$]'),
+    'equality' = paste0(
+      '[',
+      '$p=',
+      round(lht(x, test = 'F', 'us=eu')[2, 4], 3),
+      '$]'
+    ),
     'vcov.type' = 'by: Country'
   )
 }
 
 glance_custom.fixest <- function(x, ...) {
   data.frame(
-    'equality'=paste0('[','$p=',round(lht(x, test='F', 'us=eu')[2,4],3),'$]'),
+    'equality' = paste0(
+      '[',
+      '$p=',
+      round(lht(x, test = 'F', 'us=eu')[2, 4], 3),
+      '$]'
+    ),
     'vcov.type' = 'by: Country'
   )
 }
 
-coefmap <- c('us' = 'US Influence',
-             'eu' = 'EU Influence',
-             'imf' = 'IMF Influence',
-             'lnrgdpnew' = 'GDP',
-             'lnrgdpnewsq' = 'GDP$^2$',
-             'rgdpchnew' = 'GDPpc',
-             'rgdpchnewsquare' = "GDPpc$^2$",
-             'growth1new' = 'GDPpc growth',
-             'reserv1' = 'Reserves',
-             'oecd1' = 'OECD',
-              '(Intercept)' = '(Intercept)')
-gof_map <- list(list("raw" = "equality", "clean" = "US=EU", "fmt" = NULL),
-                list("raw" = "nobs", "clean" = "$N$", "fmt" = 0),
-                list('raw' = 'vcov.type', 'clean' = 'Std.Errors', 'fmt' = NULL))
-msummary(regtable, coef_map=coefmap, gof_map=gof_map, stars=T, escape=F, output = "kableExtra") %>% 
-  kable_styling(latex_options="scale_down")
+coefmap <- c(
+  'us' = 'US Influence',
+  'eu' = 'EU Influence',
+  'imf' = 'IMF Influence',
+  'lnrgdpnew' = 'GDP',
+  'lnrgdpnewsq' = 'GDP$^2$',
+  'rgdpchnew' = 'GDPpc',
+  'rgdpchnewsquare' = "GDPpc$^2$",
+  'growth1new' = 'GDPpc growth',
+  'reserv1' = 'Reserves',
+  'oecd1' = 'OECD',
+  '(Intercept)' = '(Intercept)'
+)
+gof_map <- list(
+  list("raw" = "equality", "clean" = "US=EU", "fmt" = NULL),
+  list("raw" = "nobs", "clean" = "$N$", "fmt" = 0),
+  list('raw' = 'vcov.type', 'clean' = 'Std.Errors', 'fmt' = NULL)
+)
+msummary(
+  regtable,
+  coef_map = coefmap,
+  gof_map = gof_map,
+  stars = T,
+  escape = F,
+  output = "kableExtra"
+) |>
+  kable_styling(latex_options = "scale_down")
 ```
 
 ## References {.unnumbered}
