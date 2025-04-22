@@ -1,9 +1,26 @@
-rm(list=ls())
-need <- c('tidyverse','haven','AER','fixest','modelsummary',
-          'corrplot',"ggfortify") # list packages needed
+######## INFO ########
+# Authors: Dianyi Yang
+# R Script
+# Purpose: This script runs PCA and regression analysis for the demo.
+# Inputs: data/panel_data.dta
+# Outputs: save/regtable.RData
+
+
+# SETUP ----------------------------------------------------------------------------------------------------------------
+rm(list = ls()) # Clear workspace
+
+need <- c(
+  'tidyverse',
+  'haven',
+  'AER',
+  'fixest',
+  'modelsummary',
+  'corrplot',
+  "ggfortify"
+) # list packages needed
 have <- need %in% rownames(installed.packages()) # checks packages you have
-if(any(!have)) install.packages(need[!have]) # install missing packages
-invisible(lapply(need, library, character.only=T))
+if (any(!have)) install.packages(need[!have]) # install missing packages
+invisible(lapply(need, library, character.only = T))
 
 setwd(gsub('/code','',dirname(rstudioapi::getSourceEditorContext()$path)))
 data <- read_dta("data/panel_data.dta")
