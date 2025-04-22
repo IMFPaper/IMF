@@ -49,12 +49,14 @@ IMF <- data |>
   na.omit() |>
   prcomp(scale = T)
 summary(IMF)
+plot(IMF, type = "l")
 
 US <- data |>
   select(frusanew, ustradenew, usq4) |>
   na.omit() |>
   prcomp(scale = T)
 summary(US)
+plot(US, type = "l")
 
 EU <- data |>
   select(frdfgnew, eutradenew, avgukfrgmq4) |>
