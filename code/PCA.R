@@ -16,7 +16,8 @@ need <- c(
   "kableExtra",
   'modelsummary',
   'corrplot',
-  "ggfortify"
+  "ggfortify",
+  "parameters"
 ) # list packages needed
 have <- need %in% rownames(installed.packages()) # checks packages you have
 if (any(!have)) install.packages(need[!have]) # install missing packages
