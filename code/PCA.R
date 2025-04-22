@@ -13,6 +13,7 @@ need <- c(
   'haven',
   'AER',
   'fixest',
+  "kableExtra",
   'modelsummary',
   'corrplot',
   "ggfortify"
