@@ -194,6 +194,67 @@ save(regModels, data, file = 'save/regModels.RData')
 # load('save/regModels.RData') # Load the models again if needed
 msummary(regModels, stars = T) # Rough regression table with all variables and stars
 
+## t-tests generation -----------------------------------------------------------------------------------------------------------------------------------------
+
+regModels$`Probit: IMF loan approval`$df.residual <- degrees_of_freedom(
+  regModels$`Probit: IMF loan approval`
+)
+
+glance_custom.tobit <- function(x, ...) {
+  data.frame(
+    'equality' = paste0(
+      '[',
+      '$p=',
+      round(lht(x, test = 'F', 'us=eu')[2, 4], 3),
+      '$]'
+    ),
+    'vcov.type' = 'by: Country'
+  )
+}
+
+glance_custom.fixest <- function(x, ...) {
+  data.frame(
+    'equality' = paste0(
+      '[',
+      '$p=',
+      round(lht(x, test = 'F', 'us=eu')[2, 4], 3),
+      '$]'
+    ),
+    'vcov.type' = 'by: Country'
+  )
+}
+
+## Variable renaming -------------------------------------------------------------------------------------------------------------------------------------------
+
+coefmap <- c(
+  'us' = 'US Influence',
+  'eu' = 'EU Influence',
+  'imf' = 'IMF Influence',
+  'lnrgdpnew' = 'GDP',
+  'lnrgdpnewsq' = 'GDP$^2$',
+  'rgdpchnew' = 'GDPpc',
+  'rgdpchnewsquare' = "GDPpc$^2$",
+  'growth1new' = 'GDPpc growth',
+  'reserv1' = 'Reserves',
+  'oecd1' = 'OECD',
+  '(Intercept)' = '(Intercept)'
+)
+gof_map <- list(
+  list("raw" = "equality", "clean" = "US=EU", "fmt" = NULL),
+  list("raw" = "nobs", "clean" = "$N$", "fmt" = 0),
+  list('raw' = 'vcov.type', 'clean' = 'Std.Errors', 'fmt' = NULL)
+)
+
+(resultsTable <- msummary(
+  regModels,
+  coef_map = coefmap,
+  gof_map = gof_map,
+  stars = T,
+  escape = F,
+  output = "kableExtra"
+) |>
+  kable_styling(latex_options = "scale_down"))
+
 # Auxiliary F-tests -------------------------------------------------------------------------------------------------------------------------------------------
 # You don't have to run this to replicate the demo.
 
