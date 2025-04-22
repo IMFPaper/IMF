@@ -1,6 +1,6 @@
 ---
 title: European or American? A re-examination of the transatlantic influence over the IMF
-subtitle: GV499 Dissertation
+# subtitle: GV499 Dissertation
 date: last-modified
 authors:
   - name: Dianyi Yang
