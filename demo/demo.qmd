@@ -107,8 +107,8 @@ Who has more influence over the IMF, the US or Europe?
 ```{r setup}
 need <- c('tidyverse','haven','AER','fixest','modelsummary',
           'corrplot', 'kableExtra','car','parameters') # list packages needed
-have <- need %in% rownames(installed.packages()) # checks packages you have
-if(any(!have)) install.packages(need[!have]) # install missing packages
+# have <- need %in% rownames(installed.packages()) # checks packages you have
+# if(any(!have)) install.packages(need[!have]) # install missing packages
 invisible(lapply(need, library, character.only=T))
 ```
 
