@@ -80,33 +80,103 @@ corr <- data |>
 
 corrplot(corr, method = 'color')
 
- #tobit regression - IMF loan to GDP ratio
-loan <- tobit(imfloannew100 ~ us + eu + imf + lnrgdpnew + lnrgdpnewsq + rgdpchnew + 
-              rgdpchnewsquare + growth1new + reserv1 + oecd1 + year1980 + year1985 + 
-              year1990 + year1995 + year2000, data=data, left=0, right=Inf, 
-              cluster=shcode)
-
+## tobit regression - IMF loan to GDP ratio
+loan <- tobit(
+  imfloannew100 ~
+    us +
+      eu +
+      imf +
+      lnrgdpnew +
+      lnrgdpnewsq +
+      rgdpchnew +
+      rgdpchnewsquare +
+      growth1new +
+      reserv1 +
+      oecd1 +
+      year1980 +
+      year1985 +
+      year1990 +
+      year1995 +
+      year2000,
+  data = data,
+  left = 0,
+  right = Inf,
+  cluster = shcode
+)
 summary(loan)
 
- #tobit regression - IMF participation rate
-part <- tobit(imf_p ~ us + eu + imf + lnrgdpnew + lnrgdpnewsq + rgdpchnew + 
-              rgdpchnewsquare + growth1new + reserv1 + oecd1 + year1980 + year1985 + 
-              year1990 + year1995 + year2000, data=data, left=0, right=1, 
-              cluster=shcode)
+## Tobit regression - IMF participation rate ----------------------------------------------------------------------------------------------------------------
+part <- tobit(
+  imf_p ~
+    us +
+      eu +
+      imf +
+      lnrgdpnew +
+      lnrgdpnewsq +
+      rgdpchnew +
+      rgdpchnewsquare +
+      growth1new +
+      reserv1 +
+      oecd1 +
+      year1980 +
+      year1985 +
+      year1990 +
+      year1995 +
+      year2000,
+  data = data,
+  left = 0,
+  right = 1,
+  cluster = shcode
+)
 summary(part)
 
- #probit regression - IMF loan approval
-approval <- feglm(imf5a ~ us + eu + imf + lnrgdpnew + lnrgdpnewsq + rgdpchnew + 
-                  rgdpchnewsquare + growth1new + reserv1 + oecd1 + year1980 + year1985 + 
-                  year1990 + year1995 + year2000, data=data, family=binomial(link="probit"),
-                  cluster='shcode')
+## Probit regression - IMF loan approval --------------------------------------------------------------------------------------------------------------------
+approval <- feglm(
+  imf5a ~
+    us +
+      eu +
+      imf +
+      lnrgdpnew +
+      lnrgdpnewsq +
+      rgdpchnew +
+      rgdpchnewsquare +
+      growth1new +
+      reserv1 +
+      oecd1 +
+      year1980 +
+      year1985 +
+      year1990 +
+      year1995 +
+      year2000,
+  data = data,
+  family = binomial(link = "probit"),
+  cluster = 'shcode'
+)
 summary(approval)
 
- #tobit Total number of IMF conditions
-condition <- tobit(tc ~ us + eu + imf + lnrgdpnew + lnrgdpnewsq + rgdpchnew + 
-                     rgdpchnewsquare + growth1new + reserv1 + oecd1 + year1980 + year1985 + 
-                     year1990 + year1995 + year2000, data=data, left=0, right=Inf, 
-                     cluster=shcode)
+# Tobit Total number of IMF conditions ----------------------------------------------------------------------------------------------------------------------
+condition <- tobit(
+  tc ~
+    us +
+      eu +
+      imf +
+      lnrgdpnew +
+      lnrgdpnewsq +
+      rgdpchnew +
+      rgdpchnewsquare +
+      growth1new +
+      reserv1 +
+      oecd1 +
+      year1980 +
+      year1985 +
+      year1990 +
+      year1995 +
+      year2000,
+  data = data,
+  left = 0,
+  right = Inf,
+  cluster = shcode
+)
 summary(condition)
 
 #t-tests
