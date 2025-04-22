@@ -1,3 +1,6 @@
 .Rhistory
 .DS_Store
 /.quarto/
+
+/demo/*.pdf
+/manuscript/*.pdf
