@@ -105,7 +105,6 @@ Who has more influence over the IMF, the US or Europe?
 ## Preliminary Results
 
 ```{r setup}
-knitr::opts_knit$set(root.dir = 'D:/OneDrive - London School of Economics/Desktop/GV499/IMF')
 need <- c('tidyverse','haven','AER','fixest','modelsummary',
           'corrplot', 'kableExtra','car','parameters') # list packages needed
 have <- need %in% rownames(installed.packages()) # checks packages you have
@@ -114,7 +113,7 @@ invisible(lapply(need, library, character.only=T))
 ```
 
 ```{r results}
-load('save/regtable.RData')
+load('../save/regtable.RData')
 
 #t-tests
 regtable$`Probit: IMF loan approval`$df.residual <- degrees_of_freedom(regtable$`Probit: IMF loan approval`)
@@ -147,7 +146,7 @@ coefmap <- c('us' = 'US Influence',
 gof_map <- list(list("raw" = "equality", "clean" = "US=EU", "fmt" = NULL),
                 list("raw" = "nobs", "clean" = "$N$", "fmt" = 0),
                 list('raw' = 'vcov.type', 'clean' = 'Std.Errors', 'fmt' = NULL))
-msummary(regtable, coef_map=coefmap, gof_map=gof_map, stars=T, escape=F) %>% 
+msummary(regtable, coef_map=coefmap, gof_map=gof_map, stars=T, escape=F, output = "kableExtra") %>% 
   kable_styling(latex_options="scale_down")
 ```
 
