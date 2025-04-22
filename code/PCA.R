@@ -3,7 +3,7 @@
 # R Script
 # Purpose: This script runs PCA and regression analysis for the demo.
 # Inputs: data/panel_data.dta
-# Outputs: save/regtable.RData
+# Outputs: save/regModels.RData
 
 
 # SETUP ----------------------------------------------------------------------------------------------------------------
