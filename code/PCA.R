@@ -179,16 +179,15 @@ condition <- tobit(
 )
 summary(condition)
 
-#t-tests
-
-
-#regression table
-regtable <- list('Tobit: IMF loan to GDP ratio' = loan, 
+# Save the models --------------------------------------------------------------------------------------------------------------------------------------------
+regModels <- list(
+  'Tobit: IMF loan to GDP ratio' = loan,
                  'Tobit: IMF participation rate' = part, 
                  'Probit: IMF loan approval' = approval, 
-                 'Tobit: number of IMF conditions' = condition)
-save(regtable, data, file='save/regtable.RData')
-msummary(regtable, stars=T)
+  'Tobit: number of IMF conditions' = condition
+)
+save(regModels, data, file = 'save/regMable.RData')
+msummary(regModels, stars = T)
 
 #ftest
 #tobit regression - IMF loan to GDP ratio
