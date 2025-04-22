@@ -7,15 +7,12 @@ authors:
     email: d.yang17@lse.ac.uk
     orcid: 0009-0004-4652-3429
     correspondence: true
-    
 format:
   #native: default
   #docx: default
   orcid-pdf:
     keep-tex: true
     number-sections: true
-bibliography: references.bib
-csl: extra/apa.csl
 abstract: This is an abstract.
 keywords: IMF, US hegemony, Europe
 ---
