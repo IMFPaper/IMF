@@ -189,30 +189,76 @@ regModels <- list(
 save(regModels, data, file = 'save/regModels.RData')
 msummary(regModels, stars = T)
 
-#ftest
-#tobit regression - IMF loan to GDP ratio
-loan_f <- tobit(imfloannew100 ~ shstaffl+shquotal+frusanew+frdfgnew+ustradenew+
-                  eutradenew+usq4+avgukfrgmq4 + lnrgdpnew + lnrgdpnewsq + rgdpchnew + 
-                rgdpchnewsquare + growth1new + reserv1 + oecd1 + year1980 + year1985 + 
-                year1990 + year1995 + year2000, data=data, left=0, right=Inf, 
-              cluster=shcode)
-  #significance of US
+# Auxiliary F-tests -------------------------------------------------------------------------------------------------------------------------------------------
+# You don't have to run this to replicate the demo.
+
+## Tobit regression - IMF loan to GDP ratio -------------------------------------------------------------------------------------------------------------------
+loan_f <- tobit(
+  imfloannew100 ~
+    shstaffl +
+      shquotal +
+      frusanew +
+      frdfgnew +
+      ustradenew +
+      eutradenew +
+      usq4 +
+      avgukfrgmq4 +
+      lnrgdpnew +
+      lnrgdpnewsq +
+      rgdpchnew +
+      rgdpchnewsquare +
+      growth1new +
+      reserv1 +
+      oecd1 +
+      year1980 +
+      year1985 +
+      year1990 +
+      year1995 +
+      year2000,
+  data = data,
+  left = 0,
+  right = Inf,
+  cluster = shcode
+)
+### significance of US ----
   matrix = c('frusanew = 0', 'ustradenew = 0', 'usq4 = 0')
-  lht(loan_f, test='F', matrix)
-  #significance of EU
+lht(loan_f, test = 'F', matrix)
+### significance of EU ----
   matrix = c('frdfgnew = 0', 'eutradenew = 0', 'avgukfrgmq4 = 0')
-  lht(loan_f, test='F', matrix)
+lht(loan_f, test = 'F', matrix)
   
-#tobit Total number of IMF conditions
-  condition_f <- tobit(tc ~ shstaffl+shquotal+frusanew+frdfgnew+ustradenew+
-                         eutradenew+usq4+avgukfrgmq4 + lnrgdpnew + lnrgdpnewsq + rgdpchnew + 
-                       rgdpchnewsquare + growth1new + reserv1 + oecd1 + year1980 + year1985 + 
-                       year1990 + year1995 + year2000, data=data, left=0, right=Inf, 
-                     cluster=shcode)
-  #significance of US
+## Tobit Total number of IMF conditions -----------------------------------------------------------------------------------------------------------------------
+condition_f <- tobit(
+  tc ~
+    shstaffl +
+      shquotal +
+      frusanew +
+      frdfgnew +
+      ustradenew +
+      eutradenew +
+      usq4 +
+      avgukfrgmq4 +
+      lnrgdpnew +
+      lnrgdpnewsq +
+      rgdpchnew +
+      rgdpchnewsquare +
+      growth1new +
+      reserv1 +
+      oecd1 +
+      year1980 +
+      year1985 +
+      year1990 +
+      year1995 +
+      year2000,
+  data = data,
+  left = 0,
+  right = Inf,
+  cluster = shcode
+)
+### significance of US ----
   matrix = c('frusanew = 0', 'ustradenew = 0', 'usq4 = 0')
-  lht(condition_f, test='F', matrix)
-  #significance of EU
+lht(condition_f, test = 'F', matrix)
+### significance of EU ----
   matrix = c('frdfgnew = 0', 'eutradenew = 0', 'avgukfrgmq4 = 0')
-  lht(condition_f, test='F', matrix)
+lht(condition_f, test = 'F', matrix)
   
