@@ -68,7 +68,7 @@ plot(EU, type = "l")
 # Run regression ---------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ## Create primary component variables for regression ---------------------------------------------------------------------------------------------------------------------------
-data$imf <- -predict(IMF, data)[, 1]
+data$imf <- -predict(IMF, data)[, 1] 
 data$us <- predict(US, data)[, 1]
 data$eu <- predict(EU, data)[, 1]
 data$pca <- -predict(PCA, data)[, 1]
@@ -182,8 +182,8 @@ summary(condition)
 # Save the models --------------------------------------------------------------------------------------------------------------------------------------------
 regModels <- list(
   'Tobit: IMF loan to GDP ratio' = loan,
-                 'Tobit: IMF participation rate' = part, 
-                 'Probit: IMF loan approval' = approval, 
+  'Tobit: IMF participation rate' = part,
+  'Probit: IMF loan approval' = approval,
   'Tobit: number of IMF conditions' = condition
 )
 save(regModels, data, file = 'save/regModels.RData')
@@ -221,12 +221,12 @@ loan_f <- tobit(
   cluster = shcode
 )
 ### significance of US ----
-  matrix = c('frusanew = 0', 'ustradenew = 0', 'usq4 = 0')
+matrix = c('frusanew = 0', 'ustradenew = 0', 'usq4 = 0')
 lht(loan_f, test = 'F', matrix)
 ### significance of EU ----
-  matrix = c('frdfgnew = 0', 'eutradenew = 0', 'avgukfrgmq4 = 0')
+matrix = c('frdfgnew = 0', 'eutradenew = 0', 'avgukfrgmq4 = 0')
 lht(loan_f, test = 'F', matrix)
-  
+
 ## Tobit Total number of IMF conditions -----------------------------------------------------------------------------------------------------------------------
 condition_f <- tobit(
   tc ~
@@ -256,9 +256,8 @@ condition_f <- tobit(
   cluster = shcode
 )
 ### significance of US ----
-  matrix = c('frusanew = 0', 'ustradenew = 0', 'usq4 = 0')
+matrix = c('frusanew = 0', 'ustradenew = 0', 'usq4 = 0')
 lht(condition_f, test = 'F', matrix)
 ### significance of EU ----
-  matrix = c('frdfgnew = 0', 'eutradenew = 0', 'avgukfrgmq4 = 0')
+matrix = c('frdfgnew = 0', 'eutradenew = 0', 'avgukfrgmq4 = 0')
 lht(condition_f, test = 'F', matrix)
-  
