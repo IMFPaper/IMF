@@ -66,17 +66,19 @@ summary(EU)
 plot(EU, type = "l")
 
 # Run regression ---------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+## Create primary component variables for regression ---------------------------------------------------------------------------------------------------------------------------
 data$imf <- -predict(IMF, data)[, 1]
 data$us <- predict(US, data)[, 1]
 data$eu <- predict(EU, data)[, 1]
 data$pca <- -predict(PCA, data)[, 1]
 
-#plot correlation
+## plot correlation between our variables with the original one. ---------------------------------------------------------------------------------------------------------------
 corr <- data |>
-  select('imf','us','eu','pca') |>
-  cor(use='pairwise.complete.obs')
+  select('imf', 'us', 'eu', 'pca') |>
+  cor(use = 'pairwise.complete.obs')
 
-corrplot(corr, method='color')
+corrplot(corr, method = 'color')
 
  #tobit regression - IMF loan to GDP ratio
 loan <- tobit(imfloannew100 ~ us + eu + imf + lnrgdpnew + lnrgdpnewsq + rgdpchnew + 
