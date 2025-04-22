@@ -3,7 +3,10 @@ title: European or American? A re-examination of the transatlantic influence ove
 header-includes: |
   \AtBeginDocument{\title[European or American]{European or American? A re-examination of the transatlantic influence over the IMF}}
 date: last-modified
-author: Dianyi Yang
+author:
+- name: Dianyi Yang
+# - name: Tong Hu // name placeholders subject to change
+# - name: Zhenyi Chen
 format:
   beamer:
     theme: Madrid
