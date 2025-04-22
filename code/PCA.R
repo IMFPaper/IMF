@@ -22,8 +22,7 @@ have <- need %in% rownames(installed.packages()) # checks packages you have
 if (any(!have)) install.packages(need[!have]) # install missing packages
 invisible(lapply(need, library, character.only = T))
 
-setwd(gsub('/code','',dirname(rstudioapi::getSourceEditorContext()$path)))
-data <- read_dta("data/panel_data.dta")
+data <- read_dta("data/panel_data.dta") # Load data
 
 #PCA
 PCA <- data |>
