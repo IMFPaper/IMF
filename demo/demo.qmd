@@ -10,8 +10,6 @@ format:
     theme: Madrid
 bibliography: references.bib
 csl: extra/apa.csl
-project:
-  execute-dir: "D:/OneDrive - London School of Economics/Desktop/GV499/IMF"
 ---
 
 ## Background
