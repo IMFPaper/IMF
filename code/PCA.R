@@ -186,7 +186,7 @@ regModels <- list(
                  'Probit: IMF loan approval' = approval, 
   'Tobit: number of IMF conditions' = condition
 )
-save(regModels, data, file = 'save/regMable.RData')
+save(regModels, data, file = 'save/regModels.RData')
 msummary(regModels, stars = T)
 
 #ftest
