@@ -4,6 +4,7 @@
 # Purpose: This script runs PCA and regression analysis for the demo.
 # Inputs: data/panel_data.dta
 # Outputs: save/regModels.RData
+#          save/regTable.RData
 
 # SETUP ----------------------------------------------------------------------------------------------------------------
 rm(list = ls()) # Clear workspace
