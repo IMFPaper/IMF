@@ -1,6 +1,5 @@
 ---
 title: European or American? A re-examination of the transatlantic influence over the IMF
-# subtitle: GV499 Dissertation
 date: last-modified
 authors:
   - name: Dianyi Yang
@@ -31,9 +30,9 @@ Such arrangements inspire a straightforward question that is yet difficult to an
 
 Qualitative attempts at this question may have been thwarted by the closed-door and consensus-based style of governance of the IMF, as epitomised by the "gentlemen's agreement". On the one hand, the frequent use of conventions and consensus renders any analyses on the formal structure of the IMF (e.g. veto power) insufficient on its own. On the other hand, the closed-door negotiations imply that we often observe the outcome, but not the process of the bargaining. While specific case studies (e.g. Mexico and European debt crisis, see @lipscy2018 and @hodson2014) may have shed light on the influence of the US or Europe, they rarely allow for a transatlantic comparison and their representativeness can be questioned.
 
-This dissertation therefore attempts to quantitatively compare the influence of the US and Europe on the IMF.
+This paper therefore attempts to quantitatively compare the influence of the US and Europe on the IMF.
 
-The structure of this dissertation is as follows: @sec-litreview provides a review over the literature on the influence of the US and Europe over the IMF.
+The structure of this paper is as follows: @sec-litreview provides a review over the literature on the influence of the US and Europe over the IMF.
 
 # Literature Review {#sec-litreview}
 
