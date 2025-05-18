@@ -195,7 +195,7 @@ save(regModels, data, file = 'save/regModels.RData')
 # load('save/regModels.RData') # Load the models again if needed
 msummary(regModels, stars = T) # Rough regression table with all variables and stars
 
-## t-tests generation -----------------------------------------------------------------------------------------------------------------------------------------
+## F-tests generation -----------------------------------------------------------------------------------------------------------------------------------------
 
 regModels$`Probit: IMF loan approval`$df.residual <- degrees_of_freedom(
   regModels$`Probit: IMF loan approval`
