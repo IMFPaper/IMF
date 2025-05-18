@@ -39,6 +39,12 @@ The structure of this dissertation is as follows: @sec-litreview provides a revi
 
 -   IMF chief European [@Kahler2001]
 
+# Empirical Analysis
+
+# Case Study
+
+# Conclusion
+
 # References {.unnumbered}
 
 ::: {#refs}
