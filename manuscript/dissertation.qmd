@@ -23,7 +23,7 @@ keywords: IMF, US hegemony, Europe
 
 The International Monetary Fund (IMF) and the World Bank[^1] were established toward the end of World War II as part of the Bretton Woods agreement in 1944 [@jensen2004]. While the World Bank specialised in long-term project financing, the IMF was initially designed for addressing the short-term balance-of-payment crises which would otherwise undermine the fixed exchange rate arrangements under the Bretton Woods system [@jensen2004].
 
-[^1]: Familar name for the International Bank for Reconstruction and Development (IBRD), the lending arm of the later created World Bank Group.
+[^1]: Familiar name for the International Bank for Reconstruction and Development (IBRD), the lending arm of the later created World Bank Group.
 
 One renowned fact about the IMF and its sister institution, the World Bank, is the long-standing "gentlemen's agreement" of the IMF managing director being a European, and the World Bank president being an American [@Keating2024; @Weiss2023], despite no such provisions in either institution's articles of agreements [@Fund2020; @WorldBank2021].
 
