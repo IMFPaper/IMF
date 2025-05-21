@@ -12,6 +12,14 @@ format:
   orcid-pdf:
     keep-tex: true
     number-sections: true
+    include-in-header:
+      - text: |
+          \newcommand{\centerstart}{\begin{center}}
+          \newcommand{\centerend}{\end{center}}
+          \usepackage{amsthm, thm-restate}
+          \newtheorem{hyp}{Hypothesis}
+          \newtheorem{subhyp}{Hypothesis}[hyp]
+          \renewcommand{\thesubhyp}{\thehyp\alph{subhyp}}
 abstract: This is an abstract.
 keywords: IMF, US hegemony, Europe
 execute:
@@ -29,7 +37,7 @@ The International Monetary Fund (IMF) and the World Bank[^1] were established to
 
 [^1]: Familiar name for the International Bank for Reconstruction and Development (IBRD), the lending arm of the later created World Bank Group.
 
-One renowned fact about the IMF and its sister institution, the World Bank, is the long-standing "gentlemen's agreement" of the IMF managing director being a European, and the World Bank president being an American [@Keating2024; @Weiss2023], despite no such provisions in either institution's articles of agreements [@Fund2020; @WorldBank2021].
+One renowned fact about the IMF and its sister institution, the World Bank, is the long-standing "gentlemen's agreement" of the IMF managing director being a European, and the World Bank president being an American [@keating2024; @weiss2023], despite no such provisions in either institution's articles of agreements [@fund2020; @WorldBank2021].
 
 Such arrangements inspire a straightforward question that is yet difficult to answer: who has more influence over the IMF, the US or Europe? Whereas the US dominance in the World Bank is undisputed [@clark2020; @wade2002; @woods2003], the case of the IMF is much more complicated. As the [Literature Review](#sec-litreview) section demonstrates, there has been abundant evidence of both European and American influence on the IMF, but short of a qualitative or quantitative comparison between the two.
 
@@ -41,9 +49,35 @@ The structure of this paper is as follows: @sec-litreview provides a review over
 
 # Literature Review {#sec-litreview}
 
--   IMF chief European [@Kahler2001]
+-   IMF chief European [@kahler2001]
 
 # Empirical Analysis
+
+## Hypotheses
+
+Since the [literature review](#sec-litreview) has outlined arguments for both US and European influence over IMF decision-making, this section turns to a quantitative comparison of their respective impacts. Accordingly, we formulate our main hypothesis:
+
+\begin{restatable}[$H_{1}$]{hyp}{hypmain}
+\label{hyp-main}
+The United States and Europe exert different levels of influence on IMF lending decisions.
+\end{restatable}
+
+Moreover, prior literature has either combined the United States and Europe under the umbrella of “Western” influence on IMF lending decisions [@lipscy2018], or has examined the influence of one without accounting for the other [@oatley2004]. To address this gap, we reassess the influence of the United States and Europe separately, while controlling for the presence of the other. Accordingly, we formulate the following two hypotheses:
+
+```{=latex}
+\setcounter{hyp}{2}
+\begin{restatable}[$H_{2a}$]{subhyp}{hypus}
+\label{hyp-us}
+The United States exerts a statistically significant influence on IMF lending decisions, controlling for European influence.
+\end{restatable}
+\vspace{-1em} % remove vertical space
+\begin{restatable}[$H_{2b}$]{subhyp}{hypeu}
+\label{hyp-eu}
+Europe exerts a statistically significant influence on IMF lending decisions, controlling for United States influence.
+\end{restatable}
+```
+
+## Results
 
 ```{r results}
 #| label: tbl-results
