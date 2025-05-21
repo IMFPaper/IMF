@@ -99,7 +99,8 @@ loan <- tobit(
   imfloannew100 ~
     us +
       eu +
-      imf +
+      shstaffl +
+      shquotal +
       lnrgdpnew +
       lnrgdpnewsq +
       rgdpchnew +
@@ -124,7 +125,8 @@ part <- tobit(
   imf_p ~
     us +
       eu +
-      imf +
+      shstaffl +
+      shquotal +
       lnrgdpnew +
       lnrgdpnewsq +
       rgdpchnew +
@@ -149,7 +151,8 @@ approval <- feglm(
   imf5a ~
     us +
       eu +
-      imf +
+      shstaffl +
+      shquotal +
       lnrgdpnew +
       lnrgdpnewsq +
       rgdpchnew +
@@ -173,7 +176,8 @@ condition <- tobit(
   tc ~
     us +
       eu +
-      imf +
+      shstaffl +
+      shquotal +
       lnrgdpnew +
       lnrgdpnewsq +
       rgdpchnew +
@@ -256,7 +260,8 @@ glance_custom.fixest <- function(x, ...) {
 coefmap <- c(
   'us' = 'USA Influence',
   'eu' = 'EUP Influence',
-  'imf' = 'IMF Influence',
+  'shstaffl' = 'IMF Staff',
+  'shquotal' = 'IMF Quota',
   'lnrgdpnew' = 'GDP',
   'lnrgdpnewsq' = 'GDP$^2$',
   'rgdpchnew' = 'GDPpc',
@@ -323,6 +328,7 @@ loan_f <- tobit(
   right = Inf,
   cluster = shcode
 )
+
 ### significance of US ----
 matrix = c('frusanew = 0', 'ustradenew = 0', 'usq4 = 0')
 lht(loan_f, test = 'F', matrix)
