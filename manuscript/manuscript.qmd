@@ -53,6 +53,8 @@ The structure of this paper is as follows: @sec-litreview provides a review over
 
 # Empirical Analysis
 
+## Hypotheses
+
 Since the [literature review](#sec-litreview) has outlined arguments for both US and European influence over IMF decision-making, this section turns to a quantitative comparison of their respective impacts. Accordingly, we formulate our main hypothesis:
 
 \begin{restatable}[$H_{1}$]{hyp}{hypmain}
@@ -74,6 +76,8 @@ The United States exerts a statistically significant influence on IMF lending de
 Europe exerts a statistically significant influence on IMF lending decisions, controlling for United States influence.
 \end{restatable}
 ```
+
+## Results
 
 ```{r results}
 #| label: tbl-results
