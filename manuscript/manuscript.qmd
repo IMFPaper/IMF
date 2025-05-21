@@ -12,6 +12,14 @@ format:
   orcid-pdf:
     keep-tex: true
     number-sections: true
+    include-in-header:
+      - text: |
+          \newcommand{\centerstart}{\begin{center}}
+          \newcommand{\centerend}{\end{center}}
+          \usepackage{amsthm, thm-restate}
+          \newtheorem{hyp}{Hypothesis}
+          \newtheorem{subhyp}{Hypothesis}[hyp]
+          \renewcommand{\thesubhyp}{\thehyp\alph{subhyp}}
 abstract: This is an abstract.
 keywords: IMF, US hegemony, Europe
 execute:
@@ -44,6 +52,24 @@ The structure of this paper is as follows: @sec-litreview provides a review over
 -   IMF chief European [@Kahler2001]
 
 # Empirical Analysis
+
+\begin{restatable}[$H_{1}$]{hyp}{hypmain}
+\label{hyp-main}
+The United States and Europe exert different levels of influence on IMF lending decisions.
+\end{restatable}
+
+```{=latex}
+\setcounter{hyp}{2}
+\begin{restatable}[$H_{2a}$]{subhyp}{hypus}
+\label{hyp-us}
+The United States exerts a statistically significant influence on IMF lending decisions, controlling for European influence.
+\end{restatable}
+\vspace{-1em} % remove vertical space
+\begin{restatable}[$H_{2b}$]{subhyp}{hypeu}
+\label{hyp-eu}
+Europe exerts a statistically significant influence on IMF lending decisions, controlling for United States influence.
+\end{restatable}
+```
 
 ```{r results}
 #| label: tbl-results
