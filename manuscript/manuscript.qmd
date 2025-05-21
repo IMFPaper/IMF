@@ -77,6 +77,27 @@ Europe exerts a statistically significant influence on IMF lending decisions, co
 \end{restatable}
 ```
 
+## Data
+
+```{r}
+dta <- haven::read_dta('data/panel_data.dta') 
+```
+
+This paper uses the dataset compiled by @lipscy2018, which extends the @barro2005 dataset through 2010. It provides panel data for 130 countries in five-year intervals from 1980 to 2010[^2], including information on IMF borrowing and participation outcomes, economic indicators, and measures of each country's relationship with the United States and major European powers.
+
+[^2]: e.g. 1980-1985, 1985-1990.
+
+## Dependent Variables
+
+In line with @lipscy2018 and @barro2005, we use the following four measures of IMF lending outcomes as our dependent variables:
+
+-   IMF loan to GDP ratio
+-   IMF participation rate
+-   IMF loan to GDP approval
+-   Number of IMF conditions
+
+These variables follow the definitions used in @lipscy2018. The *loan-to-GDP ratio* captures the average size of IMF lending relative to a country's GDP over each five-year interval. The *participation rate* measures the share of months within each interval during which a country was subject to an IMF programme. The *approval indicator* is a binary variable coded 1 if a new IMF programme was initiated during the interval, and 0 otherwise [see also @barro2005]. Finally, the *number of conditions* reflects the total number of performance criteria, benchmarks, and prior actions required for disbursement under IMF programmes [see also @copelovitch2010; @dreher2015].
+
 ## Results
 
 ```{r results}
