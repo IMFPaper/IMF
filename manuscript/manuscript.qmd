@@ -62,7 +62,7 @@ Since the [literature review](#sec-litreview) has outlined arguments for both US
 The United States and Europe exert different levels of influence on IMF lending decisions.
 \end{restatable}
 
-Moreover, prior literature has either combined the United States and Europe under the umbrella of “Western” influence on IMF lending decisions [@lipscy2018], or has examined the influence of one without accounting for the other [@oatley2004]. To address this gap, we reassess the influence of the United States and Europe separately, while controlling for the presence of the other. Accordingly, we formulate the following two hypotheses:
+Moreover, prior literature has either combined the United States and Europe under the umbrella of “Western” influence on IMF lending decisions [@lipscy2018], or has examined the influence of one without accounting for the other [@oatley2004; @thacker1999]. To address this gap, we reassess the influence of the United States and Europe separately, while controlling for the presence of the other. Accordingly, we formulate the following two hypotheses:
 
 ```{=latex}
 \setcounter{hyp}{2}
