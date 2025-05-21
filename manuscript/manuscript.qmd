@@ -96,6 +96,8 @@ In line with @lipscy2018 and @barro2005, we use the following four measures of I
 -   IMF loan to GDP approval
 -   Number of IMF conditions
 
+These variables follow the definitions used in @lipscy2018. The **loan-to-GDP ratio** captures the average size of IMF lending relative to a country's GDP over each five-year interval. The **participation rate** measures the share of months within each interval during which a country was subject to an IMF programme. The **approval indicator** is a binary variable coded 1 if a new IMF programme was initiated during the interval, and 0 otherwise. Finally, the **number of conditions** reflects the total number of performance criteria, benchmarks, and prior actions required for disbursement under IMF programmes.
+
 ## Results
 
 ```{r results}
