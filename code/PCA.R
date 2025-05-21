@@ -68,9 +68,9 @@ summary(EU)
 plot(EU, type = "l")
 
 ## Create primary component variables for regression ---------------------------------------------------------------------------------------------------------------------------
-data$imf <- -predict(IMF, data)[, 1]
-data$us <- predict(US, data)[, 1]
-data$eu <- predict(EU, data)[, 1]
+data$imf <- -predict(IMF, data)[, 1] |> scale()
+data$us <- predict(US, data)[, 1] |> scale()
+data$eu <- predict(EU, data)[, 1] |> scale()
 data$pca <- -predict(PCA, data)[, 1]
 
 ## draw a kernel density plot for US and EU PC1 components  -----------------------------------------------------------------------------------------------------------------------------------
