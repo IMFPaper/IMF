@@ -213,35 +213,49 @@ regModels$`Probit: IMF loan approval`$df.residual <- degrees_of_freedom(
   regModels$`Probit: IMF loan approval`
 )
 
+get_stars <- function(p){
+  if (p < 0.001) {
+    return('***')
+  } else if (p < 0.01) {
+    return('**')
+  } else if (p < 0.05) {
+    return('*')
+  } else if (p < 0.1) {
+    return('+')
+  } else {
+    return('')
+  }
+}
+
 glance_custom.tobit <- function(x, ...) {
+  p <- lht(x, test = 'F', 'us=eu')[2, 4]
   data.frame(
     'equality' = paste0(
       '[',
-      '$p=',
-      round(lht(x, test = 'F', 'us=eu')[2, 4], 3),
-      '$]'
-    ),
-    'vcov.type' = 'by: Country'
+      round(p, 3),
+      get_stars(p),
+      ']'
+    )
   )
 }
 
 glance_custom.fixest <- function(x, ...) {
+  p <- lht(x, test = 'F', 'us=eu')[2, 4]
   data.frame(
     'equality' = paste0(
       '[',
-      '$p=',
-      round(lht(x, test = 'F', 'us=eu')[2, 4], 3),
-      '$]'
-    ),
-    'vcov.type' = 'by: Country'
+      round(p, 3),
+      get_stars(p),
+      ']'
+    )
   )
 }
 
 ## Variable renaming -------------------------------------------------------------------------------------------------------------------------------------------
 
 coefmap <- c(
-  'us' = 'US Influence',
-  'eu' = 'EU Influence',
+  'us' = 'USA Influence',
+  'eu' = 'EUP Influence',
   'imf' = 'IMF Influence',
   'lnrgdpnew' = 'GDP',
   'lnrgdpnewsq' = 'GDP$^2$',
@@ -253,9 +267,9 @@ coefmap <- c(
   '(Intercept)' = '(Intercept)'
 )
 gof_map <- list(
-  list("raw" = "equality", "clean" = "US=EU", "fmt" = NULL),
-  list("raw" = "nobs", "clean" = "$N$", "fmt" = 0),
-  list('raw' = 'vcov.type', 'clean' = 'Std.Errors', 'fmt' = NULL)
+  list("raw" = "equality", "clean" = "USA=EUP", "fmt" = NULL),
+  list("raw" = "nobs", "clean" = "$N$", "fmt" = 0)
+  # list('raw' = 'vcov.type', 'clean' = 'Std.Errors', 'fmt' = NULL)
 )
 
 getTable <- function(output = "html") {
@@ -265,7 +279,10 @@ getTable <- function(output = "html") {
     gof_map = gof_map,
     stars = T,
     escape = F,
-    output = output
+    output = output,
+    notes = c(
+      "Standard errors clustered at the country level. Values in square brackets represent $p$-values from $F$-tests."
+    )
   )
 }
 
