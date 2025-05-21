@@ -67,13 +67,23 @@ EU <- data |>
 summary(EU)
 plot(EU, type = "l")
 
-# Run regression ---------------------------------------------------------------------------------------------------------------------------------------------------------------
-
 ## Create primary component variables for regression ---------------------------------------------------------------------------------------------------------------------------
 data$imf <- -predict(IMF, data)[, 1]
 data$us <- predict(US, data)[, 1]
 data$eu <- predict(EU, data)[, 1]
 data$pca <- -predict(PCA, data)[, 1]
+
+## draw a kernel density plot for US and EU PC1 components  -----------------------------------------------------------------------------------------------------------------------------------
+data |> 
+  select(us, eu) |>
+  na.omit() |>
+  pivot_longer(cols = everything(), names_to = 'region', values_to = 'value') |>
+  ggplot(aes(x = value, fill = region)) +
+  geom_density(alpha = 0.5) +
+  labs(title = "Kernel Density Plot of US and EU variables",
+       x = "PC1",
+       y = "Density") +
+  theme_minimal()
 
 ## plot correlation between our variables with the original one. ---------------------------------------------------------------------------------------------------------------
 corr <- data |>
@@ -81,6 +91,8 @@ corr <- data |>
   cor(use = 'pairwise.complete.obs')
 
 corrplot(corr, method = 'color')
+
+# Run regression ---------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ## tobit regression - IMF loan to GDP ratio
 loan <- tobit(
