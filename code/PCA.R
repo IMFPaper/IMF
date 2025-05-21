@@ -259,7 +259,7 @@ getTable <- function(output = "html") {
 
 getTable() # for previewing the table in IDE
 
-resultsTable <- getTable("latex") |> tinytable::theme_tt("resize", width = 0.95) # LaTeX table or slide/paper presentation
+resultsTable <- getTable("latex")
 
 save(resultsTable, file = 'save/regTable.RData') # Save the table
 
