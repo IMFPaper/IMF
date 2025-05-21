@@ -5,3 +5,5 @@
 /demo/*.pdf
 /manuscript/*.pdf
 /manuscript/*.tex
+
+*.bib
