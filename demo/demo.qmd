@@ -10,6 +10,7 @@ author:
 format:
   beamer:
     theme: Madrid
+    link-citations: true
     include-in-header: 
       - text: |
           \definecolor{myblue}{RGB}{0, 113, 187}
@@ -22,7 +23,7 @@ format:
 
 -   Believed US dominance in the beginning,
 
--   "Gentlemen's agreement": the IMF managing director being a European, and the World Bank president being an American [@Keating2024; @Weiss2023].
+-   "Gentlemen's agreement": the IMF managing director being a European, and the World Bank president being an American [@keating2024; @weiss2023].
 
 ## Research Question
 
