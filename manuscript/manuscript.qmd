@@ -77,6 +77,8 @@ Europe exerts a statistically significant influence on IMF lending decisions, co
 \end{restatable}
 ```
 
+## Data
+
 ## Results
 
 ```{r results}
