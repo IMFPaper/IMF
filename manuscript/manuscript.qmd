@@ -146,6 +146,24 @@ The selection of covariates, including their polynomial transformations[^9], clo
 
 ## Model Specification {#sec-model}
 
+\begin{align*}
+Y^*_{it} &= \alpha + \beta_1 \text{USA}_{it} + \beta_2 \text{EUP}_{it} + \gamma^\top \mathbf{P}_{it} + \delta^\top \mathbf{Z}_{it} + \lambda_t + \epsilon_{it} \\
+Y_{it} &= \begin{cases}
+          0~\text{if}~ Y_{it}^* \leq 0 \\
+          Y_{it}^* ~\text{if}~ 0 < Y_{it}^* < c\\
+          c ~\text{if}~ Y_{it}^* \geq c \\
+          \end{cases}
+\end{align*}
+
+$$
+\mathbf{P}_{it} = \left( \ln(\text{GDP}_{it}), \ln(\text{GDP}_{it})^2, \ln(\text{PCGDP}_{it}), \ln(\text{PCGDP}_{it})^2 \right)^\top
+$$
+
+
+$$
+\Pr(Y_{it}=1)=\Phi(\alpha + \beta_1 \text{USA}_{it} + \beta_2 \text{EUP}_{it} + \gamma^\top \mathbf{P}_{it} + \delta^\top \mathbf{Z}_{it} + \lambda_t)
+$$
+
 ## Results
 
 ```{r}
