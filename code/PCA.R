@@ -201,10 +201,10 @@ summary(condition)
 
 ## Save the models --------------------------------------------------------------------------------------------------------------------------------------------
 regModels <- list(
-  'Tobit: IMF loan to GDP ratio' = loan,
-  'Tobit: IMF participation rate' = part,
-  'Probit: IMF loan approval' = approval,
-  'Tobit: number of IMF conditions' = condition
+  'IMF loan to GDP ratio' = loan,
+  'IMF participation rate' = part,
+  'IMF loan approval' = approval,
+  'Number of IMF conditions' = condition
 )
 save(regModels, data, file = 'save/regModels.RData')
 
@@ -240,7 +240,8 @@ glance_custom.tobit <- function(x, ...) {
       get_stars(p),
       ']'
     ),
-    'periodFE' = if_else("year2000" %in% names(x$coefficients), "Yes",  "")
+    'periodFE' = if_else("year2000" %in% names(x$coefficients), "Yes",  ""),
+    'regression' = 'Tobit'
   )
 }
 
@@ -253,7 +254,8 @@ glance_custom.fixest <- function(x, ...) {
       get_stars(p),
       ']'
     ),
-    'periodFE' = if_else("year2000" %in% names(x$coefficients), "Yes",  "")
+    'periodFE' = if_else("year2000" %in% names(x$coefficients), "Yes",  ""),
+    'regression' = 'Probit'
   )
 }
 
@@ -276,6 +278,7 @@ coefmap <- c(
 gof_map <- list(
   list("raw" = "equality", "clean" = "USA=EUP", "fmt" = NULL),
   list("raw" = "periodFE", "clean" = "Period FE", "fmt" = NULL),
+  list("raw" = "regression", "clean" = "Regression", "fmt" = NULL),
   list("raw" = "nobs", "clean" = "$N$", "fmt" = 0)
   # list('raw' = 'vcov.type', 'clean' = 'Std.Errors', 'fmt' = NULL)
 )
