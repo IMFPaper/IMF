@@ -146,7 +146,9 @@ The selection of covariates, including their polynomial transformations[^9], clo
 
 ## Model Specification {#sec-model}
 
-One notable feature of IMF loan outcomes is that they are *left-censored* at zero—that is, loan amounts, participation rates, and the number of conditions are often zero, but cannot take negative values. In such cases, ordinary least squares (OLS) estimation yields biased and inconsistent results. The Tobit model addresses this issue by explicitly modeling the latent continuous variable underlying the censored observed outcomes [@tobin1958], and is particularly well-suited to our setting [@amemiya1984].
+One notable feature of IMF loan outcomes is that they are *left-censored* at zero—that is, loan amounts, participation rates, and the number of conditions are often zero, but cannot take negative values. In such cases, ordinary least squares (OLS) estimation yields biased and inconsistent results. The Tobit model addresses this issue by explicitly modelling the latent continuous variable ($Y_{it}^*$) underlying the censored observed outcomes ($Y_{it}$) [@tobin1958], and is particularly well-suited to our setting [@amemiya1984].
+
+For each non-binary dependent variable $Y_{it}$, we estimate the following Tobit model:
 
 \begin{align*}
 Y^*_{it} &= \alpha + \beta_1 \text{USA}_{it} + \beta_2 \text{EUP}_{it} + \gamma^\top \mathbf{P}_{it} + \delta^\top \mathbf{Z}_{it} + \lambda_t + \epsilon_{it} \\
@@ -157,10 +159,16 @@ Y_{it} &= \begin{cases}
           \end{cases}
 \end{align*}
 
-$$
-\mathbf{P}_{it} = \left( \ln(\text{GDP}_{it}), \ln(\text{GDP}_{it})^2, \ln(\text{PCGDP}_{it}), \ln(\text{PCGDP}_{it})^2 \right)^\top
-$$
+where:
 
+-   $Y_{it}$ is the observed outcome for country $i$ at time $t$, which may be the IMF loan-to-GDP ratio, IMF participation rate, or the number of IMF conditions.
+-   $Y^*_{it}$ is the latent continuous variable underlying the observed outcome.
+-   $c$ is the upper censoring point, set to 1 for participation rate and $\infty$ otherwise.
+-   $\text{USA}_{it}$ and $\text{EUP}_{it}$ represent the propensities for country $i$ to benefit from US and European influence at time $t$, respectively, extracted via principal component analysis.
+-   $\mathbf{P}_{it} = \left( \ln(\text{GDP}_{it}), \ln(\text{GDP}_{it})^2, \text{GDPpc}_{it}, \text{GDPpc}_{it}^2 \right)^\top$ includes logged GDP and per capita GDP, along with their squared terms.
+-   $\mathbf{Z}_{it}$ is a vector of additional covariates, including per capita GDP growth, reserves as a share of imports, and OECD membership.
+-   $\lambda_t$ denotes five-year period fixed effects.
+-   $\epsilon_{it}$ is the error term.
 
 $$
 Y_{it} = 
