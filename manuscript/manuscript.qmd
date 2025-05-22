@@ -186,6 +186,10 @@ $$
 
 ## Results
 
+We now present the results from estimating the Tobit and Probit models described above, focusing on the effects of US and European influence on IMF lending outcomes. As shown in @tbl-results, stronger ties with Europe are significantly associated with a higher IMF loan-to-GDP ratio, a greater participation rate, and an increased likelihood of loan approval. In contrast, similar ties with the United States do not yield statistically significant effects on these outcomes. The differences between American and European influence on the first two outcomes are statistically significant at the 5% level[^12].
+
+[^12]: Based on an $F$-test for the null hypothesis that USA=EUP. The associated $p$-values are 0.021 and 0.014, respectively. For loan approval, the difference is nearly significant at the 10% level ($p=0.122$).
+
 ```{r}
 #| label: tbl-results
 #| tbl-cap: Comparative Effects of US and EU Influence on IMF Lending Outcomes (1980–2010)
