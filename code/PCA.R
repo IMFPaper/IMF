@@ -239,7 +239,8 @@ glance_custom.tobit <- function(x, ...) {
       round(p, 3),
       get_stars(p),
       ']'
-    )
+    ),
+    'periodFE' = if_else("year2000" %in% names(x$coefficients), "Yes",  "")
   )
 }
 
