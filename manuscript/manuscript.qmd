@@ -84,7 +84,7 @@ Europe exerts a statistically significant influence on IMF lending decisions, co
 
 ```{r}
 #| label: fig-data
-dta <- haven::read_dta('data/panel_data.dta') 
+dta <- haven::read_dta('data/panel_data.dta')
 ```
 
 This paper uses the dataset compiled by @lipscy2018, which extends the @barro2005 dataset through 2010. It provides panel data for 130 countries in five-year intervals from 1980 to 2010[^2], including information on IMF borrowing and participation outcomes, economic indicators, and measures of each country's relationship with the United States and major European powers.
@@ -118,9 +118,17 @@ Specifically, we construct our independent variables using three indicators comm
 
 [^5]: See @broz2006; @lipscy2017; @oatley2004.
 
-However, as noted by @lipscy2018 and @belsley2004, including multiple proxies for the same latent construct in a single regression model leads to multicollinearity, which reduces statistical power and inflates standard errors, as the variables are highly correlated in our data[^6]. To address this issue, we apply principal component analysis (PCA) to reduce the dimensionality of the data [@dunteman2008]. Specifically, we extract the first principal component — a linear combination of the original variables that captures the greatest share of variance — to serve as a single measure of influence.
+However, as noted by @lipscy2018 and @belsley2004, including multiple proxies for the same latent construct in a single regression model leads to multicollinearity, which reduces statistical power and inflates standard errors, as the variables are highly correlated in our data[^6]. To address this issue, we apply principal component analysis (PCA) to reduce the dimensionality of the data [@dunteman2008]. Specifically, we extract the first principal component — a linear combination of the original variables that captures the greatest share of variance — to serve as a single measure of influence[^7].
 
-[^6]: See Appendix -@sec-corr.
+```{r percentage_variance}
+load('save/PCA.Rdata')
+US_PC1_percentage <- US$sdev[1]^2 / sum(US$sdev^2) * 100
+EU_PC1_percentage <- EU$sdev[1]^2 / sum(EU$sdev^2) * 100
+```
+
+[^6]: See Appendix [-@sec-corr].
+
+[^7]: The first principal components capture the majority of the variance (`r format(EU_PC1_percentage, digits = 1)`% for Europe and `r format(US_PC1_percentage, digits = 1)`% for the United States). See Appendix [-@sec-scree] for scree plots and additional details.
 
 Our approach differs from @lipscy2018 in that we do not pool the US and European variables together. Instead, we construct two separate measures: US influence and European influence. The PCA is conducted separately for each actor, using the same three indicators described above. The resulting first principal components are then normalised to have a mean of zero and a standard deviation of one, allowing for easier interpretation and comparability of coefficients in subsequent analyses.
 
@@ -164,4 +172,21 @@ corrplot::corrplot(corr_EU, method = 'color', addCoef.col = 'darkgrey', tl.col =
 #| fig-pos: H
 #| fig-height: 5
 corrplot::corrplot(corr_US, method = 'color', addCoef.col = 'darkgrey', tl.col = "black")
+```
+
+# Scree Plots {#sec-scree .appendix}
+
+```{r}
+#| label: fig-scree-eu
+#| fig-cap: Scree Plot of European Influence PCA
+#| fig-pos: H
+load('save/scree.Rdata')
+scree_EU
+```
+
+```{r}
+#| label: fig-scree-us
+#| fig-cap: Scree Plot of US Influence PCA
+#| fig-pos: H
+scree_US
 ```
