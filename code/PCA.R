@@ -251,7 +251,8 @@ glance_custom.fixest <- function(x, ...) {
       round(p, 3),
       get_stars(p),
       ']'
-    )
+    ),
+    'periodFE' = if_else("year2000" %in% names(x$coefficients), "Yes",  "")
   )
 }
 
@@ -273,6 +274,7 @@ coefmap <- c(
 )
 gof_map <- list(
   list("raw" = "equality", "clean" = "USA=EUP", "fmt" = NULL),
+  list("raw" = "periodFE", "clean" = "Period FE", "fmt" = NULL),
   list("raw" = "nobs", "clean" = "$N$", "fmt" = 0)
   # list('raw' = 'vcov.type', 'clean' = 'Std.Errors', 'fmt' = NULL)
 )
