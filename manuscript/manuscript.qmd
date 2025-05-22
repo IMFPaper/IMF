@@ -161,7 +161,11 @@ $$
 
 
 $$
-\Pr(Y_{it}=1)=\Phi(\alpha + \beta_1 \text{USA}_{it} + \beta_2 \text{EUP}_{it} + \gamma^\top \mathbf{P}_{it} + \delta^\top \mathbf{Z}_{it} + \lambda_t)
+Y_{it} = 
+\begin{cases}
+1 & \text{if } Y^*_{it} > 0 \\
+0 & \text{if } Y^*_{it} \leq 0
+\end{cases}
 $$
 
 ## Results
