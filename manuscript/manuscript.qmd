@@ -104,19 +104,21 @@ These variables follow the definitions used in @lipscy2018. The *loan-to-GDP rat
 
 ## Independent Variables
 
-To assess the influence of the United States and European powers on IMF lending decisions, we construct two key independent variables that capture each actor's *propensity* to exert influence in favour of a country's borrowing from the IMF at a given time. These propensities are based on widely used proxies from the existing literature, which reflect the degree of a country’s political and economic alignment with the US or Europe [@lipscy2018]. This approach assumes that both the US and European powers are more likely to advocate for lending decisions that benefit their close partners.
+To assess the influence of the United States and European powers on IMF lending decisions, we construct two key independent variables that capture each actor's *propensity* to exert influence in favour of a country's borrowing from the IMF at a given time. These propensities are based on widely used proxies from the existing literature, which reflect the degree of a country’s political and economic alignment with the US or Europe [@lipscy2018]. This approach assumes that both the US and European powers[^3] are more likely to advocate for lending decisions that benefit their close partners.
+
+[^3]: For operationalisation, we focus only on ties to the three largest Western European powers—namely, the United Kingdom, France, and Germany—and use their average values. This approach reflects the assumption that smaller European countries are unlikely to exert meaningful influence over IMF decisions on behalf of their partners.
 
 Specifically, we construct our independent variables using three indicators commonly interpreted as channels of political and economic affinity, similar to @lipscy2018:
 
--   UN General Assembly voting similarity[^3]
--   Bilateral trade intensity[^4]
--   Banking sector exposure[^5]
+-   UN General Assembly voting similarity[^4]
+-   Bilateral trade intensity[^5]
+-   Banking sector exposure[^6]
 
-[^3]: Originallly used in @thacker1999.
+[^4]: Originallly used in @thacker1999.
 
-[^4]: From @barro2005.
+[^5]: From @barro2005.
 
-[^5]: See @broz2006; @lipscy2017; @oatley2004.
+[^6]: See @broz2006; @lipscy2017; @oatley2004.
 
 ```{r percentage_variance}
 load('save/PCA.Rdata')
@@ -124,11 +126,11 @@ US_PC1_percentage <- US$sdev[1]^2 / sum(US$sdev^2) * 100
 EU_PC1_percentage <- EU$sdev[1]^2 / sum(EU$sdev^2) * 100
 ```
 
-However, as noted by @lipscy2018 and @belsley2004, including multiple proxies for the same latent construct in a single regression model leads to multicollinearity, which reduces statistical power and inflates standard errors, as the variables are highly correlated in our data[^6]. To address this issue, we apply principal component analysis (PCA) to reduce the dimensionality of the data [@dunteman2008]. Specifically, we extract the first principal component — a linear combination of the original variables that captures the greatest share of variance — to serve as a single measure of influence[^7].
+However, as noted by @lipscy2018 and @belsley2004, including multiple proxies for the same latent construct in a single regression model leads to multicollinearity, which reduces statistical power and inflates standard errors, as the variables are highly correlated in our data[^7]. To address this issue, we apply principal component analysis (PCA) to reduce the dimensionality of the data [@dunteman2008]. Specifically, we extract the first principal component — a linear combination of the original variables that captures the greatest share of variance — to serve as a single measure of influence[^8].
 
-[^6]: See Appendix [-@sec-corr].
+[^7]: See Appendix [-@sec-corr].
 
-[^7]: The first principal components capture the majority of the variance (`r format(EU_PC1_percentage, digits = 1)`% for Europe and `r format(US_PC1_percentage, digits = 1)`% for the United States). See Appendix [-@sec-scree] for scree plots and additional details.
+[^8]: The first principal components capture the majority of the variance (`r format(EU_PC1_percentage, digits = 1)`% for Europe and `r format(US_PC1_percentage, digits = 1)`% for the United States). See Appendix [-@sec-scree] for scree plots and additional details.
 
 Our approach differs from @lipscy2018 in that we do not pool the US and European variables together. Instead, we construct two separate measures: US influence and European influence. The PCA is conducted separately for each actor, using the same three indicators described above. The resulting first principal components are then normalised to have a mean of zero and a standard deviation of one, allowing for easier interpretation and comparability of coefficients in subsequent analyses.
 
@@ -138,9 +140,9 @@ The existing literature has identified several factors beyond geopolitical align
 
 We also include economic performance indicators such as GDP, per capita GDP, and lagged GDP growth as determinants of lending and borrowing behaviour. International reserves as a share of imports are used to capture a country’s ability to finance its balance of payments without IMF support. Finally, a binary indicator for OECD membership is included to proxy for institutional and economic differences among countries.
 
-The selection of covariates, including their polynomial transformations[^8], closely follows @lipscy2018 and @barro2005 to ensure comparability with previous findings.
+The selection of covariates, including their polynomial transformations[^9], closely follows @lipscy2018 and @barro2005 to ensure comparability with previous findings.
 
-[^8]: Quadratic terms are included for GDP and per capita GDP to capture potential non-linear effects. See [Model Specification] for details.
+[^9]: Quadratic terms are included for GDP and per capita GDP to capture potential non-linear effects. See [Model Specification](#sec-model) for details.
 
 ## Model Specification {#sec-model}
 
