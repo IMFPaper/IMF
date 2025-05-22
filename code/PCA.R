@@ -26,6 +26,23 @@ invisible(lapply(need, library, character.only = T))
 
 data <- read_dta("data/panel_data.dta") # Load data
 
+# Correlation matrices --------------------------------------------------------------------------------------------------------------------------
+corr_US <- data |>
+  select('frusanew', 'ustradenew', 'usq4') |>
+  rename(Voting = 'frusanew', Trade = 'ustradenew', Bank = 'usq4') |>
+  cor(use = 'pairwise.complete.obs')
+
+corrplot(corr_US, method = 'color', addCoef.col = 'darkgrey', tl.col = "black")
+
+
+corr_EU <- data |>
+  select('frdfgnew', 'eutradenew', 'avgukfrgmq4') |>
+  rename(Voting = 'frdfgnew', Trade = 'eutradenew', Bank = 'avgukfrgmq4') |>
+  cor(use = 'pairwise.complete.obs')
+corrplot(corr_EU, method = 'color', addCoef.col = 'darkgrey', tl.col = "black")
+
+save(corr_US, corr_EU, file = "save/corr.RData")
+
 # Replicate Lipscy & Lee's (2018) original PCA analysis in R ------------------------------------------------------------------------------------------------------------------
 PCA <- data |>
   select(
@@ -58,14 +75,63 @@ US <- data |>
   na.omit() |>
   prcomp(scale = T)
 summary(US)
-plot(US, type = "l")
 
 EU <- data |>
   select(frdfgnew, eutradenew, avgukfrgmq4) |>
   na.omit() |>
   prcomp(scale = T)
 summary(EU)
-plot(EU, type = "l")
+
+save(US, EU, file = "save/PCA.RData") # Save PCA results
+
+## scree plots -------------------------------------------------------------------------------------------------------------------------------------
+(scree_US <- data.frame(
+  var = US$sdev^2 / sum(US$sdev^2),
+  dim = 1:length(US$sdev)
+) |>
+  ggplot(aes(x = dim, y = var)) +
+  geom_line() +
+  geom_point() +
+  geom_text(
+    aes(label = scales::percent(var, accuracy = 0.1)),
+    vjust = -1,
+    hjust = 0.1,
+    size = 3
+  ) +
+  labs(
+    x = "Dimensions",
+    y = "Percentage of explained variances"
+  ) +
+  scale_x_continuous(breaks = 1:3, limits = c(1, 3.1)) +
+  scale_y_continuous(labels = scales::percent,
+                     limits = c(0, 0.55)) +
+  theme_bw()+
+  theme(panel.grid.minor.x = element_blank()))
+
+(scree_EU <- data.frame(
+  var = EU$sdev^2 / sum(EU$sdev^2),
+  dim = 1:length(EU$sdev)
+) |>
+  ggplot(aes(x = dim, y = var)) +
+  geom_line() +
+  geom_point() +
+  geom_text(
+    aes(label = scales::percent(var, accuracy = 0.1)),
+    vjust = -1,
+    hjust = 0.1,
+    size = 3
+  ) +
+  labs(
+    x = "Dimensions",
+    y = "Percentage of explained variances"
+  ) +
+  scale_x_continuous(breaks = 1:3, limits = c(1, 3.1)) +
+  scale_y_continuous(labels = scales::percent,
+                     limits = c(0, 0.65)) +
+  theme_bw()+
+  theme(panel.grid.minor.x = element_blank()))
+
+save(scree_US, scree_EU, file = "save/scree.RData") # Save scree plot results
 
 ## Create primary component variables for regression ---------------------------------------------------------------------------------------------------------------------------
 # data$imf <- -predict(IMF, data)[, 1] |> scale()
