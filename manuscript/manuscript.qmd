@@ -118,19 +118,31 @@ Specifically, we construct our independent variables using three indicators comm
 
 [^5]: See @broz2006; @lipscy2017; @oatley2004.
 
-However, as noted by @lipscy2018 and @belsley2004, including multiple proxies for the same latent construct in a single regression model leads to multicollinearity, which reduces statistical power and inflates standard errors, as the variables are highly correlated in our data[^6]. To address this issue, we apply principal component analysis (PCA) to reduce the dimensionality of the data [@dunteman2008]. Specifically, we extract the first principal component — a linear combination of the original variables that captures the greatest share of variance — to serve as a single measure of influence[^7].
-
 ```{r percentage_variance}
 load('save/PCA.Rdata')
 US_PC1_percentage <- US$sdev[1]^2 / sum(US$sdev^2) * 100
 EU_PC1_percentage <- EU$sdev[1]^2 / sum(EU$sdev^2) * 100
 ```
 
+However, as noted by @lipscy2018 and @belsley2004, including multiple proxies for the same latent construct in a single regression model leads to multicollinearity, which reduces statistical power and inflates standard errors, as the variables are highly correlated in our data[^6]. To address this issue, we apply principal component analysis (PCA) to reduce the dimensionality of the data [@dunteman2008]. Specifically, we extract the first principal component — a linear combination of the original variables that captures the greatest share of variance — to serve as a single measure of influence[^7].
+
 [^6]: See Appendix [-@sec-corr].
 
 [^7]: The first principal components capture the majority of the variance (`r format(EU_PC1_percentage, digits = 1)`% for Europe and `r format(US_PC1_percentage, digits = 1)`% for the United States). See Appendix [-@sec-scree] for scree plots and additional details.
 
 Our approach differs from @lipscy2018 in that we do not pool the US and European variables together. Instead, we construct two separate measures: US influence and European influence. The PCA is conducted separately for each actor, using the same three indicators described above. The resulting first principal components are then normalised to have a mean of zero and a standard deviation of one, allowing for easier interpretation and comparability of coefficients in subsequent analyses.
+
+## Covariates
+
+The existing literature has identified several factors beyond geopolitical alignment that influence IMF lending decisions or a country's demand for IMF assistance. We include these variables as covariates to account for potential confounding effects. Notably, countries with larger IMF quotas (and thus greater voting power), as well as those with nationals among IMF staff, are expected to receive more favourable treatment from the Fund [@barro2005].
+
+We also include economic performance indicators such as GDP, per capita GDP, and lagged GDP growth as determinants of lending and borrowing behaviour. International reserves as a share of imports are used to capture a country’s ability to finance its balance of payments without IMF support. Finally, a binary indicator for OECD membership is included to proxy for institutional and economic differences among countries.
+
+The selection of covariates, including their polynomial transformations[^8], closely follows @lipscy2018 and @barro2005 to ensure comparability with previous findings.
+
+[^8]: Quadratic terms are included for GDP and per capita GDP to capture potential non-linear effects. See [Model Specification] for details.
+
+## Model Specification {#sec-model}
 
 ## Results
 
