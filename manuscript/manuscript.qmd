@@ -168,7 +168,11 @@ where:
 -   $\mathbf{P}_{it} = \left( \ln(\text{GDP}_{it}), \ln(\text{GDP}_{it})^2, \text{GDPpc}_{it}, \text{GDPpc}_{it}^2 \right)^\top$ includes logged GDP and per capita GDP, along with their squared terms.
 -   $\mathbf{Z}_{it}$ is a vector of additional covariates, including per capita GDP growth, reserves as a share of imports, and OECD membership.
 -   $\lambda_t$ denotes five-year period fixed effects.
--   $\epsilon_{it}$ is the error term.
+-   $\epsilon_{it}$ is the error term, assumed to be independently and identically distributed as $\mathcal{N}(0, \sigma^2)$.
+
+For the IMF loan approval variable, which is binary ($Y_{it} \in \{0, 1\}$), we estimate a Probit model. This allows us to conveniently reuse the same latent variable specification $Y^*_{it}$ as in the Tobit model. The key differences are that the error term is now assumed to follow a standard normal distribution $\mathcal{N}(0, 1)$, and that the latent outcome maps to a binary observed outcome as follows[^10]:
+
+[^10]: Alternatively, the Probit model can be expressed in terms of probabilities as $\Pr(Y_{it}=1)=\Phi(\alpha + \beta_1 \text{USA}_{it} + \beta_2 \text{EUP}_{it} + \gamma^\top \mathbf{P}_{it} + \delta^\top \mathbf{Z}_{it} + \lambda_t)$, where $\Phi(\cdot)$ is the standard normal cumulative distribution function.
 
 $$
 Y_{it} = 
