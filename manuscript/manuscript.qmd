@@ -20,6 +20,9 @@ format:
           \newtheorem{hyp}{Hypothesis}
           \newtheorem{subhyp}{Hypothesis}[hyp]
           \renewcommand{\thesubhyp}{\thehyp\alph{subhyp}}
+          \usepackage{chngcntr}
+          \usepackage{apptools}
+          \AtAppendix{\counterwithin{figure}{section}}
 abstract: This is an abstract.
 keywords: IMF, US hegemony, Europe
 execute:
@@ -80,6 +83,7 @@ Europe exerts a statistically significant influence on IMF lending decisions, co
 ## Data
 
 ```{r}
+#| label: fig-data
 dta <- haven::read_dta('data/panel_data.dta') 
 ```
 
@@ -114,13 +118,15 @@ Specifically, we construct our independent variables using three indicators comm
 
 [^5]: See @broz2006; @lipscy2017; @oatley2004.
 
-However, as noted by @lipscy2018 and @belsley2004, including multiple proxies for the same latent construct in a single regression model leads to multicollinearity, which reduces statistical power and inflates standard errors, as the variables are highly correlated in our data. To address this issue, we apply principal component analysis (PCA) to reduce the dimensionality of the data [@dunteman2008]. Specifically, we extract the first principal component — a linear combination of the original variables that captures the greatest share of variance — to serve as a single measure of influence.
+However, as noted by @lipscy2018 and @belsley2004, including multiple proxies for the same latent construct in a single regression model leads to multicollinearity, which reduces statistical power and inflates standard errors, as the variables are highly correlated in our data[^6]. To address this issue, we apply principal component analysis (PCA) to reduce the dimensionality of the data [@dunteman2008]. Specifically, we extract the first principal component — a linear combination of the original variables that captures the greatest share of variance — to serve as a single measure of influence.
+
+[^6]: See Appendix -@sec-corr.
 
 Our approach differs from @lipscy2018 in that we do not pool the US and European variables together. Instead, we construct two separate measures: US influence and European influence. The PCA is conducted separately for each actor, using the same three indicators described above. The resulting first principal components are then normalised to have a mean of zero and a standard deviation of one, allowing for easier interpretation and comparability of coefficients in subsequent analyses.
 
 ## Results
 
-```{r results}
+```{r}
 #| label: tbl-results
 #| tbl-cap: Comparative Effects of US and EU Influence on IMF Lending Outcomes (1980–2010)
 #| tbl-pos: H
@@ -136,3 +142,26 @@ resultsTable |> tinytable::theme_tt("resize", width = 1)
 
 ::: {#refs}
 :::
+
+\appendix
+
+\newpage
+
+# Correlation Matrices {#sec-corr .appendix}
+
+```{r}
+#| label: fig-corr-eu
+#| fig-cap: Correlation Matrix of European Influence Variables
+#| fig-pos: H
+#| fig-height: 5
+load('save/corr.RData')
+corrplot::corrplot(corr_EU, method = 'color', addCoef.col = 'darkgrey', tl.col = "black")
+```
+
+```{r}
+#| label: fig-corr-us
+#| fig-cap: Correlation Matrix of US Influence Variables
+#| fig-pos: H
+#| fig-height: 5
+corrplot::corrplot(corr_US, method = 'color', addCoef.col = 'darkgrey', tl.col = "black")
+```

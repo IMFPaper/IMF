@@ -26,6 +26,23 @@ invisible(lapply(need, library, character.only = T))
 
 data <- read_dta("data/panel_data.dta") # Load data
 
+# Correlation matrices --------------------------------------------------------------------------------------------------------------------------
+corr_US <- data |>
+  select('frusanew', 'ustradenew', 'usq4') |>
+  rename(Voting = 'frusanew', Trade = 'ustradenew', Bank = 'usq4') |>
+  cor(use = 'pairwise.complete.obs')
+
+corrplot(corr_US, method = 'color', addCoef.col = 'darkgrey', tl.col = "black")
+
+
+corr_EU <- data |>
+  select('frdfgnew', 'eutradenew', 'avgukfrgmq4') |>
+  rename(Voting = 'frdfgnew', Trade = 'eutradenew', Bank = 'avgukfrgmq4') |>
+  cor(use = 'pairwise.complete.obs')
+corrplot(corr_EU, method = 'color', addCoef.col = 'darkgrey', tl.col = "black")
+
+save(corr_US, corr_EU, file = "save/corr.RData")
+
 # Replicate Lipscy & Lee's (2018) original PCA analysis in R ------------------------------------------------------------------------------------------------------------------
 PCA <- data |>
   select(
