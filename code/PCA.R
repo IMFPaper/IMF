@@ -45,13 +45,13 @@ summary(PCA) # show primary components
 plot(PCA, type = "l") # Scree plot - "elbow" shape indicates good representation by the first component
 autoplot(PCA, loadings = TRUE, loadings.label = TRUE) # shows components of the first two components
 
-# Break down PCA into IMF, US, and EU components ------------------------------------------------------------------------------------------------------------------------------
-IMF <- data |>
-  select(shstaffl, shquotal) |>
-  na.omit() |>
-  prcomp(scale = T)
-summary(IMF)
-plot(IMF, type = "l")
+# Break down PCA into US, and EU components ------------------------------------------------------------------------------------------------------------------------------
+# IMF <- data |>
+#   select(shstaffl, shquotal) |>
+#   na.omit() |>
+#   prcomp(scale = T)
+# summary(IMF)
+# plot(IMF, type = "l")
 
 US <- data |>
   select(frusanew, ustradenew, usq4) |>
@@ -68,7 +68,7 @@ summary(EU)
 plot(EU, type = "l")
 
 ## Create primary component variables for regression ---------------------------------------------------------------------------------------------------------------------------
-data$imf <- -predict(IMF, data)[, 1] |> scale()
+# data$imf <- -predict(IMF, data)[, 1] |> scale()
 data$us <- predict(US, data)[, 1] |> scale()
 data$eu <- predict(EU, data)[, 1] |> scale()
 data$pca <- -predict(PCA, data)[, 1]
@@ -87,7 +87,7 @@ data |>
 
 ## plot correlation between our variables with the original one. ---------------------------------------------------------------------------------------------------------------
 corr <- data |>
-  select('imf', 'us', 'eu', 'pca') |>
+  select('us', 'eu', 'pca') |>
   cor(use = 'pairwise.complete.obs')
 
 corrplot(corr, method = 'color')
@@ -99,7 +99,8 @@ loan <- tobit(
   imfloannew100 ~
     us +
       eu +
-      imf +
+      shstaffl +
+      shquotal +
       lnrgdpnew +
       lnrgdpnewsq +
       rgdpchnew +
@@ -124,7 +125,8 @@ part <- tobit(
   imf_p ~
     us +
       eu +
-      imf +
+      shstaffl +
+      shquotal +
       lnrgdpnew +
       lnrgdpnewsq +
       rgdpchnew +
@@ -149,7 +151,8 @@ approval <- feglm(
   imf5a ~
     us +
       eu +
-      imf +
+      shstaffl +
+      shquotal +
       lnrgdpnew +
       lnrgdpnewsq +
       rgdpchnew +
@@ -173,7 +176,8 @@ condition <- tobit(
   tc ~
     us +
       eu +
-      imf +
+      shstaffl +
+      shquotal +
       lnrgdpnew +
       lnrgdpnewsq +
       rgdpchnew +
@@ -197,10 +201,10 @@ summary(condition)
 
 ## Save the models --------------------------------------------------------------------------------------------------------------------------------------------
 regModels <- list(
-  'Tobit: IMF loan to GDP ratio' = loan,
-  'Tobit: IMF participation rate' = part,
-  'Probit: IMF loan approval' = approval,
-  'Tobit: number of IMF conditions' = condition
+  'IMF loan to GDP ratio' = loan,
+  'IMF participation rate' = part,
+  'IMF loan approval' = approval,
+  'Number of IMF conditions' = condition
 )
 save(regModels, data, file = 'save/regModels.RData')
 
@@ -235,7 +239,9 @@ glance_custom.tobit <- function(x, ...) {
       round(p, 3),
       get_stars(p),
       ']'
-    )
+    ),
+    'periodFE' = if_else("year2000" %in% names(x$coefficients), "Yes",  ""),
+    'regression' = 'Tobit'
   )
 }
 
@@ -247,7 +253,9 @@ glance_custom.fixest <- function(x, ...) {
       round(p, 3),
       get_stars(p),
       ']'
-    )
+    ),
+    'periodFE' = if_else("year2000" %in% names(x$coefficients), "Yes",  ""),
+    'regression' = 'Probit'
   )
 }
 
@@ -256,7 +264,8 @@ glance_custom.fixest <- function(x, ...) {
 coefmap <- c(
   'us' = 'USA Influence',
   'eu' = 'EUP Influence',
-  'imf' = 'IMF Influence',
+  'shstaffl' = 'IMF Staff',
+  'shquotal' = 'IMF Quota',
   'lnrgdpnew' = 'GDP',
   'lnrgdpnewsq' = 'GDP$^2$',
   'rgdpchnew' = 'GDPpc',
@@ -268,6 +277,8 @@ coefmap <- c(
 )
 gof_map <- list(
   list("raw" = "equality", "clean" = "USA=EUP", "fmt" = NULL),
+  list("raw" = "periodFE", "clean" = "Period FE", "fmt" = NULL),
+  list("raw" = "regression", "clean" = "Regression", "fmt" = NULL),
   list("raw" = "nobs", "clean" = "$N$", "fmt" = 0)
   # list('raw' = 'vcov.type', 'clean' = 'Std.Errors', 'fmt' = NULL)
 )
@@ -323,6 +334,7 @@ loan_f <- tobit(
   right = Inf,
   cluster = shcode
 )
+
 ### significance of US ----
 matrix = c('frusanew = 0', 'ustradenew = 0', 'usq4 = 0')
 lht(loan_f, test = 'F', matrix)
