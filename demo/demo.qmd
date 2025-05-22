@@ -101,7 +101,7 @@ Who has more influence over the IMF, the US or Europe?
 
 ```{r results}
 load('save/regTable.RData')
-resultsTable |> tinytable::theme_tt("resize", width = 0.85)
+resultsTable |> tinytable::theme_tt("resize", width = 0.81)
 ```
 
 ## References {.unnumbered}
