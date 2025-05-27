@@ -87,11 +87,11 @@ Who has more influence over the IMF, the US or Europe?
 
 -   Hypotheses
 
-    -   $H_0$: No difference in the influence of US and Europe over the IMF.
+    -   $H_1$: Either the US or Europe has more influence over the IMF.
 
-    -   $H_1$: Either the US or EU has more influence over the IMF.
+        -   Test of equality of the US and EU coefficients.
 
-    -   Test of equality of the US and EU coefficients.
+    -   $H_2$: The US/Europe exerts a statistically significant influence on IMF lending decisions, controlling for European/American influence.
 
 ## Results from [@lipscy2018]
 
