@@ -104,6 +104,18 @@ load('save/regTable.RData')
 resultsTable |> tinytable::theme_tt("resize", width = 0.81)
 ```
 
+## Interpretation of Results
+
+-   $H_1$: The evidence supports the hypothesis that Europe exerts greater influence over the IMF than the United States, particularly in determining loan amounts and participation rates.
+
+-   $H_2$: The results offer a more nuanced view.
+
+    -   European influence is statistically significant in shaping the loan-to-GDP ratio, participation rate, and loan approval.
+
+    -   In contrast, US influence is **only** significant in reducing the number of IMF conditions.
+
+    -   This finding echoes @lutz2014, who argue that European actors have historically adhered more strictly to the principles of the Washington Consensus than their US counterparts.
+
 ## References {.unnumbered}
 
 ::: {#refs}
