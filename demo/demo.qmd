@@ -63,7 +63,9 @@ Who has more influence over the IMF, the US or Europe?
 
 -   Proxies for influence (merged through PCA)
 
-    -   IMF direct: nationals employed as economists, IMF quota.
+    -   Number of nationals employed as IMF economists
+
+    -   IMF quota.
 
     -   US: UN affinity score with US, trade volume with US, US bank lending
 
@@ -79,7 +81,7 @@ Who has more influence over the IMF, the US or Europe?
 
 -   Independent variables
 
-    -   IMF influence (used by @lipscy2018 and separated by me into EU, US and IMF)
+    -   IMF influence proxies
 
     -   GDP, Growth
 
