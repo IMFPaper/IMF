@@ -279,8 +279,8 @@ msummary(regModels, stars = T) # Rough regression table with all variables and s
 
 ## F-tests generation -----------------------------------------------------------------------------------------------------------------------------------------
 
-regModels$`Probit: IMF loan approval`$df.residual <- degrees_of_freedom(
-  regModels$`Probit: IMF loan approval`
+regModels$`IMF loan approval`$df.residual <- degrees_of_freedom(
+  regModels$`IMF loan approval`
 )
 
 get_stars <- function(p){
