@@ -2,7 +2,7 @@
 # Authors: Dianyi Yang
 # R Script
 # Purpose: This script runs PCA and regression analysis for the demo.
-# Inputs:  data/panel_data.dta
+# Inputs:  data/panel_data.rds
 # Outputs: save/regModels.RData
 #          save/regTable.RData
 
@@ -24,7 +24,7 @@ have <- need %in% rownames(installed.packages()) # checks packages you have
 if (any(!have)) install.packages(need[!have]) # install missing packages
 invisible(lapply(need, library, character.only = T))
 
-data <- read_dta("data/panel_data.dta") # Load data
+data <- read_rds("data/panel_data.rds") # Load data
 
 # Correlation matrices --------------------------------------------------------------------------------------------------------------------------
 corr_US <- data |>
