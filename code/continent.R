@@ -1,7 +1,7 @@
 ######## INFO ########
 # Authors: Dianyi Yang
 # R Script
-# Purpose: This script runs PCA and regression analysis for the demo.
+# Purpose: This script adds continent information to the panel data.
 # Inputs:  data/panel_data_raw.dta
 #          data/continents.json
 # Outputs: data/panel_data.rds
