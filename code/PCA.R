@@ -312,7 +312,7 @@ glance_custom.tobit <- function(x, ...) {
 }
 
 glance_custom.fixest <- function(x, ...) {
-  p <- lht(x, test = 'F', 'us=eu')[2, 4]
+  p <- lht(x, test = 'Chisq', 'us=eu')[2, 4]
   data.frame(
     'equality' = paste0(
       '[',
