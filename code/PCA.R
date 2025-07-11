@@ -279,8 +279,8 @@ msummary(regModels, stars = T) # Rough regression table with all variables and s
 
 ## F-tests generation -----------------------------------------------------------------------------------------------------------------------------------------
 
-regModels$`Probit: IMF loan approval`$df.residual <- degrees_of_freedom(
-  regModels$`Probit: IMF loan approval`
+regModels$`IMF loan approval`$df.residual <- degrees_of_freedom(
+  regModels$`IMF loan approval`
 )
 
 get_stars <- function(p){
@@ -312,7 +312,7 @@ glance_custom.tobit <- function(x, ...) {
 }
 
 glance_custom.fixest <- function(x, ...) {
-  p <- lht(x, test = 'F', 'us=eu')[2, 4]
+  p <- lht(x, test = 'Chisq', 'us=eu')[2, 4]
   data.frame(
     'equality' = paste0(
       '[',

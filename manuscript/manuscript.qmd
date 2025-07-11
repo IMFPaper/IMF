@@ -190,7 +190,7 @@ We now present the results from estimating the Tobit and Probit models described
 
 The only favourable treatment associated with American influence, perhaps surprisingly, is a reduction in the number of IMF conditions. In contrast, ties with Europe are not associated with such benefits. This finding echoes the argument by @lutz2014, who suggest that European actors have historically adhered more strictly to economic orthodoxy—most visibly during the Eurozone crisis—despite such policies traditionally being associated with the United States under the so-called “Washington Consensus.” Although the European adoption of neoliberal economic doctrines became especially prominent after the crisis, it is notable that similar patterns are already evident in the pre-2010 data examined here.
 
-[^12]: Based on an $F$-test for the null hypothesis that USA=EUP. The associated $p$-values are 0.021 and 0.014, respectively. For loan approval, the difference is nearly significant at the 10% level ($p=0.122$).
+[^12]: Based on tests of equality for the null hypothesis that $\text{USA} = \text{EUP}$. $F$-tests are used for the linear models; for the Probit model, the test corresponds to an asymptotic Chi-squared statistic, which is appropriate given the large sample size ($N = 522$). The $p$-values for the first two models are 0.021 and 0.014, respectively. For loan approval, the difference is nearly significant at the 10% level ($p = 0.122$).
 
 ```{r}
 #| label: tbl-results
