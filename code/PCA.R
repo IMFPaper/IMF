@@ -226,7 +226,7 @@ regModels <- list(
   'IMF loan approval' = approval,
   'Number of IMF conditions' = condition
 )
-save(regModels, data, file = 'save/regModels.RData')
+save(regModels, file = 'save/regModels.RData')
 
 # load('save/regModels.RData') # Load the models again if needed
 msummary(regModels, stars = T) # Rough regression table with all variables and stars
@@ -268,7 +268,7 @@ getTable <- function(output = "html") {
     escape = F,
     output = output,
     notes = c(
-      "Standard errors clustered at the country level. Values in square brackets represent $p$-values from $F$-tests."
+      "Standard errors clustered at the country level. Values in square brackets represent $p$-values from $F$-tests (linear models) and Chi-squared tests (Probit model)."
     )
   )
 }
