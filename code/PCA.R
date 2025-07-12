@@ -166,25 +166,21 @@ corrplot(corr, method = 'color')
 
 # Run regression ---------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+## Prepare variables -----------------------------------------------------------------------------------------------------
+rhs <- c(
+  "us", "eu", "shstaffl", "shquotal", 
+  "lnrgdpnew", "lnrgdpnewsq", 
+  "rgdpchnew", "rgdpchnewsquare", 
+  "growth1new", "reserv1", "oecd1", 
+  "year1980", "year1985", "year1990", "year1995", "year2000"
+)
+make_formula <- function(outcome) {
+  as.formula(paste(outcome, paste(rhs, collapse = " + "), sep = " ~ "))
+}
+
 ## tobit regression - IMF loan to GDP ratio ----------------------------------------------------------------------------------------------------
 loan <- tobit(
-  imfloannew100 ~
-    us +
-      eu*is_european +
-      shstaffl +
-      shquotal +
-      lnrgdpnew +
-      lnrgdpnewsq +
-      rgdpchnew +
-      rgdpchnewsquare +
-      growth1new +
-      reserv1 +
-      oecd1 +
-      year1980 +
-      year1985 +
-      year1990 +
-      year1995 +
-      year2000,
+  make_formula("imfloannew100"),
   data = data,
   left = 0,
   right = Inf,
@@ -194,23 +190,7 @@ summary(loan)
 
 ## Tobit regression - IMF participation rate ----------------------------------------------------------------------------------------------------------------
 part <- tobit(
-  imf_p ~
-    us +
-      eu*is_european +
-      shstaffl +
-      shquotal +
-      lnrgdpnew +
-      lnrgdpnewsq +
-      rgdpchnew +
-      rgdpchnewsquare +
-      growth1new +
-      reserv1 +
-      oecd1 +
-      year1980 +
-      year1985 +
-      year1990 +
-      year1995 +
-      year2000,
+  make_formula("imf_p"),
   data = data,
   left = 0,
   right = 1,
@@ -220,23 +200,7 @@ summary(part)
 
 ## Probit regression - IMF loan approval --------------------------------------------------------------------------------------------------------------------
 approval <- feglm(
-  imf5a ~
-    us +
-      eu*is_european +
-      shstaffl +
-      shquotal +
-      lnrgdpnew +
-      lnrgdpnewsq +
-      rgdpchnew +
-      rgdpchnewsquare +
-      growth1new +
-      reserv1 +
-      oecd1 +
-      year1980 +
-      year1985 +
-      year1990 +
-      year1995 +
-      year2000,
+  make_formula("imf5a"),
   data = data,
   family = binomial(link = "probit"),
   cluster = 'shcode'
@@ -245,23 +209,7 @@ summary(approval)
 
 # Tobit Total number of IMF conditions ----------------------------------------------------------------------------------------------------------------------
 condition <- tobit(
-  tc ~
-    us +
-      eu*is_european +
-      shstaffl +
-      shquotal +
-      lnrgdpnew +
-      lnrgdpnewsq +
-      rgdpchnew +
-      rgdpchnewsquare +
-      growth1new +
-      reserv1 +
-      oecd1 +
-      year1980 +
-      year1985 +
-      year1990 +
-      year1995 +
-      year2000,
+  make_formula("tc"),
   data = data,
   left = 0,
   right = Inf,
