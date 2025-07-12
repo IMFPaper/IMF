@@ -6,6 +6,7 @@
 # Outputs: save/corr.RData
 #          save/PCA.RData
 #          save/scree.RData
+#          data/panel_data_pca.rds
 #          save/regModels.RData
 #          save/regTable.RData
 
@@ -141,6 +142,8 @@ save(scree_US, scree_EU, file = "save/scree.RData") # Save scree plot results
 data$us <- predict(US, data)[, 1] |> scale()
 data$eu <- predict(EU, data)[, 1] |> scale()
 data$pca <- -predict(PCA, data)[, 1]
+
+write_rds(data, "data/panel_data_pca.rds")
 
 ## draw a kernel density plot for US and EU PC1 components  -----------------------------------------------------------------------------------------------------------------------------------
 data |> 
