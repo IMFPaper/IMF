@@ -47,7 +47,8 @@ loan <- tobit(
   right = Inf,
   cluster = shcode
 )
-summary(loan)
+
+msummary(loan, stars = TRUE)
 
 ## Tobit regression - IMF participation rate ----------------------------------------------------------------------------------------------------------------
 part <- tobit(
@@ -57,7 +58,7 @@ part <- tobit(
   right = 1,
   cluster = shcode
 )
-summary(part)
+msummary(part, stars = TRUE)
 
 ## Probit regression - IMF loan approval --------------------------------------------------------------------------------------------------------------------
 approval <- feglm(
@@ -66,7 +67,7 @@ approval <- feglm(
   family = binomial(link = "probit"),
   cluster = 'shcode'
 )
-summary(approval)
+msummary(approval, stars = TRUE)
 
 # Tobit Total number of IMF conditions ----------------------------------------------------------------------------------------------------------------------
 condition <- tobit(
@@ -76,4 +77,4 @@ condition <- tobit(
   right = Inf,
   cluster = shcode
 )
-summary(condition)
+msummary(condition, stars = TRUE)
