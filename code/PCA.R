@@ -3,7 +3,11 @@
 # R Script
 # Purpose: This script runs PCA and regression analysis for the demo.
 # Inputs:  data/panel_data.rds
-# Outputs: save/regModels.RData
+# Outputs: save/corr.RData
+#          save/PCA.RData
+#          save/scree.RData
+#          data/panel_data_pca.rds
+#          save/regModels.RData
 #          save/regTable.RData
 
 # SETUP ----------------------------------------------------------------------------------------------------------------
@@ -139,6 +143,8 @@ data$us <- predict(US, data)[, 1] |> scale()
 data$eu <- predict(EU, data)[, 1] |> scale()
 data$pca <- -predict(PCA, data)[, 1]
 
+write_rds(data, "data/panel_data_pca.rds")
+
 ## draw a kernel density plot for US and EU PC1 components  -----------------------------------------------------------------------------------------------------------------------------------
 data |> 
   select(us, eu) |>
@@ -160,108 +166,56 @@ corrplot(corr, method = 'color')
 
 # Run regression ---------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-## tobit regression - IMF loan to GDP ratio
+## Prepare variables -----------------------------------------------------------------------------------------------------
+rhs <- c(
+  "us", "eu", "shstaffl", "shquotal", 
+  "lnrgdpnew", "lnrgdpnewsq", 
+  "rgdpchnew", "rgdpchnewsquare", 
+  "growth1new", "reserv1", "oecd1", 
+  "year1980", "year1985", "year1990", "year1995", "year2000"
+)
+make_formula <- function(outcome) {
+  as.formula(paste(outcome, paste(rhs, collapse = " + "), sep = " ~ "))
+}
+
+## tobit regression - IMF loan to GDP ratio ----------------------------------------------------------------------------------------------------
 loan <- tobit(
-  imfloannew100 ~
-    us +
-      eu +
-      shstaffl +
-      shquotal +
-      lnrgdpnew +
-      lnrgdpnewsq +
-      rgdpchnew +
-      rgdpchnewsquare +
-      growth1new +
-      reserv1 +
-      oecd1 +
-      year1980 +
-      year1985 +
-      year1990 +
-      year1995 +
-      year2000,
+  make_formula("imfloannew100"),
   data = data,
   left = 0,
   right = Inf,
   cluster = shcode
 )
-summary(loan)
+msummary(loan, stars = TRUE)
 
 ## Tobit regression - IMF participation rate ----------------------------------------------------------------------------------------------------------------
 part <- tobit(
-  imf_p ~
-    us +
-      eu +
-      shstaffl +
-      shquotal +
-      lnrgdpnew +
-      lnrgdpnewsq +
-      rgdpchnew +
-      rgdpchnewsquare +
-      growth1new +
-      reserv1 +
-      oecd1 +
-      year1980 +
-      year1985 +
-      year1990 +
-      year1995 +
-      year2000,
+  make_formula("imf_p"),
   data = data,
   left = 0,
   right = 1,
   cluster = shcode
 )
-summary(part)
+msummary(part, stars = TRUE)
 
 ## Probit regression - IMF loan approval --------------------------------------------------------------------------------------------------------------------
 approval <- feglm(
-  imf5a ~
-    us +
-      eu +
-      shstaffl +
-      shquotal +
-      lnrgdpnew +
-      lnrgdpnewsq +
-      rgdpchnew +
-      rgdpchnewsquare +
-      growth1new +
-      reserv1 +
-      oecd1 +
-      year1980 +
-      year1985 +
-      year1990 +
-      year1995 +
-      year2000,
+  make_formula("imf5a"),
   data = data,
   family = binomial(link = "probit"),
   cluster = 'shcode'
 )
-summary(approval)
+msummary(approval, stars = TRUE)
 
 # Tobit Total number of IMF conditions ----------------------------------------------------------------------------------------------------------------------
 condition <- tobit(
-  tc ~
-    us +
-      eu +
-      shstaffl +
-      shquotal +
-      lnrgdpnew +
-      lnrgdpnewsq +
-      rgdpchnew +
-      rgdpchnewsquare +
-      growth1new +
-      reserv1 +
-      oecd1 +
-      year1980 +
-      year1985 +
-      year1990 +
-      year1995 +
-      year2000,
+  make_formula("tc"),
   data = data,
   left = 0,
   right = Inf,
   cluster = shcode
 )
-summary(condition)
+msummary(condition, stars = TRUE)
 
 # Table generation -------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -279,51 +233,7 @@ msummary(regModels, stars = T) # Rough regression table with all variables and s
 
 ## F-tests generation -----------------------------------------------------------------------------------------------------------------------------------------
 
-regModels$`IMF loan approval`$df.residual <- degrees_of_freedom(
-  regModels$`IMF loan approval`
-)
-
-get_stars <- function(p){
-  if (p < 0.001) {
-    return('***')
-  } else if (p < 0.01) {
-    return('**')
-  } else if (p < 0.05) {
-    return('*')
-  } else if (p < 0.1) {
-    return('+')
-  } else {
-    return('')
-  }
-}
-
-glance_custom.tobit <- function(x, ...) {
-  p <- lht(x, test = 'F', 'us=eu')[2, 4]
-  data.frame(
-    'equality' = paste0(
-      '[',
-      round(p, 3),
-      get_stars(p),
-      ']'
-    ),
-    'periodFE' = if_else("year2000" %in% names(x$coefficients), "Yes",  ""),
-    'regression' = 'Tobit'
-  )
-}
-
-glance_custom.fixest <- function(x, ...) {
-  p <- lht(x, test = 'Chisq', 'us=eu')[2, 4]
-  data.frame(
-    'equality' = paste0(
-      '[',
-      round(p, 3),
-      get_stars(p),
-      ']'
-    ),
-    'periodFE' = if_else("year2000" %in% names(x$coefficients), "Yes",  ""),
-    'regression' = 'Probit'
-  )
-}
+source("helper/f_test.R")
 
 ## Variable renaming -------------------------------------------------------------------------------------------------------------------------------------------
 
