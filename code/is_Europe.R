@@ -78,3 +78,17 @@ condition <- tobit(
   cluster = shcode
 )
 msummary(condition, stars = TRUE)
+
+# Table generation -------------------------------------------------------------------------------------------------------------------------------------------
+
+## Save the models --------------------------------------------------------------------------------------------------------------------------------------------
+regModels <- list(
+  'IMF loan to GDP ratio' = loan,
+  'IMF participation rate' = part,
+  'IMF loan approval' = approval,
+  'Number of IMF conditions' = condition
+)
+save(regModels, file = 'save/regModels_europe.RData')
+
+# load('save/regModels.RData') # Load the models again if needed
+msummary(regModels, stars = T) # Rough regression table with all variables and stars
