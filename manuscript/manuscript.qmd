@@ -200,6 +200,15 @@ load('save/regTable.RData')
 resultsTable |> tinytable::theme_tt("resize", width = 1)
 ```
 
+
+```{r}
+#| label: tbl-results-europe
+#| tbl-cap: Effects of U.S. and European Influence on IMF Lending Outcomes (1980–2010), Separating European and Non-European Recipients
+#| tbl-pos: H
+load('save/regTable_europe.RData')
+resultsTable |> tinytable::theme_tt("resize", width = 1)
+```
+
 # Case Study
 
 # Conclusion
