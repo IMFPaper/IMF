@@ -166,11 +166,11 @@ corrplot(corr, method = 'color')
 
 # Run regression ---------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-## tobit regression - IMF loan to GDP ratio
+## tobit regression - IMF loan to GDP ratio ----------------------------------------------------------------------------------------------------
 loan <- tobit(
   imfloannew100 ~
     us +
-      eu +
+      eu*is_european +
       shstaffl +
       shquotal +
       lnrgdpnew +
@@ -196,7 +196,7 @@ summary(loan)
 part <- tobit(
   imf_p ~
     us +
-      eu +
+      eu*is_european +
       shstaffl +
       shquotal +
       lnrgdpnew +
@@ -222,7 +222,7 @@ summary(part)
 approval <- feglm(
   imf5a ~
     us +
-      eu +
+      eu*is_european +
       shstaffl +
       shquotal +
       lnrgdpnew +
@@ -247,7 +247,7 @@ summary(approval)
 condition <- tobit(
   tc ~
     us +
-      eu +
+      eu*is_european +
       shstaffl +
       shquotal +
       lnrgdpnew +
