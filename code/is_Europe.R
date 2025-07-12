@@ -2,7 +2,7 @@
 # Authors: Dianyi Yang
 # R Script
 # Purpose: This script runs separate regressions for European and non-European countries.
-# Inputs:  data/panel_data.rds
+# Inputs:  data/panel_data_pca.rds
 # Outputs: 
 
 # SETUP ----------------------------------------------------------------------------------------------------------------
@@ -20,7 +20,7 @@ have <- need %in% rownames(installed.packages()) # checks packages you have
 if (any(!have)) install.packages(need[!have]) # install missing packages
 invisible(lapply(need, library, character.only = T))
 
-data <- read_rds("data/panel_data.rds") # Load data
+data <- read_rds("data/panel_data_pca.rds") # Load data
 
 # Generate European dummy variable ------------------------------------------------------------------------------------------------
 data$is_european <- ifelse(data$continent == "Europe", 1, 0)
