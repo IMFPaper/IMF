@@ -84,7 +84,7 @@ Europe exerts a statistically significant influence on IMF lending decisions, co
 
 ```{r}
 #| label: fig-data
-dta <- haven::read_dta('data/panel_data.dta')
+dta <- readr::read_rds('data/panel_data.rds')
 ```
 
 This paper uses the dataset compiled by @lipscy2018, which extends the @barro2005 dataset through 2010. It provides panel data for 130 countries in five-year intervals from 1980 to 2010[^2], including information on IMF borrowing and participation outcomes, economic indicators, and measures of each country's relationship with the United States and major European powers.
