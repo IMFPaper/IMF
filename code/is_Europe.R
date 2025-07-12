@@ -1,0 +1,127 @@
+######## INFO ########
+# Authors: Dianyi Yang
+# R Script
+# Purpose: This script runs separate regressions for European and non-European countries.
+# Inputs:  data/panel_data.rds
+# Outputs: 
+
+# SETUP ----------------------------------------------------------------------------------------------------------------
+rm(list = ls()) # Clear workspace
+
+need <- c(
+  'tidyverse',
+  'AER',
+  'fixest',
+  "kableExtra",
+  'modelsummary',
+  "parameters"
+) # list packages needed
+have <- need %in% rownames(installed.packages()) # checks packages you have
+if (any(!have)) install.packages(need[!have]) # install missing packages
+invisible(lapply(need, library, character.only = T))
+
+data <- read_rds("data/panel_data.rds") # Load data
+
+# Generate European dummy variable ------------------------------------------------------------------------------------------------
+data$is_european <- ifelse(data$continent == "Europe", 1, 0)
+
+# Run regression ---------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+## Prepare variables -----------------------------------------------------------------------------------------------------
+rhs <- c(
+  "us", "eu", "shstaffl", "shquotal", 
+  "lnrgdpnew", "lnrgdpnewsq", 
+  "rgdpchnew", "rgdpchnewsquare", 
+  "growth1new", "reserv1", "oecd1", 
+  "year1980", "year1985", "year1990", "year1995", "year2000"
+)
+make_formula <- function(outcome) {
+  as.formula(paste(outcome, paste(rhs, collapse = " + "), sep = " ~ "))
+}
+
+## tobit regression - IMF loan to GDP ratio --------------------------------------------------------------------------------------------------------------------
+loan <- tobit(
+  make_formula("imfloannew100"),
+  data = data,
+  left = 0,
+  right = Inf,
+  cluster = shcode
+)
+summary(loan)
+
+## Tobit regression - IMF participation rate ----------------------------------------------------------------------------------------------------------------
+part <- tobit(
+  imf_p ~
+    us +
+      eu +
+      shstaffl +
+      shquotal +
+      lnrgdpnew +
+      lnrgdpnewsq +
+      rgdpchnew +
+      rgdpchnewsquare +
+      growth1new +
+      reserv1 +
+      oecd1 +
+      year1980 +
+      year1985 +
+      year1990 +
+      year1995 +
+      year2000,
+  data = data,
+  left = 0,
+  right = 1,
+  cluster = shcode
+)
+summary(part)
+
+## Probit regression - IMF loan approval --------------------------------------------------------------------------------------------------------------------
+approval <- feglm(
+  imf5a ~
+    us +
+      eu +
+      shstaffl +
+      shquotal +
+      lnrgdpnew +
+      lnrgdpnewsq +
+      rgdpchnew +
+      rgdpchnewsquare +
+      growth1new +
+      reserv1 +
+      oecd1 +
+      year1980 +
+      year1985 +
+      year1990 +
+      year1995 +
+      year2000,
+  data = data,
+  family = binomial(link = "probit"),
+  cluster = 'shcode'
+)
+summary(approval)
+
+# Tobit Total number of IMF conditions ----------------------------------------------------------------------------------------------------------------------
+condition <- tobit(
+  tc ~
+    us +
+      eu +
+      shstaffl +
+      shquotal +
+      lnrgdpnew +
+      lnrgdpnewsq +
+      rgdpchnew +
+      rgdpchnewsquare +
+      growth1new +
+      reserv1 +
+      oecd1 +
+      year1980 +
+      year1985 +
+      year1990 +
+      year1995 +
+      year2000,
+  data = data,
+  left = 0,
+  right = Inf,
+  cluster = shcode
+)
+summary(condition)
