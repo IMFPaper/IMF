@@ -92,3 +92,48 @@ save(regModels, file = 'save/regModels_europe.RData')
 
 # load('save/regModels.RData') # Load the models again if needed
 msummary(regModels, stars = T) # Rough regression table with all variables and stars
+
+## Variable renaming -------------------------------------------------------------------------------------------------------------------------------------------
+
+coefmap <- c(
+  'us' = 'USA Influence',
+  'eu' = 'EUP Influence',
+  'eu:is_european' = 'EUP Influence x European recipient',
+  'is_european' = 'European recipient',
+  'shstaffl' = 'IMF Staff',
+  'shquotal' = 'IMF Quota',
+  'lnrgdpnew' = 'GDP',
+  'lnrgdpnewsq' = 'GDP$^2$',
+  'rgdpchnew' = 'GDPpc',
+  'rgdpchnewsquare' = "GDPpc$^2$",
+  'growth1new' = 'GDPpc growth',
+  'reserv1' = 'Reserves',
+  'oecd1' = 'OECD',
+  '(Intercept)' = '(Intercept)'
+)
+gof_map <- list(
+  list("raw" = "periodFE", "clean" = "Period FE", "fmt" = NULL),
+  list("raw" = "regression", "clean" = "Regression", "fmt" = NULL),
+  list("raw" = "nobs", "clean" = "$N$", "fmt" = 0)
+  # list('raw' = 'vcov.type', 'clean' = 'Std.Errors', 'fmt' = NULL)
+)
+
+getTable <- function(output = "html") {
+  msummary(
+    regModels,
+    coef_map = coefmap,
+    gof_map = gof_map,
+    stars = T,
+    escape = F,
+    output = output,
+    notes = c(
+      "Standard errors clustered at the country level."
+    )
+  )
+}
+
+getTable() # for previewing the table in IDE
+
+resultsTable <- getTable("latex")
+
+save(resultsTable, file = 'save/regTable_europe.RData') # Save the table
