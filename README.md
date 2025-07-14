@@ -50,3 +50,15 @@ install.packages("missing_package_name")
 ```
 
 for installing any missing packages.
+
+---
+
+## 🔁 Collaboration Guidelines
+
+Please *DO NOT* commit directly to `main`.
+
+- Always work on a separate branch.
+- Open a Pull Request (PR) when ready for review or merge.
+- Use descriptive branch names (e.g., fix-pca-labels, results-table-tweaks).
+- Keep PRs focused — one purpose per PR is best.
+- Multiple commits on the same branch are *encouraged* to keep track of changes.
