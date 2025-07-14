@@ -7,17 +7,18 @@
 
 ## 📂 Project Structure
 
-- `code/` — R scripts for data preparation and analysis (e.g., PCA, continent classification).
-- `data/` — Raw data (not tracked in Git for privacy reasons).
-- `demo/` — A standalone Quarto demonstration document and its PDF output.
+- `code/` — R scripts for data preparation and regression analysis, plotting and table-generation.
+- `data/` — Raw and processed data.
+- `demo/` — A standalone Quarto Beamer demonstration.
 - `extra/` — Shared assets across projects:
   - `references.bib` → auto-generated BibTeX file exported from Zotero.
   - `apa.csl` → Citation style file used by both `demo/` and `manuscript/`.
-- `helper/` — Auxiliary scripts (e.g., testing functions).
+- `helper/` — Auxiliary scripts (e.g., $F$-test scripts).
 - `manuscript/` — Quarto source and output for the main manuscript.
 - `save/` — Saved R objects (e.g., models, regression outputs).
 - `Taiwan_paper/` — Archived Do-files and resources from related Taiwan IMF work.
 
+Note that all PDF files are ignored by `.gitignore` and not tracked by Git, and should be generated locally.
 ---
 
 ## 📚 Citation Management
