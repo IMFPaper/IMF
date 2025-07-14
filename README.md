@@ -19,6 +19,7 @@
 - `Taiwan_paper/` — Archived Do-files and resources from related Taiwan IMF work.
 
 Note that all PDF files are ignored by `.gitignore` and not tracked by Git, and should be generated locally.
+
 ---
 
 ## 📚 Citation Management
