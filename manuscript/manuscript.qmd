@@ -30,7 +30,6 @@ execute:
   warning: false
   error: false
   message: false
-bibliography: references.bib
 ---
 
 \newpage
