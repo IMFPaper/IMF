@@ -98,7 +98,7 @@ msummary(regModels, stars = T) # Rough regression table with all variables and s
 coefmap <- c(
   'us' = 'USA Influence',
   'eu' = 'EUP Influence',
-  'eu:is_european' = 'EUP Influence \\\\~$\\times$ European recipient',
+  'eu:is_european' = 'EUP Influence $\\times$ \\newline European recipient',
   'is_european' = 'European recipient',
   'shstaffl' = 'IMF Staff',
   'shquotal' = 'IMF Quota',
