@@ -202,9 +202,9 @@ resultsTable |> tinytable::theme_tt("resize", width = 1)
 
 ## Robustness: Continental Preference?
 
-One plausible alternative explanation for the strong association between European influence and favourable IMF lending outcomes is that European powers might be disproportionately favouring fellow European recipients. To evaluate this possibility, we examine whether the effect of European influence differs significantly between European and non-European countries.
+One plausible alternative explanation for the strong association between European influence and favourable IMF lending outcomes is that European powers might be disproportionately favouring fellow European recipients, in contrast to the United States, for which such continental preference may not apply. This suspicion is not unfounded: during the Eurozone crisis, the IMF partnered with the European Commission and the European Central Bank—collectively known as the Troika—to jointly extend financial assistance to Greece and other European economies.
 
-We interact the European influence variable (`EUP Influence`) with a binary indicator for whether the recipient is a European country (`European recipient`), and re-estimate the main models accordingly. The results are presented in @tbl-results-europe.
+To evaluate this possibility, we examine whether the effect of European influence varies systematically between European and non-European countries. We interact the European influence variable (`EUP Influence`) with a binary indicator for whether the recipient is a European country (`European recipient`), and re-estimate the main models accordingly. The results are presented in @tbl-results-europe.
 
 Contrary to the hypothesis of regional favouritism, the interaction terms are either statistically insignificant or, when significant, indicate a *weaker* effect of European influence for European borrowers. For example, in the loan-to-GDP ratio and participation rate models, the negative and significant interaction terms suggest that European influence is associated with *less favourable* outcomes for European recipients compared to non-Europeans.
 
