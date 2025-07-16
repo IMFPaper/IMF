@@ -200,7 +200,7 @@ load('save/regTable.RData')
 resultsTable |> tinytable::theme_tt("resize", width = 1)
 ```
 
-## Robustness: Continental Preference
+## Robustness: Continental Preference?
 
 One plausible alternative explanation for the strong association between European influence and favourable IMF lending outcomes is that European powers might be disproportionately favouring fellow European recipients. To evaluate this possibility, we examine whether the effect of European influence differs significantly between European and non-European countries.
 
