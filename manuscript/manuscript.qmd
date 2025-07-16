@@ -218,7 +218,7 @@ Contrary to the hypothesis of regional favouritism, the results suggest that Eur
 
 Furthermore, the `European recipient` variable itself is associated with *less favourable* outcomes, even after controlling for ties to the US and European powers, as well as other covariates. This negative association is statistically significant at the 5% level for both the loan-to-GDP ratio and the number of IMF conditions. These results suggest that, on average, European countries tend to receive *less favourable* treatment from the IMF than non-European countries, despite their typically stronger connections to Western European powers.
 
-These findings suggest that the observed European influence is not driven by a preference for geographically proximate countries, but instead reflects a broader institutional influence over the IMF. In other words, European powers appear to exercise their influence globally, rather than selectively favoring their regional neighbours.
+These findings suggest that the observed European influence is not driven by a preference for geographically proximate countries, but instead reflects a broader institutional influence over the IMF. In other words, European powers appear to exercise their influence globally, rather than selectively favouring their regional neighbours.
 
 # Case Study
 
