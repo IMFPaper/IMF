@@ -93,6 +93,10 @@ save(regModels, file = 'save/regModels_europe.RData')
 # load('save/regModels.RData') # Load the models again if needed
 msummary(regModels, stars = T) # Rough regression table with all variables and stars
 
+## gof generation -----------------------------------------------------------------------------------------------------------------------------------------
+
+source("helper/f_test.R")
+
 ## Variable renaming -------------------------------------------------------------------------------------------------------------------------------------------
 
 coefmap <- c(
