@@ -93,12 +93,16 @@ save(regModels, file = 'save/regModels_europe.RData')
 # load('save/regModels.RData') # Load the models again if needed
 msummary(regModels, stars = T) # Rough regression table with all variables and stars
 
+## gof generation -----------------------------------------------------------------------------------------------------------------------------------------
+
+source("helper/f_test.R")
+
 ## Variable renaming -------------------------------------------------------------------------------------------------------------------------------------------
 
 coefmap <- c(
   'us' = 'USA Influence',
   'eu' = 'EUP Influence',
-  'eu:is_european' = 'EUP Influence x European recipient',
+  'eu:is_european' = 'EUP Influence $\\times$ \\newline European recipient',
   'is_european' = 'European recipient',
   'shstaffl' = 'IMF Staff',
   'shquotal' = 'IMF Quota',

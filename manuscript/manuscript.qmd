@@ -196,11 +196,31 @@ The only favourable treatment associated with American influence, perhaps surpri
 
 ```{r}
 #| label: tbl-results
-#| tbl-cap: Comparative Effects of US and EU Influence on IMF Lending Outcomes (1980–2010)
+#| tbl-cap: Comparative Effects of US and European Influence on IMF Lending Outcomes (1980–2010)
 #| tbl-pos: H
 load('save/regTable.RData')
 resultsTable |> tinytable::theme_tt("resize", width = 1)
 ```
+
+## Robustness: Continental Preference?
+
+One plausible alternative explanation for the strong association between European influence and favourable IMF lending outcomes is that European powers might be disproportionately favouring fellow European recipients, in contrast to the United States, for which such continental preference may not apply. This suspicion is not unfounded: during the Eurozone crisis, the IMF partnered with the European Commission and the European Central Bank—collectively known as the Troika—to jointly extend financial assistance to Greece and other European economies.
+
+To evaluate this possibility, we examine whether the effect of European influence varies systematically between European and non-European countries. We interact the European influence variable (`EUP Influence`) with a binary indicator for whether the recipient is a European country (`European recipient`), and re-estimate the main models accordingly. The results are presented in @tbl-results-europe.
+
+```{r}
+#| label: tbl-results-europe
+#| tbl-cap: Effects of US and European Influence on IMF Lending Outcomes (1980–2010), Separating European and Non-European Recipients
+#| tbl-pos: H
+load('save/regTable_europe.RData')
+resultsTable |> tinytable::theme_tt("resize", width = 1)
+```
+
+Contrary to the hypothesis of regional favouritism, the results suggest that European recipients do not receive preferential treatment from the IMF or benefit more from their ties to Western European powers. If anything, the estimates indicate that they may even be treated less favourably in some respects. The interaction terms (`EUP Influence $\times$ European recipient`), which capture whether European influence has a differential effect for European borrowers compared to non-European ones, are either statistically insignificant or, when significant, indicate a *weaker* effect for European recipients. For instance, in the loan-to-GDP ratio, participation rate, and IMF conditions models, the negative and significant interaction terms suggest that ties with Western European powers are associated with *less favourable* outcomes for European recipients relative to non-European countries with comparable ties.
+
+Furthermore, the `European recipient` variable itself is associated with *less favourable* outcomes, even after controlling for ties to the US and European powers, as well as other covariates. This negative association is statistically significant at the 5% level for both the loan-to-GDP ratio and the number of IMF conditions. These results suggest that, on average, European countries tend to receive *less favourable* treatment from the IMF than non-European countries, despite their typically stronger connections to Western European powers.
+
+These findings suggest that the observed European influence is not driven by a preference for geographically proximate countries, but instead reflects a broader institutional influence over the IMF. In other words, European powers appear to exercise their influence globally, rather than selectively favouring their regional neighbours.
 
 # Case Study
 
