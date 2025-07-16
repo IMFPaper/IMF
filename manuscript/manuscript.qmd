@@ -194,7 +194,7 @@ The only favourable treatment associated with American influence, perhaps surpri
 
 ```{r}
 #| label: tbl-results
-#| tbl-cap: Comparative Effects of US and EU Influence on IMF Lending Outcomes (1980–2010)
+#| tbl-cap: Comparative Effects of US and European Influence on IMF Lending Outcomes (1980–2010)
 #| tbl-pos: H
 load('save/regTable.RData')
 resultsTable |> tinytable::theme_tt("resize", width = 1)
@@ -208,7 +208,7 @@ To evaluate this possibility, we examine whether the effect of European influenc
 
 ```{r}
 #| label: tbl-results-europe
-#| tbl-cap: Effects of U.S. and European Influence on IMF Lending Outcomes (1980–2010), Separating European and Non-European Recipients
+#| tbl-cap: Effects of US and European Influence on IMF Lending Outcomes (1980–2010), Separating European and Non-European Recipients
 #| tbl-pos: H
 load('save/regTable_europe.RData')
 resultsTable |> tinytable::theme_tt("resize", width = 1)
