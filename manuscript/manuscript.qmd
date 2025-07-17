@@ -6,6 +6,8 @@ authors:
     email: d.yang17@lse.ac.uk
     orcid: 0009-0004-4652-3429
     correspondence: true
+  - name: Tong Hu
+    orcid: 0009-0003-5234-8164
 format:
   #native: default
   #docx: default
