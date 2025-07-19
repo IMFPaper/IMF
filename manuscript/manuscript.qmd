@@ -228,6 +228,8 @@ These findings suggest that the observed European influence is not driven by a p
 
 # Conclusion
 
+\newpage
+
 # References {.unnumbered}
 
 ::: {#refs}
