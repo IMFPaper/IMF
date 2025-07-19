@@ -54,7 +54,7 @@ The question is straightforward but surprisingly difficult to answer. Whereas th
 
 Qualitative approaches to this issue are often hampered by the Fund’s closed-door, consensus-based decision-making—precisely the kind of opaque process exemplified by the “gentlemen’s agreement.” On the one hand, the prevalence of informal conventions limits the utility of formal institutional analyses (e.g., voting power or veto rights). On the other, the secretive nature of negotiations means scholars often observe the outcomes, but not the underlying power struggles. While case studies such as Mexico’s bailout or the European debt crisis [@lipscy2018; @hodson2014] provide compelling narratives, they lack transatlantic comparability and generalisability.
 
-This paper therefore attempts to quantitatively compare the influence of the US and Europe on the IMF.
+This paper contributes to the literature in three key ways. First, it offers a direct empirical comparison of US and European influence over IMF lending outcomes—an angle surprisingly overlooked in existing work. Second, by disaggregating “the West” into its US and European components, it uncovers variation in how influence is exercised and to what ends. Third, it challenges the assumption of geographic bias, showing that European powers do not disproportionately favour European borrowers. These findings shed new light on the internal politics of the IMF and speak to wider debates on institutional legitimacy, great power contestation, and the geopolitics of global finance.
 
 The structure of this paper is as follows: @sec-litreview provides a review over the literature on the influence of the US and Europe over the IMF.
 
