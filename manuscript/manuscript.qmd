@@ -38,9 +38,11 @@ execute:
 
 # Introduction
 
-The International Monetary Fund (IMF) and the World Bank[^1] were established toward the end of World War II as part of the Bretton Woods agreement in 1944 [@jensen2004]. While the World Bank specialised in long-term project financing, the IMF was initially designed for addressing the short-term balance-of-payment crises which would otherwise undermine the fixed exchange rate arrangements under the Bretton Woods system [@jensen2004].
+The International Monetary Fund (IMF) and the World Bank[^1] were established toward the end of World War II as part of the Bretton Woods agreement in 1944 [@jensen2004]. While the World Bank specialised in long-term project financing, the IMF was initially established for providing short-term balance-of-payment support and ensuring the stability of the international monetary system  [@fund2020; @jensen2004].
 
 [^1]: Familiar name for the International Bank for Reconstruction and Development (IBRD), the lending arm of the later created World Bank Group.
+
+Despite IMF's initial technical and narrow mandate, the IMF gradually expanded its role into structural adjustment and domestic economic governance, with loan conditionality often targeting fiscal policy, labour markets, and institutional reforms [@barnett2004]. This evolution pushed the Fund into deeply political and distributional arenas far beyond its original design.
 
 One renowned fact about the IMF and its sister institution, the World Bank, is the long-standing "gentlemen's agreement" of the IMF managing director being a European, and the World Bank president being an American [@keating2024; @weiss2023], despite no such provisions in either institution's articles of agreements [@fund2020; @WorldBank2021].
 
