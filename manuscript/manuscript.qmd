@@ -72,7 +72,9 @@ In principle, quantitative approaches are well suited for directly comparing the
 
 This paper addresses this gap by conducting a disaggregated, quantitative comparison of US and European influence on IMF lending outcomes. By distinguishing between the two major transatlantic actors, we provide new insights into the internal dynamics of power within the IMF and contribute to broader debates over institutional legitimacy, hegemony, and the geopolitics of economic governance.
 
-The projection of great power capabilities into international organizations is sometimes uneven, because of strategic preferences, the perceived inefficiency of institutional engagement, or other possible reasons. Existing studies provide substantial evidence of U.S. influence over IMF lending decisions, they leave a crucial question open-the comparison between the U.S. and other major powers, particularly the European countries. IMF is perceived to be an institution dominated by a few major power, but the relative weight of American versus European remains ambiguous. The organization is traditionally chaired by an European national [@kahler2001],
+\color{red}
+However, empirical studies suggested that countries with low international reserves, high current account deficits, and low GDP growth are more likely to receive IMF funding assistance [@barro2005; @knight1997], despite such indicators often reflecting a limited capacity to repay.
+\color{black}
 
 # Empirical Analysis
 
