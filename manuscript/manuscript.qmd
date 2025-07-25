@@ -72,10 +72,6 @@ In principle, quantitative approaches are well suited for directly comparing the
 
 This paper addresses this gap by conducting a disaggregated, quantitative comparison of US and European influence on IMF lending outcomes. By distinguishing between the two major transatlantic actors, we provide new insights into the internal dynamics of power within the IMF and contribute to broader debates over institutional legitimacy, hegemony, and the geopolitics of economic governance.
 
-\color{red}
-However, empirical studies suggested that countries with low international reserves, high current account deficits, and low GDP growth are more likely to receive IMF funding assistance [@barro2005; @knight1997], despite such indicators often reflecting a limited capacity to repay.
-\color{black}
-
 # Empirical Analysis
 
 ## Hypotheses
@@ -160,7 +156,7 @@ Our approach differs from @lipscy2018 in that we do not pool the US and European
 
 The existing literature has identified several factors beyond geopolitical alignment that influence IMF lending decisions or a country's demand for IMF assistance. We include these variables as covariates to account for potential confounding effects. Notably, countries with larger IMF quotas (and thus greater voting power), as well as those with nationals among IMF staff, are expected to receive more favourable treatment from the Fund [@barro2005].
 
-We also include economic performance indicators such as GDP, per capita GDP, and lagged GDP growth as determinants of lending and borrowing behaviour. International reserves as a share of imports are used to capture a country’s ability to finance its balance of payments without IMF support. Finally, a binary indicator for OECD membership is included to proxy for institutional and economic differences among countries.
+We include a range of economic performance indicators that have been shown to systematically affect IMF lending decisions [@barro2005; @knight1997]. To capture these dynamics, we include GDP, per capita GDP, and lagged GDP growth as proxies for macroeconomic performance. International reserves as a share of imports are used to measure a country’s external liquidity and ability to manage balance-of-payments pressures without IMF support. Finally, a binary variable for OECD membership serves as a proxy for broader institutional and economic differences among countries.
 
 The selection of covariates, including their polynomial transformations[^9], closely follows @lipscy2018 and @barro2005 to ensure comparability with previous findings.
 
