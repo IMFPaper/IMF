@@ -3,7 +3,7 @@ title: European or American? A re-examination of the transatlantic influence ove
 date: last-modified
 authors:
   - name: Dianyi Yang
-    email: d.yang17@lse.ac.uk
+    email: dianyi.yang@politics.ox.ac.uk
     orcid: 0009-0004-4652-3429
     correspondence: true
   - name: Tong Hu
