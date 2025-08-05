@@ -3,7 +3,8 @@
 # R Script
 # Purpose: This script runs separate regressions for European and non-European countries.
 # Inputs:  data/panel_data_pca.rds
-# Outputs: save/regTable_europe.RData
+# Outputs: save/regModels_europe.RData
+#          save/regTable_europe.RData
 
 # SETUP ----------------------------------------------------------------------------------------------------------------
 rm(list = ls()) # Clear workspace
