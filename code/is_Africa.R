@@ -89,7 +89,7 @@ regModels <- list(
   'IMF loan approval' = approval,
   'Number of IMF conditions' = condition
 )
-save(regModels, file = 'save/regModels_europe.RData')
+save(regModels, file = 'save/regModels_africa.RData')
 
 # load('save/regModels.RData') # Load the models again if needed
 msummary(regModels, stars = T) # Rough regression table with all variables and stars
@@ -141,4 +141,4 @@ getTable() # for previewing the table in IDE
 
 resultsTable <- getTable("latex")
 
-save(resultsTable, file = 'save/regTable_europe.RData') # Save the table
+save(resultsTable, file = 'save/regTable_africa.RData') # Save the table
