@@ -3,7 +3,7 @@
 # R Script
 # Purpose: This script runs separate regressions for African and non-African countries.
 # Inputs:  data/panel_data_pca.rds
-# Outputs: 
+# Outputs: save/regTable_europe.RData
 
 # SETUP ----------------------------------------------------------------------------------------------------------------
 rm(list = ls()) # Clear workspace
