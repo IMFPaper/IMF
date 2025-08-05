@@ -224,7 +224,8 @@ load('save/regTable.RData')
 resultsTable |> tinytable::theme_tt("resize", width = 1)
 ```
 
-## Robustness: Continental Preference?
+## Robustness Checks
+### Continental Preference?
 
 One plausible alternative explanation for the strong association between European influence and favourable IMF lending outcomes is that European powers might be disproportionately favouring fellow European recipients, in contrast to the United States, for which such continental preference may not apply. This suspicion is not unfounded: during the Eurozone crisis, the IMF partnered with the European Commission and the European Central Bank—collectively known as the Troika—to jointly extend financial assistance to Greece and other European economies.
 
@@ -243,6 +244,16 @@ Contrary to the hypothesis of regional favouritism, the results suggest that Eur
 Furthermore, the `European recipient` variable itself is associated with *less favourable* outcomes, even after controlling for ties to the US and European powers, as well as other covariates. This negative association is statistically significant at the 5% level for both the loan-to-GDP ratio and the number of IMF conditions. These results suggest that, on average, European countries tend to receive *less favourable* treatment from the IMF than non-European countries, despite their typically stronger connections to Western European powers.
 
 These findings suggest that the observed European influence is not driven by a preference for geographically proximate countries, but instead reflects a broader institutional influence over the IMF. In other words, European powers appear to exercise their influence globally, rather than selectively favouring their regional neighbours.
+
+### Colonial Preference?
+
+```{r}
+#| label: tbl-results-africa
+#| tbl-cap: Effects of US and European Influence on IMF Lending Outcomes (1980–2010), Separating African and Non-African Recipients
+#| tbl-pos: H
+load('save/regTable_africa.RData')
+resultsTable |> tinytable::theme_tt("resize", width = 1)
+```
 
 # Case Study
 
