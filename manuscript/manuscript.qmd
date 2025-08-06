@@ -254,6 +254,8 @@ These findings suggest that the observed European influence is not driven by a p
 
 ### Colonial Preference?
 
+A second possible explanation is that European influence is concentrated in lending to former colonies, particularly in Africa, where historical, linguistic, and economic ties might motivate preferential treatment. To assess this, we interact `EUP Influence` with a binary variable for African recipients and re-estimate our main models. The results are reported in @tbl-results-africa.
+
 ```{r}
 #| label: tbl-results-africa
 #| tbl-cap: Effects of US and European Influence on IMF Lending Outcomes (1980–2010), Separating African and Non-African Recipients
@@ -261,6 +263,10 @@ These findings suggest that the observed European influence is not driven by a p
 load('save/regTable_africa.RData')
 resultsTable |> tinytable::theme_tt("resize", width = 1)
 ```
+
+Contrary to the colonial preference hypothesis, the interaction terms (`EUP Influence` $\times$ `African recipient`) are statistically insignificant in most specifications, and when significant, they are negative — indicating that African recipients, if anything, benefit less from European influence than non-African borrowers with comparable ties. Likewise, the `African recipient` variable itself is not associated with systematically more favourable lending outcomes, and in some models is linked to less favourable terms.
+
+These findings parallel our results for European recipients: they indicate that the observed association between European influence and IMF lending is not driven by a concentration of support for countries with historic colonial ties. Instead, European influence appears to be exercised in a globally consistent manner, extending beyond specific regional or historical relationships.
 
 # Case Study
 
