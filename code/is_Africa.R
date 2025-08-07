@@ -1,10 +1,10 @@
 ######## INFO ########
 # Authors: Dianyi Yang
 # R Script
-# Purpose: This script runs separate regressions for European and non-European countries.
+# Purpose: This script runs separate regressions for African and non-African countries.
 # Inputs:  data/panel_data_pca.rds
-# Outputs: save/regModels_europe.RData
-#          save/regTable_europe.RData
+# Outputs: save/regModels_africa.RData
+#          save/regTable_africa.RData
 
 # SETUP ----------------------------------------------------------------------------------------------------------------
 rm(list = ls()) # Clear workspace
@@ -23,14 +23,14 @@ invisible(lapply(need, library, character.only = T))
 
 data <- read_rds("data/panel_data_pca.rds") # Load data
 
-# Generate European dummy variable ------------------------------------------------------------------------------------------------
-data$is_european <- ifelse(data$continent == "Europe", 1, 0)
+# Generate African dummy variable ------------------------------------------------------------------------------------------------
+data$is_african <- ifelse(data$continent == "Africa", 1, 0)
 
 # Run regression ---------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ## Prepare variables -----------------------------------------------------------------------------------------------------
 rhs <- c(
-  "us", "eu*is_european", "shstaffl", "shquotal", 
+  "us", "eu*is_african", "shstaffl", "shquotal", 
   "lnrgdpnew", "lnrgdpnewsq", 
   "rgdpchnew", "rgdpchnewsquare", 
   "growth1new", "reserv1", "oecd1", 
@@ -89,7 +89,7 @@ regModels <- list(
   'IMF loan approval' = approval,
   'Number of IMF conditions' = condition
 )
-save(regModels, file = 'save/regModels_europe.RData')
+save(regModels, file = 'save/regModels_africa.RData')
 
 # load('save/regModels.RData') # Load the models again if needed
 msummary(regModels, stars = T) # Rough regression table with all variables and stars
@@ -103,8 +103,8 @@ source("helper/f_test.R")
 coefmap <- c(
   'us' = 'USA Influence',
   'eu' = 'EUP Influence',
-  'eu:is_european' = 'EUP Influence $\\times$ \\newline European recipient',
-  'is_european' = 'European recipient',
+  'eu:is_african' = 'EUP Influence $\\times$ \\newline African recipient',
+  'is_african' = 'African recipient',
   'shstaffl' = 'IMF Staff',
   'shquotal' = 'IMF Quota',
   'lnrgdpnew' = 'GDP',
@@ -141,4 +141,4 @@ getTable() # for previewing the table in IDE
 
 resultsTable <- getTable("latex")
 
-save(resultsTable, file = 'save/regTable_europe.RData') # Save the table
+save(resultsTable, file = 'save/regTable_africa.RData') # Save the table
