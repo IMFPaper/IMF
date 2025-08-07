@@ -254,7 +254,7 @@ These findings suggest that the observed European influence is not driven by a p
 
 ### Colonial Preference?
 
-A second possible explanation is that European influence is concentrated in lending to former colonies, particularly in Africa, where historical, linguistic, and economic ties might motivate preferential treatment. To assess this, we interact `EUP Influence` with a binary variable for African recipients and re-estimate our main models. The results are reported in @tbl-results-africa.
+A second possible explanation is that European influence is concentrated in lending to former colonies, particularly in Africa, where historical, linguistic, and economic ties might motivate preferential treatment, as suggested by @stone2004. To assess this, we interact `EUP Influence` with a binary variable for African recipients and re-estimate our main models. The results are reported in @tbl-results-africa.
 
 ```{r}
 #| label: tbl-results-africa
