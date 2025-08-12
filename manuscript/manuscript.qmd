@@ -234,7 +234,7 @@ In this section, we test both explanations by interacting our measure of Europea
 
 ### Continental Preference?
 
-One plausible alternative explanation for the strong association between European influence and favourable IMF lending outcomes is that European powers might be disproportionately favouring fellow European recipients, in contrast to the United States, for which such continental preference may not apply. This suspicion is not unfounded: during the Eurozone crisis, the IMF partnered with the European Commission and the European Central Bank—collectively known as the Troika—to jointly extend financial assistance to Greece and other European economies.
+One plausible alternative explanation for the strong association between European influence and favourable IMF lending outcomes is that European powers might be disproportionately favouring fellow European recipients, in contrast to the United States, for which such continental preference may not apply. This suspicion is not unfounded: during the Eurozone crisis, the IMF partnered with the European Commission and the European Central Bank—collectively known as the Troika—to jointly extend financial assistance to Greece and other European economies [@pisani-ferry2013].
 
 To evaluate this possibility, we examine whether the effect of European influence varies systematically between European and non-European countries. We interact the European influence variable (`EUP Influence`) with a binary indicator for whether the recipient is a European country (`European recipient`), and re-estimate the main models accordingly. The results are presented in @tbl-results-europe.
 
