@@ -226,7 +226,7 @@ resultsTable |> tinytable::theme_tt("resize", width = 1)
 
 ## Robustness Checks
 
-While our baseline results indicate that European powers exert substantial influence over IMF lending outcomes, two common explanations in the literature could potentially account for these patterns without implying broad, institutionalised influence.
+While our baseline results indicate that European powers exert substantial influence over IMF lending outcomes, two plausible explanations could potentially account for these patterns without implying broad, institutionalised influence.
 
 First, European powers may favour geographically proximate borrowers — in other words, a continental preference — leading to disproportionately favourable treatment of European recipients. Second, given the historical legacy of colonialism, particularly in Africa, European powers might be more inclined to support former colonies (colonial preference), especially those with enduring political, economic, or cultural ties [@moyo2024; @stone2004; @stone2011, p.51].
 
