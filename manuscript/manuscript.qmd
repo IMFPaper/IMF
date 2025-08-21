@@ -5,7 +5,7 @@ authors:
   - name: Dianyi Yang
     email: dianyi.yang@politics.ox.ac.uk
     orcid: 0009-0004-4652-3429
-    correspondence: true
+    corresponding: true
   - name: Tong Hu
     orcid: 0009-0003-5234-8164
   - name: Zhenyi Chen
