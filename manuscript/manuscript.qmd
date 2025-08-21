@@ -78,7 +78,7 @@ In principle, quantitative approaches are well suited for directly comparing the
 
 This paper addresses this gap by conducting a disaggregated, quantitative comparison of US and European influence on IMF lending outcomes. By distinguishing between the two major transatlantic actors, we provide new insights into the internal dynamics of power within the IMF and contribute to broader debates over institutional legitimacy, hegemony, and the geopolitics of economic governance.
 
-# Empirical Analysis
+# Empirical Strategy
 
 ## Hypotheses
 
@@ -208,7 +208,7 @@ Y_{it} =
 \end{cases}
 $$
 
-## Results
+# Results
 
 We now present the results from estimating the Tobit and Probit models described above, focusing on the effects of US and European influence on IMF lending outcomes. As shown in @tbl-results, stronger ties with Europe are significantly associated with a higher IMF loan-to-GDP ratio, a greater participation rate, and an increased likelihood of loan approval. In contrast, similar ties with the United States do not yield statistically significant effects on these outcomes. The differences between American and European influence on the first two outcomes are statistically significant at the 5% level[^12].
 
@@ -224,7 +224,7 @@ load('save/regTable.RData')
 resultsTable |> tinytable::theme_tt("resize", width = 1)
 ```
 
-## Robustness Checks
+# Robustness Checks
 
 While our baseline results indicate that European powers exert substantial influence over IMF lending outcomes, two plausible explanations could account for these patterns without implying broad, institutionalised influence.
 
@@ -232,7 +232,7 @@ First, European powers may favour geographically proximate borrowers — a *cont
 
 In this section, we test both explanations by interacting our measure of European influence with indicators for European and African recipients, respectively. If either hypothesis holds, we would expect the interaction terms to be positive and significant for the first three lending outcomes — loan-to-GDP ratio, participation rate, and loan approval, indicating stronger European influence in those contexts. As shown below, neither hypothesis is supported: in both cases, the interaction terms are insignificant or negative, and our core finding — that European influence is associated with more favourable IMF lending outcomes — remains robust across the recipient groups. This suggests that European influence is not geographically or historically confined, but instead reflects a global institutional role within the IMF.
 
-### Continental Preference?
+## Continental Preference?
 
 One plausible alternative explanation for the strong association between European influence and favourable IMF lending outcomes is that European powers might be disproportionately favouring fellow European recipients, in contrast to the United States, for which such continental preference may not apply. This suspicion is not unfounded: during the Eurozone crisis, the IMF partnered with the European Commission and the European Central Bank—collectively known as the Troika—to jointly extend financial assistance to Greece and other European economies [@hodson2014; @pisani-ferry2013]. Although the Eurozone crisis itself overlaps only slightly with the end of our sample period (1980-2010), and the Troika’s coordinated lending response occurred largely afterwards, we nevertheless test this hypothesis to assess whether similar continental preference dynamics could explain our findings.
 
@@ -252,7 +252,7 @@ Furthermore, the `European recipient` variable itself is associated with *less f
 
 These findings suggest that the observed European influence is not driven by a preference for geographically proximate countries, but instead reflects a broader institutional influence over the IMF. In other words, European powers appear to exercise their influence globally, rather than selectively favouring their regional neighbours.
 
-### Colonial Preference?
+## Colonial Preference?
 
 A second possible explanation is that European influence is concentrated in lending to former colonies, particularly in Africa, where historical, linguistic, and economic ties might motivate preferential treatment, as suggested by @stone2004. To assess this, we interact `EUP Influence` with a binary variable for African recipients and re-estimate our main models. The results are reported in @tbl-results-africa.
 
