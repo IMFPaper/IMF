@@ -1,6 +1,8 @@
 ---
 title: European or American? A re-examination of the transatlantic influence over the IMF
 date: last-modified
+date-format: |
+    | DD MMMM YYYY
 authors:
   - name: Dianyi Yang
     email: dianyi.yang@politics.ox.ac.uk
