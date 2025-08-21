@@ -8,3 +8,4 @@
 /manuscript/manuscript_files
 
 *.bib
+/.luarc.json
