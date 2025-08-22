@@ -3890,6 +3890,12 @@
       "Maintainer": "Jeroen Ooms <jeroenooms@gmail.com>",
       "Repository": "CRAN"
     },
+    "pak": {
+      "Package": "pak",
+      "Version": "0.9.0",
+      "Source": "Repository",
+      "Repository": "CRAN"
+    },
     "parameters": {
       "Package": "parameters",
       "Version": "0.28.0",
