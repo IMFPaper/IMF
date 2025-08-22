@@ -9,17 +9,12 @@
 # SETUP ----------------------------------------------------------------------------------------------------------------
 rm(list = ls()) # Clear workspace
 
-need <- c(
-  'tidyverse',
-  'AER',
-  'fixest',
-  "kableExtra",
-  'modelsummary',
-  "parameters"
-) # list packages needed
-have <- need %in% rownames(installed.packages()) # checks packages you have
-if (any(!have)) install.packages(need[!have]) # install missing packages
-invisible(lapply(need, library, character.only = T))
+library('tidyverse')
+library('AER')
+library('fixest')
+library("kableExtra")
+library('modelsummary')
+library("parameters")
 
 data <- read_rds("data/panel_data_pca.rds") # Load data
 
@@ -30,11 +25,22 @@ data$is_african <- ifelse(data$continent == "Africa", 1, 0)
 
 ## Prepare variables -----------------------------------------------------------------------------------------------------
 rhs <- c(
-  "us", "eu*is_african", "shstaffl", "shquotal", 
-  "lnrgdpnew", "lnrgdpnewsq", 
-  "rgdpchnew", "rgdpchnewsquare", 
-  "growth1new", "reserv1", "oecd1", 
-  "year1980", "year1985", "year1990", "year1995", "year2000"
+  "us",
+  "eu*is_african",
+  "shstaffl",
+  "shquotal",
+  "lnrgdpnew",
+  "lnrgdpnewsq",
+  "rgdpchnew",
+  "rgdpchnewsquare",
+  "growth1new",
+  "reserv1",
+  "oecd1",
+  "year1980",
+  "year1985",
+  "year1990",
+  "year1995",
+  "year2000"
 )
 make_formula <- function(outcome) {
   as.formula(paste(outcome, paste(rhs, collapse = " + "), sep = " ~ "))
@@ -91,7 +97,7 @@ regModels <- list(
 )
 save(regModels, file = 'save/regModels_africa.RData')
 
-# load('save/regModels.RData') # Load the models again if needed
+# load('save/regModels_africa.RData') # Load the models again if needed
 msummary(regModels, stars = T) # Rough regression table with all variables and stars
 
 ## gof generation -----------------------------------------------------------------------------------------------------------------------------------------

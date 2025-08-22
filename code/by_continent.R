@@ -8,19 +8,12 @@
 # SETUP ----------------------------------------------------------------------------------------------------------------
 rm(list = ls()) # Clear workspace
 
-need <- c(
-  'tidyverse',
-  'AER',
-  'fixest',
-  "kableExtra",
-  'modelsummary',
-  "parameters"
-) # list packages needed
-have <- need %in% rownames(installed.packages()) # checks packages you have
-if (any(!have)) {
-  install.packages(need[!have])
-} # install missing packages
-invisible(lapply(need, library, character.only = T))
+library('tidyverse')
+library('AER')
+library('fixest')
+library("kableExtra")
+library('modelsummary')
+library("parameters")
 
 data <- read_rds("data/panel_data_pca.rds") # Load data
 
@@ -126,28 +119,31 @@ get_continent_estimate <- function(continent, power, mod) {
 ## IMF loan to GDP ratio --------------------------------------------------------------------------------------------------
 loan_summary_df <- get_estimates(loan) |>
   dplyr::select(-term) |>
-  slice(0) |>  # empties the dataframe while preserving structure
+  slice(0) |> # empties the dataframe while preserving structure
   mutate(
     continent = character(),
     power = character()
   ) |>
   relocate(continent, power, .before = 1)
 
-  # Loop through each continent and power to compute estimates
+# Loop through each continent and power to compute estimates
 for (ct in continents) {
   for (pw in c("us", "eu")) {
     row <- get_continent_estimate(ct, pw, loan) |>
       mutate(continent = ct, power = pw) |>
       relocate(continent, power, .before = 1)
-    
+
     loan_summary_df <- bind_rows(loan_summary_df, row)
   }
 }
 
 ggplot(loan_summary_df, aes(x = power, y = estimate, color = power)) +
   geom_point(position = position_dodge(width = 0.5)) +
-  geom_errorbar(aes(ymin = conf.low, ymax = conf.high),
-                width = 0.2, position = position_dodge(width = 0.5)) +
+  geom_errorbar(
+    aes(ymin = conf.low, ymax = conf.high),
+    width = 0.2,
+    position = position_dodge(width = 0.5)
+  ) +
   facet_wrap(~continent, ncol = 3) +
   theme_bw() +
   labs(
@@ -160,7 +156,7 @@ ggplot(loan_summary_df, aes(x = power, y = estimate, color = power)) +
 ## Total number of IMF conditions --------------------------------------------------------------------------------------------------
 condition_summary_df <- get_estimates(condition) |>
   dplyr::select(-term) |>
-  slice(0) |>  # empties the dataframe while preserving structure
+  slice(0) |> # empties the dataframe while preserving structure
   mutate(
     continent = character(),
     power = character()
@@ -172,15 +168,18 @@ for (ct in continents) {
     row <- get_continent_estimate(ct, pw, condition) |>
       mutate(continent = ct, power = pw) |>
       relocate(continent, power, .before = 1)
-    
+
     condition_summary_df <- bind_rows(condition_summary_df, row)
   }
 }
 
 ggplot(condition_summary_df, aes(x = power, y = estimate, color = power)) +
   geom_point(position = position_dodge(width = 0.5)) +
-  geom_errorbar(aes(ymin = conf.low, ymax = conf.high),
-                width = 0.2, position = position_dodge(width = 0.5)) +
+  geom_errorbar(
+    aes(ymin = conf.low, ymax = conf.high),
+    width = 0.2,
+    position = position_dodge(width = 0.5)
+  ) +
   facet_wrap(~continent, ncol = 3) +
   theme_bw() +
   labs(

@@ -5,6 +5,47 @@
 
 ---
 
+## 🛠️ Package Management with renv
+
+This project uses **renv** for reproducible package management. The `renv.lock` file contains the exact package versions used in this analysis.
+
+### Getting Started with renv
+
+1. **First-time setup** (when cloning the repository):
+
+   ```r
+   # Install renv and pak if not already installed
+   if (!requireNamespace("renv", quietly = TRUE)) {
+     install.packages("renv")
+   }
+
+   if (!requireNamespace("pak", quietly = TRUE)) {
+     install.packages("pak")
+   }
+
+   # Initialize renv and restore packages
+   renv::restore()
+   ```
+
+2. Daily Workflow
+
+   ```r
+   # Activate the renv environment (usually automatic in Positron/RStudio)
+   renv::activate()
+
+   # Install new packages (they'll be added to the lockfile)
+   renv::install("package_name")
+
+   # Update the lockfile after adding packages
+   renv::snapshot()
+   ```
+
+3. Troubleshooting
+
+- If packages are missing: `renv::restore()`
+- To update all packages: `renv::update()`
+- To check status: `renv::status()`
+
 ## 📂 Project Structure
 
 - `code/` — R scripts for data preparation and regression analysis, plotting and table-generation.
@@ -30,35 +71,12 @@ Both `demo/` and `manuscript/` use this file — avoid duplicating citations els
 
 ---
 
-## ⚠️ Common Issues and Troubleshooting
-
-Most problems related to running R scripts or rendering Quarto documents (e.g., `manuscript.qmd`, `demo.qmd`) can be resolved by:
-
-1. **Updating packages**
-2. **Installing missing packages**
-
-You are recommended to use the `Positron R Package Manager` extension written by @kv9898, or the RStudio built-in `Packages` tab for such tasks. Alternatively, you can run the following commands in the R console:
-
-```r
-update.packages(ask = FALSE)
-```
-
-for updating packages, and
-
-```r
-install.packages("missing_package_name")
-```
-
-for installing any missing packages.
-
----
-
 ## 🔁 Collaboration Guidelines
 
-Please *DO NOT* commit directly to `main`.
+Please _DO NOT_ commit directly to `main`.
 
 - Always work on a separate branch.
 - Open a Pull Request (PR) when ready for review or merge.
 - Use descriptive branch names (e.g., fix-pca-labels, results-table-tweaks).
 - Keep PRs focused — one purpose per PR is best.
-- Multiple commits on the same branch are *encouraged* to keep track of changes.
+- Multiple commits on the same branch are _encouraged_ to keep track of changes.

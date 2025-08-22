@@ -9,13 +9,8 @@
 # SETUP ----------------------------------------------------------------------------------------------------------------
 rm(list = ls()) # Clear workspace
 
-need <- c(
-  'tidyverse',
-  'jsonlite'
-) # list packages needed
-have <- need %in% rownames(installed.packages()) # checks packages you have
-if (any(!have)) install.packages(need[!have]) # install missing packages
-invisible(lapply(need, library, character.only = T))
+library('tidyverse')
+library('jsonlite')
 
 # Read data ----------------------------------------------------------------------------------------------------------------
 raw_data <- read_dta("data/panel_data_raw.dta")
