@@ -98,7 +98,7 @@ regModels <- list(
 )
 save(regModels, file = 'save/regModels_europe.RData')
 
-# load('save/regModels.RData') # Load the models again if needed
+# load('save/regModels_europe.RData') # Load the models again if needed
 msummary(regModels, stars = T) # Rough regression table with all variables and stars
 
 ## gof generation -----------------------------------------------------------------------------------------------------------------------------------------
