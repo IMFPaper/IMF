@@ -137,7 +137,7 @@ data$eu <- predict(EU, data)[, 1] |> scale()
 data$pca <- -predict(PCA, data)[, 1]
 
 write_rds(data, "data/panel_data_pca.rds")
-data <- read_rds("data/panel_data_pca.rds") # Reload data with PCA variables
+# data <- read_rds("data/panel_data_pca.rds") # Reload data with PCA variables
 
 ## draw a kernel density plot for US and EU PC1 components  -----------------------------------------------------------------------------------------------------------------------------------
 data |>
