@@ -13,20 +13,15 @@
 # SETUP ----------------------------------------------------------------------------------------------------------------
 rm(list = ls()) # Clear workspace
 
-need <- c(
-  'tidyverse',
-  'haven',
-  'AER',
-  'fixest',
-  "kableExtra",
-  'modelsummary',
-  'corrplot',
-  "ggfortify",
-  "parameters"
-) # list packages needed
-have <- need %in% rownames(installed.packages()) # checks packages you have
-if (any(!have)) install.packages(need[!have]) # install missing packages
-invisible(lapply(need, library, character.only = T))
+library('tidyverse')
+library('haven')
+library('AER')
+library('fixest')
+library("kableExtra")
+library('modelsummary')
+library('corrplot')
+library("ggfortify")
+library("parameters")
 
 data <- read_rds("data/panel_data.rds") # Load data
 
