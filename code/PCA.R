@@ -102,9 +102,8 @@ save(US, EU, file = "save/PCA.RData") # Save PCA results
     y = "Percentage of explained variances"
   ) +
   scale_x_continuous(breaks = 1:3, limits = c(1, 3.1)) +
-  scale_y_continuous(labels = scales::percent,
-                     limits = c(0, 0.55)) +
-  theme_bw()+
+  scale_y_continuous(labels = scales::percent, limits = c(0, 0.55)) +
+  theme_bw() +
   theme(panel.grid.minor.x = element_blank()))
 
 (scree_EU <- data.frame(
@@ -125,9 +124,8 @@ save(US, EU, file = "save/PCA.RData") # Save PCA results
     y = "Percentage of explained variances"
   ) +
   scale_x_continuous(breaks = 1:3, limits = c(1, 3.1)) +
-  scale_y_continuous(labels = scales::percent,
-                     limits = c(0, 0.65)) +
-  theme_bw()+
+  scale_y_continuous(labels = scales::percent, limits = c(0, 0.65)) +
+  theme_bw() +
   theme(panel.grid.minor.x = element_blank()))
 
 save(scree_US, scree_EU, file = "save/scree.RData") # Save scree plot results
@@ -139,17 +137,20 @@ data$eu <- predict(EU, data)[, 1] |> scale()
 data$pca <- -predict(PCA, data)[, 1]
 
 write_rds(data, "data/panel_data_pca.rds")
+data <- read_rds("data/panel_data_pca.rds") # Reload data with PCA variables
 
 ## draw a kernel density plot for US and EU PC1 components  -----------------------------------------------------------------------------------------------------------------------------------
-data |> 
+data |>
   select(us, eu) |>
   na.omit() |>
   pivot_longer(cols = everything(), names_to = 'region', values_to = 'value') |>
   ggplot(aes(x = value, fill = region)) +
   geom_density(alpha = 0.5) +
-  labs(title = "Kernel Density Plot of US and EU variables",
-       x = "PC1",
-       y = "Density") +
+  labs(
+    title = "Kernel Density Plot of US and EU variables",
+    x = "PC1",
+    y = "Density"
+  ) +
   theme_minimal()
 
 ## plot correlation between our variables with the original one. ---------------------------------------------------------------------------------------------------------------
@@ -163,11 +164,22 @@ corrplot(corr, method = 'color')
 
 ## Prepare variables -----------------------------------------------------------------------------------------------------
 rhs <- c(
-  "us", "eu", "shstaffl", "shquotal", 
-  "lnrgdpnew", "lnrgdpnewsq", 
-  "rgdpchnew", "rgdpchnewsquare", 
-  "growth1new", "reserv1", "oecd1", 
-  "year1980", "year1985", "year1990", "year1995", "year2000"
+  "us",
+  "eu",
+  "shstaffl",
+  "shquotal",
+  "lnrgdpnew",
+  "lnrgdpnewsq",
+  "rgdpchnew",
+  "rgdpchnewsquare",
+  "growth1new",
+  "reserv1",
+  "oecd1",
+  "year1980",
+  "year1985",
+  "year1990",
+  "year1995",
+  "year2000"
 )
 make_formula <- function(outcome) {
   as.formula(paste(outcome, paste(rhs, collapse = " + "), sep = " ~ "))
