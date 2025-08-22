@@ -221,7 +221,7 @@ The only favourable treatment associated with American influence, perhaps surpri
 #| tbl-cap: Comparative Effects of US and European Influence on IMF Lending Outcomes (1980–2010)
 #| tbl-pos: H
 load('save/regTable.RData')
-resultsTable |> tinytable::theme_tt("resize", width = 1)
+resultsTable |> tinytable::theme_latex(resize_width = 1, resize_direction = "down")
 ```
 
 # Robustness Checks
@@ -243,7 +243,7 @@ To evaluate this possibility, we examine whether the effect of European influenc
 #| tbl-cap: Effects of US and European Influence on IMF Lending Outcomes (1980–2010), Separating European and Non-European Recipients
 #| tbl-pos: H
 load('save/regTable_europe.RData')
-resultsTable |> tinytable::theme_tt("resize", width = 1)
+resultsTable |> tinytable::theme_latex(resize_width = 1, resize_direction = "down")
 ```
 
 Contrary to the hypothesis of regional favouritism, the results suggest that European recipients do not receive preferential treatment from the IMF or benefit more from their ties to Western European powers. If anything, the estimates indicate that they may even be treated less favourably in some respects. The interaction terms (`EUP Influence` $\times$ `European recipient`), which capture whether European influence has a differential effect for European borrowers compared to non-European ones, are either statistically insignificant or, when significant, indicate a *weaker* effect for European recipients. For instance, in the loan-to-GDP ratio, participation rate, and IMF conditions models, the negative and significant interaction terms suggest that ties with Western European powers are associated with *less favourable* outcomes for European recipients relative to non-European countries with comparable ties.
@@ -261,7 +261,7 @@ A second possible explanation is that European influence is concentrated in lend
 #| tbl-cap: Effects of US and European Influence on IMF Lending Outcomes (1980–2010), Separating African and Non-African Recipients
 #| tbl-pos: H
 load('save/regTable_africa.RData')
-resultsTable |> tinytable::theme_tt("resize", width = 1)
+resultsTable |> tinytable::theme_latex(resize_width = 1, resize_direction = "down")
 ```
 
 Contrary to the colonial preference hypothesis, the interaction terms (`EUP Influence` $\times$ `African recipient`) are statistically insignificant in most specifications, and when significant (as in the participation rate model), they are *negative* — indicating that ties with Western European powers, if anything, bring fewer benefits to African recipients than to non-African borrowers. Similarly, the `African recipient` variable itself is not consistently associated with more favourable IMF lending outcomes; in fact, in some models (participation rate and conditionality), it is significantly correlated with *less* favourable terms. Taken together, these results suggest that African recipients do not benefit disproportionately from their historical or post-colonial relationships with European powers—and may, on average, receive less favourable treatment than non-African countries with comparable political ties and economic profiles.
