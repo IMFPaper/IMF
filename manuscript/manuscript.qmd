@@ -1,15 +1,32 @@
 ---
 title: European or American? A re-examination of the transatlantic influence over the IMF
 date: last-modified
+date-format: |
+    | DD MMMM YYYY
 authors:
   - name: Dianyi Yang
     email: dianyi.yang@politics.ox.ac.uk
     orcid: 0009-0004-4652-3429
-    correspondence: true
+    corresponding: true
+    affiliations:
+      - ref: ox    
   - name: Tong Hu
     orcid: 0009-0003-5234-8164
+    affiliations:
+      - ref: bw
+    equal-contributor: true
   - name: Zhenyi Chen
     orcid: 0009-0008-2910-5187
+    affiliations:
+      - ref: rmu
+    equal-contributor: true
+affiliations:
+  - id: ox
+    name: Department of Politics and International Relations, University of Oxford
+  - id: bw
+    name: School of International Relations and Diplomacy, Beijing Foreign Studies University
+  - id: rmu
+    name: School of International Studies, Renmin University of China
 format:
   #native: default
   #docx: default
