@@ -130,7 +130,7 @@ msummary(rfa2, stars = TRUE)
 regModels <- list(
   'Number of IMF conditions' = condition,
   'Number of Fiscal conditions' = fiscal_condition,
-  'RFA (T+1)' = rfa1,
+  'RFA ($T$+1)' = rfa1,
   'RFA (end year)' = rfa2
 )
 save(regModels, file = 'save/regModels_fiscal.RData')
