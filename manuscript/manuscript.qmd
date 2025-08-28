@@ -335,3 +335,13 @@ scree_EU
 #| fig-pos: H
 scree_US
 ```
+
+# Fiscal Conditions {#sec-fiscal .appendix}
+
+```{r}
+#| label: tbl-results-fiscal
+#| tbl-cap: Effects of US and European Influence on IMF fiscal conditionality (1999–2012)
+#| tbl-pos: H
+load('save/regTable_fiscal.RData')
+resultsTable |> tinytable::theme_latex(resize_width = 1, resize_direction = "down")
+```
