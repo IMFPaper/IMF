@@ -68,6 +68,7 @@ data_new <- data |>
   select(-country_lower)
 
 saveRDS(data_new, "data/panel_data_fiscal.rds") # save the new data
+# data_new <- read_rds("data/panel_data_fiscal.rds") # reload to avoid any potential issues
 
 # Run regressions -----------------------------------------------------------------------------------------------------------
 ## Load old condition regression model ---------------------------------------------------------------------------------
