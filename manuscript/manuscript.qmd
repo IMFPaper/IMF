@@ -285,6 +285,11 @@ Contrary to the colonial preference hypothesis, the interaction terms (`EUP Infl
 
 These findings parallel our results for European recipients: they indicate that the observed association between European influence and IMF lending is not driven by a concentration of support for countries with historic colonial ties. Instead, European influence appears to be exercised in a globally consistent manner, extending beyond specific regional or historical relationships.
 
+## Alternative Measure of Conditionality
+
+Another concern is that our results on conditionality could be sensitive to the way IMF programme conditions are measured. Our baseline analysis follows @lipscy2018, who aggregate the total number of conditions across five-year periods. Yet, as @guimaraes2021 note, the overall count of IMF conditions, although widely used, may not fully capture the *stringency* of conditionality. They therefore propose alternative indicators, including the number of *fiscal* conditions and the required fiscal adjustment (RFA), to reassess the relationship between political alignment and conditionality. To address this concern, we replicate our conditionality model (the fourth specification in @tbl-results) using these alternative measures as dependent variables, and present the results in Appendix [-@sec-fiscal].
+
+
 # Case Study
 
 # Conclusion
