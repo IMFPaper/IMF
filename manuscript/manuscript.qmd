@@ -343,7 +343,7 @@ scree_EU
 scree_US
 ```
 
-# Fiscal Conditions {#sec-fiscal .appendix}
+# Fiscal Conditionality Analysis {#sec-fiscal .appendix}
 
 This appendix extends our analysis of IMF conditionality by examining alternative measures that focus specifically on fiscal policy requirements. Following @guimaraes2021, we consider not only the total number of conditions (as in our main analysis), but also the number of *fiscal* conditions and the required fiscal adjustment (RFA)—the extent of fiscal tightening mandated by IMF programmes, expressed as a percentage of GDP. We report RFA at two time horizons: one year after programme approval ($T+1$) and at the programme’s end year. Together, these measures provide a more nuanced understanding of the nature and stringency of IMF conditionality, particularly in the fiscal domain.
 
