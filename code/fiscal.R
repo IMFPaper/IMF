@@ -20,6 +20,7 @@ library('fixest')
 library("kableExtra")
 library('modelsummary')
 library("parameters")
+library("haven")
 
 # Clean data -----------------------------------------------------------------------------------------------------------
 fiscal <- read_dta("data/fiscal.dta") # Load rfa data
