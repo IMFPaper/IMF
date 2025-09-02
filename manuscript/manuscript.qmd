@@ -44,6 +44,7 @@ format:
           \usepackage{chngcntr}
           \usepackage{apptools}
           \AtAppendix{\counterwithin{figure}{section}}
+          \AtAppendix{\counterwithin{table}{section}}
 abstract: "This paper investigates whether the United States or Europe holds greater influence over the International Monetary Fund (IMF)—a longstanding yet underexamined question in the study of global economic governance. While the Fund is widely regarded as dominated by “Western” powers, most existing research either focuses exclusively on American influence or treats the West as a unified bloc, masking important variation between its two key actors. Drawing on panel data from 1980 to 2010, we construct separate measures of US and European influence using principal component analysis of commonly used alignment indicators—UN voting patterns, bilateral trade, and banking exposure—and estimate a series of Tobit and Probit models to assess their impact on four key IMF lending outcomes: loan-to-GDP ratios, participation rates, loan approvals, and conditionality. We find that European influence is strongly associated with higher loan volumes, more frequent participation, and greater likelihood of loan approval, while US influence is not. However, American ties are significantly correlated with fewer conditions attached to loans. Additional analysis shows that European influence is not driven by regional or colonial favouritism: neither European nor African borrowers benefit more from European ties—and may, in fact, fare worse—than other countries with comparable alignment. These findings complicate existing assumptions about IMF decision-making, highlighting the need to distinguish between types of Western influence. They also suggest that Europe wields broader institutional influence over access to IMF resources, while US power manifests more selectively through conditionality. In doing so, the paper contributes to debates on hegemony, institutional legitimacy, and intra-Western dynamics in global economic governance."
 keywords: IMF, US hegemony, Europe
 execute:
@@ -57,7 +58,7 @@ execute:
 
 # Introduction
 
-The International Monetary Fund (IMF) and the World Bank[^1] were established toward the end of World War II as part of the Bretton Woods agreement in 1944 [@jensen2004]. While the World Bank specialised in long-term project financing, the IMF was initially established for providing short-term balance-of-payment support and ensuring the stability of the international monetary system  [@fund2020; @jensen2004].
+The International Monetary Fund (IMF) and the World Bank[^1] were established toward the end of World War II as part of the Bretton Woods agreement in 1944 [@jensen2004]. While the World Bank specialised in long-term project financing, the IMF was initially established for providing short-term balance-of-payment support and ensuring the stability of the international monetary system [@fund2020; @jensen2004].
 
 [^1]: Familiar name for the International Bank for Reconstruction and Development (IBRD), the lending arm of the later created World Bank Group.
 
@@ -285,6 +286,12 @@ Contrary to the colonial preference hypothesis, the interaction terms (`EUP Infl
 
 These findings parallel our results for European recipients: they indicate that the observed association between European influence and IMF lending is not driven by a concentration of support for countries with historic colonial ties. Instead, European influence appears to be exercised in a globally consistent manner, extending beyond specific regional or historical relationships.
 
+## Alternative Measure of Conditionality
+
+Another concern is that our results on conditionality could be sensitive to the way IMF programme conditions are measured. Our baseline analysis follows @lipscy2018, who aggregate the total number of conditions across five-year periods. Yet, as @guimaraes2021 note, the overall count of IMF conditions, although widely used, may not fully capture the *stringency* of conditionality. They therefore propose alternative indicators, including the number of *fiscal* conditions and the required fiscal adjustment (RFA), to reassess the relationship between political alignment and conditionality. To address this concern, we replicate our conditionality model (the fourth specification in @tbl-results) using these alternative measures as dependent variables, and present the results in Appendix [-@sec-fiscal].
+
+The results in @tbl-results-fiscal indicate that our earlier finding, that closer relations with the US, rather than European powers, are associated with fewer IMF conditions, extends to the *fiscal* subset of conditions. This echoes @guimaraes2021, who also find that political alignment with the US reduces fiscal conditions, though they do not control for European influence. Importantly, fewer fiscal conditions should not be taken as evidence of less stringent conditionality: our results on the required fiscal adjustment (RFA) are inconclusive, consistent with @guimaraes2021. Finally, fiscal-conditions data are available only from 1999 onwards, leaving a very limited sample ($N \approx 30$), so these findings should be interpreted with caution.
+
 # Case Study
 
 # Conclusion
@@ -334,4 +341,24 @@ scree_EU
 #| fig-cap: Scree Plot of US Influence PCA
 #| fig-pos: H
 scree_US
+```
+
+# Fiscal Conditionality Analysis {#sec-fiscal .appendix}
+
+This appendix extends our analysis of IMF conditionality by examining alternative measures that focus specifically on fiscal policy requirements. Following @guimaraes2021, we consider not only the total number of conditions (as in our main analysis), but also the number of *fiscal* conditions and the required fiscal adjustment (RFA)[^13]—the extent of fiscal tightening mandated by IMF programmes, expressed as a percentage of GDP. We report RFA at two time horizons: one year after programme approval ($T+1$) and at the programme’s end year. Together, these measures provide a more nuanced understanding of the nature and stringency of IMF conditionality, particularly in the fiscal domain.
+
+[^13]: To merge these variables with our dataset, aggregation is necessary: our data are at the five-year country level, whereas theirs are at the programme level. We sum the number of fiscal conditions and average the RFA variables.
+
+@tbl-results-fiscal reveals patterns that largely reinforce our main findings while adding important nuance. Consistent with our baseline results, US influence is significantly associated with fewer overall IMF conditions. This pattern extends to fiscal conditions, where US influence is associated with a substantial reduction, though this effect is only marginally significant ($p < 0.1$), likely due to the much smaller sample size ($N=31$ vs. $N=93$ for total conditions). Interestingly, European influence shows the opposite pattern: it is associated with a significant increase in fiscal conditions ($p < 0.05$), suggesting that European powers may advocate for more extensive fiscal reforms when they have influence over IMF lending decisions. This finding supports arguments in the current literature that Europe, if anything, has more fully internalised neoliberal economic orthodoxy and the principles of the "Washington Consensus" than the United States, and may view austerity-oriented policies as intrinsically beneficial [@lutz2014; @dyson2010].
+
+The required fiscal adjustment (RFA), however, shows inconsistent results. US influence correlates with significantly more stringent fiscal adjustment requirements in the short term ($p<0.05$ for $T+1$), while European influence is associated with more lenient short-term adjustment requirements ($p<0.1$). This stands in contrast to the findings on the number of (fiscal) conditions. Moreover, these patterns do not persist in the longer term (end year), where neither US nor European influence shows statistically significant effects. These mixed results suggest that while political alignment may influence the *number* of fiscal conditions imposed, it does not consistently affect the *stringency* of fiscal adjustment requirements over time. This echoes the findings of @guimaraes2021 and indicates that the relationship between political influence and the nature of conditionality is complex and warrants further investigation.
+
+We note that these fiscal conditionality analyses are based on substantially smaller samples ($N\approx 30$) and cover a more limited time period (1999–2012) than our main analyses. This reduction in sample size is due to the limited availability of disaggregated fiscal conditionality data. Consequently, these results should be interpreted with appropriate caution.
+
+```{r}
+#| label: tbl-results-fiscal
+#| tbl-cap: Effects of US and European Influence on IMF fiscal conditionality (1999–2012)
+#| tbl-pos: H
+load('save/regTable_fiscal.RData')
+resultsTable |> tinytable::theme_latex(resize_width = 1, resize_direction = "down")
 ```
