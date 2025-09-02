@@ -174,7 +174,7 @@ getTable <- function(output = "html") {
     escape = F,
     output = output,
     notes = c(
-      "Standard errors clustered at the country level. Values in square brackets represent $p$-values from $F$-tests (linear models) and Chi-squared tests (Probit model)."
+      "Standard errors clustered at the country level. Values in square brackets represent $p$-values from $F$-tests."
     )
   )
 }
