@@ -186,7 +186,35 @@ The selection of covariates, including their polynomial transformations[^9], clo
 
 [^9]: Quadratic terms are included for GDP and per capita GDP to capture potential non-linear effects. See [Model Specification](#sec-model) for details.
 
-## Model Specification {#sec-model}
+## Summary Statistics
+
+We present summary statistics for key variables in @tbl-summary.
+
+```{r}
+#| label: tbl-summary
+#| tbl-cap: Summary Statistics of Key Variables (1980–2010)
+#| tbl-pos: H
+library(modelsummary)
+dsummary(
+  (`IMF loan to GDP ratio` = imfloannew100) +
+    (`IMF participation rate` = imf_p) +
+    (`IMF loan approval` = imf5a) +
+    (`Number of IMF conditions` = tc) +
+    (`USA Influence` = us) +
+    (`EUP Influence` = eu) +
+    (`IMF Staff` = shstaffl) +
+    (`IMF Quota` = `shquotal`) +
+    (GDP = lnrgdpnew) +
+    (GDPpc = rgdpchnew) +
+    (`GDPpc growth` = growth1new) +
+    (Reserves = reserv1) +
+    (OECD = oecd1) ~ 
+    Mean + SD + Min + (Q1 = P25) + Median + (Q3 = P75) + Max + N,
+  data = dta
+) |> tinytable::theme_latex(resize_width = 1, resize_direction = "down")
+```
+
+# Model Specification {#sec-model}
 
 One notable feature of IMF loan outcomes is that they are *left-censored* at zero—that is, loan amounts, participation rates, and the number of conditions are often zero, but cannot take negative values. In such cases, ordinary least squares (OLS) estimation yields biased and inconsistent results. The Tobit model addresses this issue by explicitly modelling the latent continuous variable ($Y_{it}^*$) underlying the censored observed outcomes ($Y_{it}$) [@tobin1958], and is particularly well-suited to our setting [@amemiya1984].
 
