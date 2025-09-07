@@ -194,18 +194,18 @@ The selection of covariates, including their polynomial transformations[^9], clo
 #| tbl-pos: H
 library(modelsummary)
 dsummary(
-  (`IMF loan to GDP ratio` = imfloannew100) +
+  (`IMF loan to GDP ratio (%)` = imfloannew100) +
     (`IMF participation rate` = imf_p) +
     (`IMF loan approval` = imf5a) +
     (`Number of IMF conditions` = tc) +
     (`USA Influence` = us) +
     (`EUP Influence` = eu) +
-    (`IMF Staff` = shstaffl) +
-    (`IMF Quota` = `shquotal`) +
-    (GDP = lnrgdpnew) +
-    (GDPpc = rgdpchnew) +
-    (`GDPpc growth` = growth1new) +
-    (Reserves = reserv1) +
+    (`IMF Staff (%)` = shstaffl) +
+    (`IMF Quota (%)` = `shquotal`) +
+    (`GDP (log)` = lnrgdpnew) +
+    (`GDPpc (log)` = rgdpchnew) +
+    (`GDPpc growth (%)` = growth1new) +
+    (`Reserves (months of imports)` = reserv1) +
     (OECD = oecd1) ~ 
     Mean + SD + Min + (Q1 = P25) + Median + (Q3 = P75) + Max + N,
   data = dta
