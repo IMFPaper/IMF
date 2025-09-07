@@ -176,7 +176,7 @@ Our approach differs from @lipscy2018 in that we do not pool the US and European
 
 ## Covariates
 
-The existing literature has identified several factors beyond geopolitical alignment that influence IMF lending decisions or a country's demand for IMF assistance. We include these variables as covariates to account for potential confounding effects. Notably, countries with larger IMF quotas (and thus greater voting power), as well as those with nationals among IMF staff, are expected to receive more favourable treatment from the Fund [@barro2005].
+The existing literature has identified several factors beyond geopolitical alignment that influence IMF lending decisions or a country's demand for IMF assistance. We include these variables as covariates to account for potential confounding effects. Notably, countries with larger IMF quotas (and thus greater voting power), as well as those with nationals among IMF staff, are expected to receive more favourable treatment from the Fund [@barro2005]. Therefore, we include the share of nationals among IMF economists and the share of IMF quota, both in logged form, as control covariates.
 
 We include a range of economic performance indicators that have been shown to systematically affect IMF lending decisions [@barro2005; @knight1997]. To capture these dynamics, we include log GDP, log per capita GDP, and lagged GDP growth as proxies for macroeconomic performance. International reserves measured in months of imports are used to measure a country’s external liquidity and ability to manage balance-of-payments pressures without IMF support. Finally, a binary variable for OECD membership serves as a proxy for broader institutional and economic differences among countries.
 
@@ -200,8 +200,8 @@ dsummary(
     (`Number of IMF conditions` = tc) +
     (`USA Influence` = us) +
     (`EUP Influence` = eu) +
-    (`IMF Staff (%)` = shstaffl) +
-    (`IMF Quota (%)` = `shquotal`) +
+    (`IMF Staff (log)` = shstaffl) +
+    (`IMF Quota (log)` = `shquotal`) +
     (`GDP (log)` = lnrgdpnew) +
     (`GDPpc (log)` = rgdpchnew) +
     (`GDPpc growth (%)` = growth1new) +
