@@ -361,7 +361,7 @@ corrplot::corrplot(corr_US, method = 'color', addCoef.col = 'darkgrey', tl.col =
 #| label: fig-scree-eu
 #| fig-cap: Scree Plot of European Influence PCA
 #| fig-pos: H
-load('save/scree.Rdata')
+load('save/scree.RData')
 scree_EU
 ```
 
