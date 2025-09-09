@@ -52,6 +52,7 @@ execute:
   warning: false
   error: false
   message: false
+  dir: project
 ---
 
 \newpage
@@ -161,7 +162,7 @@ Specifically, we construct our independent variables using three indicators comm
 [^6]: See @broz2006; @lipscy2017; @oatley2004.
 
 ```{r percentage_variance}
-load('save/PCA.Rdata')
+load('save/PCA.RData')
 US_PC1_percentage <- US$sdev[1]^2 / sum(US$sdev^2) * 100
 EU_PC1_percentage <- EU$sdev[1]^2 / sum(EU$sdev^2) * 100
 ```
