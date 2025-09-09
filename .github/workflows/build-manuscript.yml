@@ -1,12 +1,10 @@
 name: Build Manuscript (Zotero → .bib → Quarto PDF)
 
 on:
-  workflow_dispatch:
-  push:
-    paths:
-      - 'manuscript/**'
-      - 'renv.lock'
-      - '.github/workflows/build-manuscript.yml'
+  workflow_dispatch:  # manual runs
+  push:               # run on ANY push to any branch
+    branches:
+      - 'github'
 
 jobs:
   build:
