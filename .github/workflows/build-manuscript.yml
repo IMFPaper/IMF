@@ -1,8 +1,8 @@
 name: Build Manuscript (Zotero → .bib → Quarto PDF)
 
 on:
-  workflow_dispatch:  # manual runs
-  push:               # run on ANY push to any branch
+  workflow_dispatch:
+  push: 
     branches:
       - 'github'
 
@@ -13,6 +13,8 @@ jobs:
       # Your specific group & collection from the URL you shared
       ZOTERO_GROUP_ID: "5979835"
       ZOTERO_COLLECTION_KEY: "HY6TKCRU"
+      RENV_CONFIG_REPOS_OVERRIDE: https://packagemanager.posit.co/cran/latest
+      RENV_CONFIG_INSTALL_MODE: "binary"
 
     steps:
       - name: Checkout
