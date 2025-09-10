@@ -52,6 +52,30 @@ function pinnedFromNote(note) {
   return m ? m[1] : null;
 }
 
+// Wrap acronyms (2+ consecutive uppercase letters) in {{...}} inside titles
+function protectCapitalsInTitles(bib) {
+  return bib.replace(/(title\s*=\s*\{)([^}]+)(\})/gi, (m, pre, content, post) => {
+    const protectedContent = content.replace(/\b([A-Z]{2,})\b/g, '{{$1}}');
+    return `${pre}${protectedContent}${post}`;
+  });
+}
+
+// CSL → BibTeX type mapping
+const typeMap = {
+  "article-journal": "article",
+  "article": "article",
+  "book": "book",
+  "chapter": "incollection",
+  "paper-conference": "inproceedings",
+  "thesis": "thesis",
+  "report": "report",
+  "webpage": "online",
+  "post": "online",
+  "post-weblog": "online",
+  "dataset": "dataset",
+  "manuscript": "unpublished",
+};
+
 async function fetchAllParentsCSL() {
   const base = `https://api.zotero.org/groups/${GROUP_ID}/collections/${COLL_KEY}/items`;
   const params = `?format=csljson&recursive=1&top=1&limit=100&start=`;
@@ -72,6 +96,7 @@ async function fetchAllParentsCSL() {
 const cslItems = await fetchAllParentsCSL();
 
 const pinnedMap = new Map();
+const typeHints = new Map(); // itemKey → CSL type
 const itemKeys = [];
 for (const it of cslItems) {
   // CSL id format is "<libraryId>/<itemKey>"
@@ -81,6 +106,7 @@ for (const it of cslItems) {
   itemKeys.push(key);
   const pinned = pinnedFromNote(it.note);
   if (pinned) pinnedMap.set(key, pinned);
+  if (it.type) typeHints.set(key, it.type);
 }
 
 if (itemKeys.length === 0) {
@@ -105,12 +131,15 @@ for (let i = 0; i < itemKeys.length; i += 50) {
   }
 }
 
-// Rewrite entry keys to pinned ones where present.
-// Server BibTeX uses the 8-char Zotero itemKey by default.
+// Rewrite entry keys to pinned ones, and remap types
 bib = bib.replace(/@(\w+)\{([^,]+),/g, (m, type, k) => {
   const newKey = pinnedMap.get(k) || k;
-  return `@${type}{${newKey},`;
+  const mapped = typeMap[typeHints.get(k)] || type;
+  return `@${mapped}{${newKey},`;
 });
+
+// Escape acronyms in titles
+bib = protectCapitalsInTitles(bib);
 
 await fs.mkdir("extra", { recursive: true });
 await fs.writeFile("extra/references.bib", bib, "utf8");
