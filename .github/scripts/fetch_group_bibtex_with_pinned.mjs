@@ -53,11 +53,15 @@ function pinnedFromNote(note) {
 }
 
 // Wrap acronyms (2+ consecutive uppercase letters) in {{...}} inside titles
-function protectCapitalsInTitles(bib) {
-  return bib.replace(/(title\s*=\s*\{)([^}]+)(\})/gi, (m, pre, content, post) => {
-    const protectedContent = content.replace(/\b([A-Z]{2,})\b/g, '{{$1}}');
-    return `${pre}${protectedContent}${post}`;
-  });
+function protectCapitalsInFields(bib, fields = ["title", "booktitle", "series", "number"]) {
+  for (const field of fields) {
+    const regex = new RegExp(`(${field}\\s*=\\s*\\{)([^}]+)(\\})`, "gi");
+    bib = bib.replace(regex, (m, pre, content, post) => {
+      const protectedContent = content.replace(/\b([A-Z]{2,})\b/g, '{{$1}}');
+      return `${pre}${protectedContent}${post}`;
+    });
+  }
+  return bib;
 }
 
 // CSL → BibTeX type mapping
@@ -136,6 +140,11 @@ bib = bib.replace(/@(\w+)\{([^,]+),/g, (m, type, k) => {
   const newKey = pinnedMap.get(k) || k;
   const mapped = typeMap[typeHints.get(k)] || type;
   return `@${mapped}{${newKey},`;
+});
+
+// Force "organization" instead of "journal" for @online
+bib = bib.replace(/(journal\s*=\s*\{)([^}]+)(\})/gi, (m, pre, content, post) => {
+  return `organization = {${content}}`;
 });
 
 // Escape acronyms in titles
