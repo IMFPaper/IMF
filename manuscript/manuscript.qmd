@@ -161,7 +161,7 @@ Specifically, we construct our independent variables using three indicators comm
 [^6]: See @broz2006; @lipscy2017; @oatley2004.
 
 ```{r percentage_variance}
-load('save/PCA.Rdata')
+load('save/PCA.RData')
 US_PC1_percentage <- US$sdev[1]^2 / sum(US$sdev^2) * 100
 EU_PC1_percentage <- EU$sdev[1]^2 / sum(EU$sdev^2) * 100
 ```
@@ -360,7 +360,7 @@ corrplot::corrplot(corr_US, method = 'color', addCoef.col = 'darkgrey', tl.col =
 #| label: fig-scree-eu
 #| fig-cap: Scree Plot of European Influence PCA
 #| fig-pos: H
-load('save/scree.Rdata')
+load('save/scree.RData')
 scree_EU
 ```
 

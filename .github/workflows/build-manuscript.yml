@@ -1,0 +1,129 @@
+name: Build Manuscript (Zotero → .bib → Quarto PDF)
+
+on:
+  workflow_dispatch:
+  push: 
+    branches:
+      - 'main'
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04 # <= pin to jammy for better binaries
+    env:
+      # Your specific group & collection from the URL you shared
+      ZOTERO_GROUP_ID: "5979835"
+      ZOTERO_COLLECTION_KEY: "HY6TKCRU"
+      ZOTERO_OUT_BIB_PATH: "extra/references.bib"
+      RENV_CONFIG_REPOS_OVERRIDE: https://packagemanager.posit.co/cran/latest
+      RENV_CONFIG_INSTALL_MODE: "binary"
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # full history for commit counting
+
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            cmake \
+            libcurl4-openssl-dev \
+            libfontconfig1-dev \
+            libfreetype6-dev \
+            libpng-dev \
+            libx11-dev \
+            pkg-config \
+            libharfbuzz-dev \
+            libfribidi-dev \
+            libxml2-dev
+
+      # ---------- Fetch + Convert (Zotero → CSL-JSON → BibTeX) ----------
+      - name: Export Zotero BibTeX
+        uses: kv9898/actions-zotero-bibtex@v1
+        with:
+          api-key: ${{ secrets.ZOTERO_API_KEY }}
+          library-id: ${{ env.ZOTERO_GROUP_ID }}
+          coll-key: ${{ env.ZOTERO_COLLECTION_KEY }}
+          is-group: 'true'     # or leave default 'false' for user
+          out-bib-path: ${{ env.ZOTERO_OUT_BIB_PATH }}
+
+      # ------------------- R -----------------
+      - name: Setup R
+        uses: r-lib/actions/setup-r@v2
+        with:
+          use-public-rspm: true
+
+      # ---------- Quarto + TinyTeX ----------
+      - name: Setup Quarto (with TinyTeX for PDF)
+        uses: quarto-dev/quarto-actions/setup@v2
+        with:
+          tinytex: true
+
+      # ---------- R packages via renv ----------
+      - name: Setup renv
+        uses: r-lib/actions/setup-renv@v2
+        with:
+          # Defaults to renv.lock at repo root; adjust if yours lives elsewhere
+          cache-version: 1
+
+      # If your document requires extra LaTeX packages not auto-installed,
+      # you can add a step here to install them with tlmgr, e.g.:
+      # - name: Install extra LaTeX packages
+      #   run: tlmgr install <packagename>
+
+      # ---------- Render ----------
+      - name: Render manuscript to PDF
+        uses: quarto-dev/quarto-actions/render@v2
+        with:
+          path: manuscript/manuscript.qmd
+          # By default renders formats declared in the doc.
+          # Ensure manuscript.qmd lists 'pdf' (or has default-format: pdf in _quarto.yml)
+
+      # ---------- Upload artifact ----------
+      - name: Upload PDF
+        uses: actions/upload-artifact@v4
+        with:
+          name: manuscript-pdf
+          path: manuscript/manuscript.pdf
+          if-no-files-found: error
+
+      # ---------- Create tag and release ----------
+      - name: Configure git identity
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Create date-based tag and release
+        id: tag
+        run: |
+          # Get year.month prefix (UTC)
+          PREFIX=$(date -u +'%Y.%m')
+
+          # Get the number of commits on this branch in the current month
+          git fetch --unshallow || true
+          git fetch origin ${{ github.ref_name }} --tags
+          COUNT=$(git rev-list --count --since="$(date -u +'%Y-%m-01')" HEAD)
+
+          TAG="${PREFIX}-${COUNT}"
+          echo "TAG=$TAG" >> $GITHUB_ENV
+          echo "Created tag: $TAG"
+
+          # Create annotated tag and push
+          git tag -a "$TAG" -m "Release $TAG"
+          git push origin "$TAG"
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ env.TAG }}
+          name: Release ${{ env.TAG }}
+          body: |
+            Automated release for manuscript build.
+            Includes PDF generated from Quarto.
+          files: manuscript/manuscript.pdf
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
