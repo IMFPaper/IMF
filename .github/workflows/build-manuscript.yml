@@ -85,3 +85,34 @@ jobs:
           name: manuscript-pdf
           path: manuscript/manuscript.pdf
           if-no-files-found: error
+
+      # ---------- Create tag and release ----------
+      - name: Create date-based tag and release
+        id: tag
+        run: |
+          # Get year.month prefix (UTC)
+          PREFIX=$(date -u +'%Y.%m')
+
+          # Get the number of commits on this branch in the current month
+          git fetch --unshallow || true
+          git fetch origin ${{ github.ref_name }} --tags
+          COUNT=$(git rev-list --count --since="$(date -u +'%Y-%m-01')" HEAD)
+
+          TAG="${PREFIX}-${COUNT}"
+          echo "TAG=$TAG" >> $GITHUB_ENV
+          echo "Created tag: $TAG"
+
+          # Create annotated tag and push
+          git tag -a "$TAG" -m "Release $TAG"
+          git push origin "$TAG"
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ env.TAG }}
+          name: Release ${{ env.TAG }}
+          body: |
+            Automated release for manuscript build.
+            Includes PDF generated from Quarto.
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
