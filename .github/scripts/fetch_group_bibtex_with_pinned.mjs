@@ -64,6 +64,18 @@ function protectCapitalsInFields(bib, fields = ["title", "booktitle", "series", 
   return bib;
 }
 
+// Clean up 'type' field: remove nested braces like {Policy {Contribution}}
+function cleanTypeField(bib) {
+  // ^ or \n so we only match a field at line start; 'm' for multiline
+  // The big group ((?:[^{}]|{[^{}]*})*) matches any text or a {...} chunk (one level deep)
+  const rx = /(^|\n)(\s*)type\s*=\s*\{((?:[^{}]|{[^{}]*})*)\}(\s*,?)/gmi;
+
+  return bib.replace(rx, (m, nl, indent, content, comma) => {
+    const cleaned = content.replace(/[{}]/g, "").replace(/\s+/g, " ").trim();
+    return `${nl}${indent}type = {${cleaned}}${comma}`;
+  });
+}
+
 // CSL → BibTeX type mapping
 const typeMap = {
   "article-journal": "article",
@@ -149,6 +161,9 @@ bib = bib.replace(/(journal\s*=\s*\{)([^}]+)(\})/gi, (m, pre, content, post) => 
 
 // Escape acronyms in titles
 bib = protectCapitalsInFields(bib);
+
+// Clean 'type' field
+bib = cleanTypeField(bib);
 
 await fs.mkdir("extra", { recursive: true });
 await fs.writeFile("extra/references.bib", bib, "utf8");
