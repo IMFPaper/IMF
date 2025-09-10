@@ -148,7 +148,7 @@ bib = bib.replace(/(journal\s*=\s*\{)([^}]+)(\})/gi, (m, pre, content, post) => 
 });
 
 // Escape acronyms in titles
-bib = protectCapitalsInTitles(bib);
+bib = protectCapitalsInFields(bib);
 
 await fs.mkdir("extra", { recursive: true });
 await fs.writeFile("extra/references.bib", bib, "utf8");
