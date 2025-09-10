@@ -6,6 +6,9 @@ on:
     branches:
       - 'github'
 
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-22.04 # <= pin to jammy for better binaries
@@ -91,7 +94,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          
+
       - name: Create date-based tag and release
         id: tag
         run: |
