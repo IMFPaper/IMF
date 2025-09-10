@@ -3,12 +3,18 @@
 // Writes extra/references.bib
 
 import fs from "node:fs/promises";
+import path from "node:path";
 
-const { API_KEY, GROUP_ID, COLL_KEY } = process.env;
-if (!API_KEY || !GROUP_ID || !COLL_KEY) {
-  console.error("Missing API_KEY / GROUP_ID / COLL_KEY");
+const { API_KEY, IS_GROUP, LIBRARY_ID, COLL_KEY, OUT_BIB_PATH } = process.env;
+if (!API_KEY || !LIBRARY_ID || !COLL_KEY || !OUT_BIB_PATH) {
+  console.error("Missing API_KEY / LIBRARY_ID / COLL_KEY / OUT_BIB_PATH environment variables");
   process.exit(1);
 }
+
+// Default to false if IS_GROUP is not provided
+const isGroup = (IS_GROUP === "true"); 
+const LIBRARY_TYPE = isGroup ? "groups" : "users";
+const BASE_URL = `https://api.zotero.org/${LIBRARY_TYPE}/${LIBRARY_ID}`;
 
 async function fetchJSON(url) {
   const res = await fetch(url, {
@@ -93,7 +99,7 @@ const typeMap = {
 };
 
 async function fetchAllParentsCSL() {
-  const base = `https://api.zotero.org/groups/${GROUP_ID}/collections/${COLL_KEY}/items`;
+  const base = `${BASE_URL}/collections/${COLL_KEY}/items`;
   const params = `?format=csljson&recursive=1&top=1&limit=100&start=`;
   let start = 0, all = [];
   for (;;) {
@@ -132,7 +138,7 @@ if (itemKeys.length === 0) {
 // Fetch BibTeX for item keys (server translators). Chunk to avoid URL bloat.
 async function fetchBibForKeys(keys) {
   const joined = keys.join(",");
-  const url = `https://api.zotero.org/groups/${GROUP_ID}/items?format=bibtex&itemKey=${joined}`;
+  const url = `${BASE_URL}/items?format=bibtex&itemKey=${joined}`;
   const { body } = await fetchText(url);
   return body;
 }
@@ -165,7 +171,9 @@ bib = protectCapitalsInFields(bib);
 // Clean 'type' field
 bib = cleanTypeField(bib);
 
-await fs.mkdir("extra", { recursive: true });
-await fs.writeFile("extra/references.bib", bib, "utf8");
+// await fs.mkdir("extra", { recursive: true });
+// await fs.writeFile("extra/references.bib", bib, "utf8");
+await fs.mkdir(path.dirname(OUT_BIB_PATH), { recursive: true });
+await fs.writeFile(OUT_BIB_PATH, bib, "utf8");
 
 console.log(`Wrote extra/references.bib with ${itemKeys.length} entries (pinned: ${pinnedMap.size})`);

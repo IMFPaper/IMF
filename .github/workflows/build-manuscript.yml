@@ -13,6 +13,7 @@ jobs:
       # Your specific group & collection from the URL you shared
       ZOTERO_GROUP_ID: "5979835"
       ZOTERO_COLLECTION_KEY: "HY6TKCRU"
+      ZOTERO_OUT_BIB_PATH: "extra/references.bib"
       RENV_CONFIG_REPOS_OVERRIDE: https://packagemanager.posit.co/cran/latest
       RENV_CONFIG_INSTALL_MODE: "binary"
 
@@ -44,8 +45,10 @@ jobs:
       - name: Build extra/references.bib from Zotero
         env:
           API_KEY: ${{ secrets.ZOTERO_API_KEY }}
-          GROUP_ID: ${{ env.ZOTERO_GROUP_ID }}
+          IS_GROUP: true  # "groups" or "users"
+          LIBRARY_ID: ${{ env.ZOTERO_GROUP_ID }}       # group ID or user ID
           COLL_KEY: ${{ env.ZOTERO_COLLECTION_KEY }}
+          OUT_BIB_PATH: ${{ env.ZOTERO_OUT_BIB_PATH }}
         run: node .github/scripts/fetch_group_bibtex_with_pinned.mjs
 
       # ------------------- R -----------------
