@@ -38,7 +38,7 @@ jobs:
 
       # ---------- Fetch + Convert (Zotero → CSL-JSON → BibTeX) ----------
       - name: Export Zotero BibTeX
-        uses: kv9898/actions-zotero-bibtex@debug
+        uses: kv9898/actions-zotero-bibtex@ts
         with:
           api-key: ${{ secrets.ZOTERO_API_KEY }}
           library-id: ${{ env.ZOTERO_GROUP_ID }}
