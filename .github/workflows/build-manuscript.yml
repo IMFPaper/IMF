@@ -122,5 +122,6 @@ jobs:
           body: |
             Automated release for manuscript build.
             Includes PDF generated from Quarto.
+          files: manuscript/manuscript.pdf
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
