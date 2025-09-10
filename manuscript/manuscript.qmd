@@ -52,7 +52,6 @@ execute:
   warning: false
   error: false
   message: false
-  dir: project
 ---
 
 \newpage
