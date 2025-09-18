@@ -44,6 +44,7 @@ format:
           \usepackage{chngcntr}
           \usepackage{apptools}
           \AtAppendix{\counterwithin{figure}{section}}
+          \AtAppendix{\counterwithin{table}{section}}
 abstract: "This paper investigates whether the United States or Europe holds greater influence over the International Monetary Fund (IMF)—a longstanding yet underexamined question in the study of global economic governance. While the Fund is widely regarded as dominated by “Western” powers, most existing research either focuses exclusively on American influence or treats the West as a unified bloc, masking important variation between its two key actors. Drawing on panel data from 1980 to 2010, we construct separate measures of US and European influence using principal component analysis of commonly used alignment indicators—UN voting patterns, bilateral trade, and banking exposure—and estimate a series of Tobit and Probit models to assess their impact on four key IMF lending outcomes: loan-to-GDP ratios, participation rates, loan approvals, and conditionality. We find that European influence is strongly associated with higher loan volumes, more frequent participation, and greater likelihood of loan approval, while US influence is not. However, American ties are significantly correlated with fewer conditions attached to loans. Additional analysis shows that European influence is not driven by regional or colonial favouritism: neither European nor African borrowers benefit more from European ties—and may, in fact, fare worse—than other countries with comparable alignment. These findings complicate existing assumptions about IMF decision-making, highlighting the need to distinguish between types of Western influence. They also suggest that Europe wields broader institutional influence over access to IMF resources, while US power manifests more selectively through conditionality. In doing so, the paper contributes to debates on hegemony, institutional legitimacy, and intra-Western dynamics in global economic governance."
 keywords: IMF, US hegemony, Europe
 execute:
@@ -83,7 +84,7 @@ International Relations theory, particularly realism, has long emphasised that i
 
 In the case of the IMF, there is broad consensus that the institution is dominated by “Western” powers. This is reflected in both historical accounts of its founding and institutional design—especially its weighted voting system, which concentrates power in the hands of the United States and European countries [@kahler2001; @barnett2004; @copelovitch2010]. Given the ideological, geopolitical, and economic proximity between the US and major European states, many studies treat “the West” as a unified bloc and do not disaggregate their respective influences [e.g. @copelovitch2010a; @lipscy2018; @barro2005].
 
-For the strand of literature that examines American and European influence separately, nearly all studies identify the United States as the dominant actor within the IMF [@stone2011, p.51]. Qualitative accounts emphasise the United States’ foundational role in shaping the IMF’s governance structure [@stone2011], the Fund’s practice of making direct enquiries with Washington for major lending decisions [@southard1979; @woods2003], and its unique status as the only country-level veto player, stemming from its position as the largest financial contributor [@woods2003; @stone2011]. The US also benefits from significant informational advantages over other members [@stone2011, p.57] and proximity-based access, with the IMF headquartered in Washington, D.C. [@stone2011, p.57]. Numerous case studies further demonstrate instances of US political pressure resulting in lenient loan conditions for key geopolitical allies, including Zaire, Egypt, Mexico, Argentina, South Korea, and MENA countries [@vreeland2009; @copelovitch2010a; @lipscy2018; @harrigan2006]. This pattern of influence is consistent with the United States’ broader role across international financial institutions, particularly the World Bank, where American dominance is widely acknowledged [@wade2002; @woods2003; @clark2020].
+For the strand of literature that examines American and European influence separately, nearly all studies identify the United States as the dominant actor within the IMF [@stone2011, p.51]. Qualitative accounts emphasise the United States’ foundational role in shaping the IMF’s governance structure [@stone2011], the Fund’s practice of making direct enquiries with Washington for major lending decisions [@southard1979; @woods2003], and its unique status as the only country-level veto player, stemming from its position as the largest financial contributor [@woods2003; @stone2011]. The US also benefits from significant informational advantages over other members [@stone2011, p.57] and proximity-based access, with the IMF headquartered in Washington, D.C. [@stone2011, p.57]. Numerous case studies further demonstrate instances of US political pressure resulting in lenient loan conditions for key geopolitical allies, including Zaire, Egypt, Mexico, Argentina, South Korea, and MENA countries [@vreeland2009; @copelovitch2010a; @lipscy2018; @harrigan2006]. Closer allies of the United States enjoy IMF loans with less fiscal conditions [@dreher2003]. This pattern of influence is consistent with the United States’ broader role across international financial institutions, particularly the World Bank, where American dominance is widely acknowledged [@wade2002; @woods2003; @clark2020].
 
 Compared to the extensive literature on US dominance in the IMF, research on European influence remains more limited and fragmented. Nevertheless, a growing body of scholarship highlights that European countries do possess considerable institutional and structural advantages that enable them to shape lending outcomes. First, EU countries collectively hold over 30% of IMF voting shares—greater than the US—and, if coordinated, could theoretically counterbalance American veto power [@brandner2009a; @leech2005a; @smaghi2004]. Second, Europe has enjoyed long-standing leadership within the Fund: all IMF Managing Directors since the institution's founding have been European nationals [@kahler2001; @keating2024]. Third, coordination mechanisms such as EURIMF and SCIMF facilitate policy alignment among EU members and amplify their collective voice [@lutz2014]. During the Eurozone crisis, for instance, France and Germany lobbied for IMF involvement, embedding austerity-oriented conditionality that aligned with creditor interests and protected domestic banking sectors [@hodson2014; @kickert2019a; @veron2016]. Scholars have also documented European influence beyond the continent—for example, in the use of IMF concessional lending to sustain post-colonial relationships in Africa, particularly by the UK and France [@moyo2024; @stone2004]. These studies suggest that European actors, when effectively coordinated, are capable of steering lending priorities.
 
@@ -97,9 +98,7 @@ In principle, quantitative approaches are well suited for directly comparing the
 
 This paper addresses this gap by conducting a disaggregated, quantitative comparison of US and European influence on IMF lending outcomes. By distinguishing between the two major transatlantic actors, we provide new insights into the internal dynamics of power within the IMF and contribute to broader debates over institutional legitimacy, hegemony, and the geopolitics of economic governance.
 
-# Empirical Strategy
-
-## Hypotheses
+# Hypotheses
 
 Since the [literature review](#sec-litreview) has outlined arguments for both US and European influence over IMF decision-making, this section turns to a quantitative comparison of their respective impacts. Accordingly, we formulate our main hypothesis:
 
@@ -123,11 +122,11 @@ Europe exerts a statistically significant influence on IMF lending decisions, co
 \end{restatable}
 ```
 
-## Data
+# Data
 
 ```{r}
 #| label: fig-data
-dta <- readr::read_rds('data/panel_data.rds')
+dta <- readr::read_rds('data/panel_data_pca.rds')
 ```
 
 This paper uses the dataset compiled by @lipscy2018, which extends the @barro2005 dataset through 2010. It provides panel data for 130 countries in five-year intervals from 1980 to 2010[^3], including information on IMF borrowing and participation outcomes, economic indicators, and measures of each country's relationship with the United States and major European powers.
@@ -179,15 +178,46 @@ Our approach differs from @lipscy2018 in that we do not pool the US and European
 
 ## Covariates
 
-The existing literature has identified several factors beyond geopolitical alignment that influence IMF lending decisions or a country's demand for IMF assistance. We include these variables as covariates to account for potential confounding effects. Notably, countries with larger IMF quotas (and thus greater voting power), as well as those with nationals among IMF staff, are expected to receive more favourable treatment from the Fund [@barro2005].
+The existing literature has identified several factors beyond geopolitical alignment that influence IMF lending decisions or a country's demand for IMF assistance. We include these variables as covariates to account for potential confounding effects. Notably, countries with larger IMF quotas (and thus greater voting power), as well as those with nationals among IMF staff, are expected to receive more favourable treatment from the Fund [@barro2005]. Therefore, we include the share of nationals among IMF economists and the share of IMF quota, both in logged form, as control covariates.
+
+We include a range of economic performance indicators that have been shown to systematically affect IMF lending decisions [@barro2005; @knight1997]. To capture these dynamics, we include log GDP, per capita GDP, and lagged GDP growth as proxies for macroeconomic performance[^9]. International reserves measured in months of imports are used to measure a country’s external liquidity and ability to manage balance-of-payments pressures without IMF support. Finally, a binary variable for OECD membership serves as a proxy for broader institutional and economic differences among countries.
+
+[^9]: GDP, before log transformation, is measured in millions of constant 2002 US dollars, while GDP per capita is measured in thousands of constant 2002 US dollars.
 
 We include a range of economic performance indicators that have been shown to systematically affect IMF lending decisions [@barro2005; @knight1997; @youssef2023]. To capture these dynamics, we include GDP, per capita GDP, and lagged GDP growth as proxies for macroeconomic performance. International reserves as a share of imports are used to measure a country’s external liquidity and ability to manage balance-of-payments pressures without IMF support. Finally, a binary variable for OECD membership serves as a proxy for broader institutional and economic differences among countries.
 
 The selection of covariates, including their polynomial transformations[^10], closely follows @lipscy2018 and @barro2005 to ensure comparability with previous findings.
 
 [^10]: Quadratic terms are included for GDP and per capita GDP to capture potential non-linear effects. See [Model Specification](#sec-model) for details.
+## Summary Statistics
 
-## Model Specification {#sec-model}
+@tbl-summary presents summary statistics for the key variables. IMF lending outcomes are generally sparse: both the loan-to-GDP ratio and the participation rate have means close to zero, with medians at zero, indicating that most country-periods did not involve IMF programmes. However, when loans are approved, they can be large, with the loan-to-GDP ratio reaching over 12 percent and the number of conditions ranging up to 179. The influence measures derived from PCA are centered at zero by construction, with wide dispersion across countries. Among the covariates, GDP per capita and its growth show substantial variation, while OECD membership is rare in the sample (16 percent of observations). International reserves also vary widely, suggesting heterogeneous external liquidity and self-insurance capacity across countries. These patterns underscore the skewed and censored nature of IMF outcomes, motivating our use of Tobit and Probit models in the subsequent analysis.
+
+```{r}
+#| label: tbl-summary
+#| tbl-cap: Summary Statistics of Key Variables (1980–2010)
+#| tbl-pos: H
+library(modelsummary)
+dsummary(
+  (`IMF loan to GDP ratio (%)` = imfloannew100) +
+    (`IMF participation rate` = imf_p) +
+    (`IMF loan approval` = imf5a) +
+    (`Number of IMF conditions` = tc) +
+    (`USA Influence` = us) +
+    (`EUP Influence` = eu) +
+    (`IMF Staff (log)` = shstaffl) +
+    (`IMF Quota (log)` = `shquotal`) +
+    (`GDP (log)` = lnrgdpnew) +
+    (`GDPpc (thousands USD)` = rgdpchnew) +
+    (`GDPpc growth (%)` = growth1new) +
+    (`Reserves (months of imports)` = reserv1) +
+    (OECD = oecd1) ~ 
+    Mean + SD + Min + (Q1 = P25) + Median + (Q3 = P75) + Max + N,
+  data = dta
+) |> tinytable::theme_latex(resize_width = 1, resize_direction = "down")
+```
+
+# Model Specification {#sec-model}
 
 One notable feature of IMF loan outcomes is that they are *left-censored* at zero—that is, loan amounts, participation rates, and the number of conditions are often zero, but cannot take negative values. In such cases, ordinary least squares (OLS) estimation yields biased and inconsistent results. The Tobit model addresses this issue by explicitly modelling the latent continuous variable ($Y_{it}^*$) underlying the censored observed outcomes ($Y_{it}$) [@tobin1958], and is particularly well-suited to our setting [@amemiya1984].
 
@@ -287,6 +317,12 @@ Contrary to the colonial preference hypothesis, the interaction terms (`EUP Infl
 
 These findings parallel our results for European recipients: they indicate that the observed association between European influence and IMF lending is not driven by a concentration of support for countries with historic colonial ties. Instead, European influence appears to be exercised in a globally consistent manner, extending beyond specific regional or historical relationships.
 
+## Alternative Measure of Conditionality
+
+Another concern is that our results on conditionality could be sensitive to the way IMF programme conditions are measured. Our baseline analysis follows @lipscy2018, who aggregate the total number of conditions across five-year periods. Yet, as @guimaraes2021 note, the overall count of IMF conditions, although widely used, may not fully capture the *stringency* of conditionality. They therefore propose alternative indicators, including the number of *fiscal* conditions and the required fiscal adjustment (RFA), to reassess the relationship between political alignment and conditionality. To address this concern, we replicate our conditionality model (the fourth specification in @tbl-results) using these alternative measures as dependent variables, and present the results in Appendix [-@sec-fiscal].
+
+The results in @tbl-results-fiscal indicate that our earlier finding, that closer relations with the US, rather than European powers, are associated with fewer IMF conditions, extends to the *fiscal* subset of conditions. This echoes @guimaraes2021, who also find that political alignment with the US reduces fiscal conditions, though they do not control for European influence. Importantly, fewer fiscal conditions should not be taken as evidence of less stringent conditionality: our results on the required fiscal adjustment (RFA) are inconclusive, consistent with @guimaraes2021. Finally, fiscal-conditions data are available only from 1999 onwards, leaving a very limited sample ($N \approx 30$), so these findings should be interpreted with caution.
+
 # Case Study
 
 # Conclusion
@@ -336,4 +372,24 @@ scree_EU
 #| fig-cap: Scree Plot of US Influence PCA
 #| fig-pos: H
 scree_US
+```
+
+# Fiscal Conditionality Analysis {#sec-fiscal .appendix}
+
+This appendix extends our analysis of IMF conditionality by examining alternative measures that focus specifically on fiscal policy requirements. Fiscal conditionality, under a comprehensive review of both theoretical approaches and empirical evidence, is "the practice of giving financial assistance contingent on the implementation of specific policies", and it continues to rise over the years [@dreher2009a]. Following @guimaraes2021, we consider not only the total number of conditions (as in our main analysis), but also the number of *fiscal* conditions and the required fiscal adjustment (RFA)[^14]—the extent of fiscal tightening mandated by IMF programmes, expressed as a percentage of GDP. We report RFA at two time horizons: one year after programme approval ($T+1$) and at the programme’s end year. Together, these measures provide a more nuanced understanding of the nature and stringency of IMF conditionality, particularly in the fiscal domain.
+
+[^14]: To merge these variables with our dataset, aggregation is necessary: our data are at the five-year country level, whereas theirs are at the programme level. We sum the number of fiscal conditions and average the RFA variables.
+
+@tbl-results-fiscal reveals patterns that largely reinforce our main findings while adding important nuance. Consistent with our baseline results, US influence is significantly associated with fewer overall IMF conditions. This pattern extends to fiscal conditions, where US influence is associated with a substantial reduction, though this effect is only marginally significant ($p < 0.1$), likely due to the much smaller sample size ($N=31$ vs. $N=93$ for total conditions). Interestingly, European influence shows the opposite pattern: it is associated with a significant increase in fiscal conditions ($p < 0.05$), suggesting that European powers may advocate for more extensive fiscal reforms when they have influence over IMF lending decisions. This finding supports arguments in the current literature that Europe, if anything, has more fully internalised neoliberal economic orthodoxy and the principles of the "Washington Consensus" than the United States, and may view austerity-oriented policies as intrinsically beneficial [@lutz2014; @dyson2010].
+
+The required fiscal adjustment (RFA), however, shows inconsistent results. US influence correlates with significantly more stringent fiscal adjustment requirements in the short term ($p<0.05$ for $T+1$), while European influence is associated with more lenient short-term adjustment requirements ($p<0.1$). This stands in contrast to the findings on the number of (fiscal) conditions. Moreover, these patterns do not persist in the longer term (end year), where neither US nor European influence shows statistically significant effects. These mixed results suggest that while political alignment may influence the *number* of fiscal conditions imposed, it does not consistently affect the *stringency* of fiscal adjustment requirements over time. This echoes the findings of @guimaraes2021 and indicates that the relationship between political influence and the nature of conditionality is complex and warrants further investigation.
+
+We note that these fiscal conditionality analyses are based on substantially smaller samples ($N\approx 30$) and cover a more limited time period (1999–2012) than our main analyses. This reduction in sample size is due to the limited availability of disaggregated fiscal conditionality data. Consequently, these results should be interpreted with appropriate caution.
+
+```{r}
+#| label: tbl-results-fiscal
+#| tbl-cap: Effects of US and European Influence on IMF fiscal conditionality (1999–2012)
+#| tbl-pos: H
+load('save/regTable_fiscal.RData')
+resultsTable |> tinytable::theme_latex(resize_width = 1, resize_direction = "down")
 ```
