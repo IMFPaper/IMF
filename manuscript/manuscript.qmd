@@ -189,6 +189,7 @@ We include a range of economic performance indicators that have been shown to sy
 The selection of covariates, including their polynomial transformations[^10], closely follows @lipscy2018 and @barro2005 to ensure comparability with previous findings.
 
 [^10]: Quadratic terms are included for GDP and per capita GDP to capture potential non-linear effects. See [Model Specification](#sec-model) for details.
+
 ## Summary Statistics
 
 @tbl-summary presents summary statistics for the key variables. IMF lending outcomes are generally sparse: both the loan-to-GDP ratio and the participation rate have means close to zero, with medians at zero, indicating that most country-periods did not involve IMF programmes. However, when loans are approved, they can be large, with the loan-to-GDP ratio reaching over 12 percent and the number of conditions ranging up to 179. The influence measures derived from PCA are centered at zero by construction, with wide dispersion across countries. Among the covariates, GDP per capita and its growth show substantial variation, while OECD membership is rare in the sample (16 percent of observations). International reserves also vary widely, suggesting heterogeneous external liquidity and self-insurance capacity across countries. These patterns underscore the skewed and censored nature of IMF outcomes, motivating our use of Tobit and Probit models in the subsequent analysis.
