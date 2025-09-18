@@ -172,7 +172,7 @@ However, as noted by @lipscy2018 and @belsley2004, including multiple proxies fo
 
 [^8]: See Appendix [-@sec-corr].
 
-[^9]: The first principal components capture the majority of the variance (`r format(EU_PC1_percentage, digits = 1)`% for Europe and `r format(US_PC1_percentage, digits = 1)`% for the United States). See Appendix [-@sec-scree] for scree plots and additional details.
+[^9]: GDP, before log transformation, is measured in millions of constant 2002 US dollars, while GDP per capita is measured in thousands of constant 2002 US dollars.
 
 Our approach differs from @lipscy2018 in that we do not pool the US and European variables together. Instead, we construct two separate measures: US influence and European influence. The PCA is conducted separately for each actor, using the same three indicators described above. The resulting first principal components are then normalised to have a mean of zero and a standard deviation of one, allowing for easier interpretation and comparability of coefficients in subsequent analyses.
 
@@ -180,15 +180,15 @@ Our approach differs from @lipscy2018 in that we do not pool the US and European
 
 The existing literature has identified several factors beyond geopolitical alignment that influence IMF lending decisions or a country's demand for IMF assistance. We include these variables as covariates to account for potential confounding effects. Notably, countries with larger IMF quotas (and thus greater voting power), as well as those with nationals among IMF staff, are expected to receive more favourable treatment from the Fund [@barro2005]. Therefore, we include the share of nationals among IMF economists and the share of IMF quota, both in logged form, as control covariates.
 
-We include a range of economic performance indicators that have been shown to systematically affect IMF lending decisions [@barro2005; @knight1997]. To capture these dynamics, we include log GDP, per capita GDP, and lagged GDP growth as proxies for macroeconomic performance[^9]. International reserves measured in months of imports are used to measure a country’s external liquidity and ability to manage balance-of-payments pressures without IMF support. Finally, a binary variable for OECD membership serves as a proxy for broader institutional and economic differences among countries.
+We include a range of economic performance indicators that have been shown to systematically affect IMF lending decisions [@barro2005; @knight1997]. To capture these dynamics, we include log GDP, per capita GDP, and lagged GDP growth as proxies for macroeconomic performance[^10]. International reserves measured in months of imports are used to measure a country’s external liquidity and ability to manage balance-of-payments pressures without IMF support. Finally, a binary variable for OECD membership serves as a proxy for broader institutional and economic differences among countries.
 
-[^9]: GDP, before log transformation, is measured in millions of constant 2002 US dollars, while GDP per capita is measured in thousands of constant 2002 US dollars.
+[^10]: GDP, before log transformation, is measured in millions of constant 2002 US dollars, while GDP per capita is measured in thousands of constant 2002 US dollars.
 
 We include a range of economic performance indicators that have been shown to systematically affect IMF lending decisions [@barro2005; @knight1997; @youssef2023]. To capture these dynamics, we include GDP, per capita GDP, and lagged GDP growth as proxies for macroeconomic performance. International reserves as a share of imports are used to measure a country’s external liquidity and ability to manage balance-of-payments pressures without IMF support. Finally, a binary variable for OECD membership serves as a proxy for broader institutional and economic differences among countries.
 
-The selection of covariates, including their polynomial transformations[^10], closely follows @lipscy2018 and @barro2005 to ensure comparability with previous findings.
+The selection of covariates, including their polynomial transformations[^11], closely follows @lipscy2018 and @barro2005 to ensure comparability with previous findings.
 
-[^10]: Quadratic terms are included for GDP and per capita GDP to capture potential non-linear effects. See [Model Specification](#sec-model) for details.
+[^11]: Quadratic terms are included for GDP and per capita GDP to capture potential non-linear effects. See [Model Specification](#sec-model) for details.
 
 ## Summary Statistics
 
@@ -242,13 +242,13 @@ where:
 -   $\mathbf{P}_{it} = \left( \ln(\text{GDP}_{it}), \ln(\text{GDP}_{it})^2, \text{GDPpc}_{it}, \text{GDPpc}_{it}^2 \right)^\top$ includes logged GDP and per capita GDP, along with their squared terms.
 -   $\mathbf{Z}_{it}$ is a vector of additional covariates, including per capita GDP growth, reserves as a share of imports, and OECD membership.
 -   $\lambda_t$ denotes five-year period fixed effects.
--   $\epsilon_{it}$ is the error term, assumed to be independently and identically distributed as $\mathcal{N}(0, \sigma^2)$[^11].
+-   $\epsilon_{it}$ is the error term, assumed to be independently and identically distributed as $\mathcal{N}(0, \sigma^2)$[^12].
 
-[^11]: Country fixed effects are not included because the number of time periods ($T$) is small relative to the number of countries ($N$). In such cases, including country fixed effects would lead to inconsistent estimates of the disturbance variance $\sigma$ [@greene2004].
+[^12]: Country fixed effects are not included because the number of time periods ($T$) is small relative to the number of countries ($N$). In such cases, including country fixed effects would lead to inconsistent estimates of the disturbance variance $\sigma$ [@greene2004].
 
-For the IMF loan approval variable, which is binary ($Y_{it} \in \{0, 1\}$), we estimate a Probit model. This allows us to conveniently reuse the same latent variable specification $Y^*_{it}$ as in the Tobit model. The key differences are that the error term is now assumed to follow a standard normal distribution $\mathcal{N}(0, 1)$, and that the latent outcome maps to a binary observed outcome as follows[^12]:
+For the IMF loan approval variable, which is binary ($Y_{it} \in \{0, 1\}$), we estimate a Probit model. This allows us to conveniently reuse the same latent variable specification $Y^*_{it}$ as in the Tobit model. The key differences are that the error term is now assumed to follow a standard normal distribution $\mathcal{N}(0, 1)$, and that the latent outcome maps to a binary observed outcome as follows[^13]:
 
-[^12]: Alternatively, the Probit model can be expressed in terms of probabilities as $\Pr(Y_{it}=1)=\Phi(\alpha + \beta_1 \text{USA}_{it} + \beta_2 \text{EUP}_{it} + \gamma^\top \mathbf{P}_{it} + \delta^\top \mathbf{Z}_{it} + \lambda_t)$, where $\Phi(\cdot)$ is the standard normal cumulative distribution function.
+[^13]: Alternatively, the Probit model can be expressed in terms of probabilities as $\Pr(Y_{it}=1)=\Phi(\alpha + \beta_1 \text{USA}_{it} + \beta_2 \text{EUP}_{it} + \gamma^\top \mathbf{P}_{it} + \delta^\top \mathbf{Z}_{it} + \lambda_t)$, where $\Phi(\cdot)$ is the standard normal cumulative distribution function.
 
 $$
 Y_{it} = 
@@ -260,9 +260,9 @@ $$
 
 # Results
 
-We now present the results from estimating the Tobit and Probit models described above, focusing on the effects of US and European influence on IMF lending outcomes. As shown in @tbl-results, stronger ties with Europe are significantly associated with a higher IMF loan-to-GDP ratio, a greater participation rate, and an increased likelihood of loan approval. In contrast, similar ties with the United States do not yield statistically significant effects on these outcomes. The differences between American and European influence on the first two outcomes are statistically significant at the 5% level[^13].
+We now present the results from estimating the Tobit and Probit models described above, focusing on the effects of US and European influence on IMF lending outcomes. As shown in @tbl-results, stronger ties with Europe are significantly associated with a higher IMF loan-to-GDP ratio, a greater participation rate, and an increased likelihood of loan approval. In contrast, similar ties with the United States do not yield statistically significant effects on these outcomes. The differences between American and European influence on the first two outcomes are statistically significant at the 5% level[^14].
 
-[^13]: Based on tests of equality for the null hypothesis that $\text{USA} = \text{EUP}$. $F$-tests are used for the linear models; for the Probit model, the test corresponds to an asymptotic Chi-squared statistic, which is appropriate given the large sample size ($N = 522$). The $p$-values for the first two models are 0.021 and 0.014, respectively. For loan approval, the difference is nearly significant at the 10% level ($p = 0.122$).
+[^14]: Based on tests of equality for the null hypothesis that $\text{USA} = \text{EUP}$. $F$-tests are used for the linear models; for the Probit model, the test corresponds to an asymptotic Chi-squared statistic, which is appropriate given the large sample size ($N = 522$). The $p$-values for the first two models are 0.021 and 0.014, respectively. For loan approval, the difference is nearly significant at the 10% level ($p = 0.122$).
 
 The only favourable treatment associated with American influence, perhaps surprisingly, is a reduction in the number of IMF conditions. In contrast, ties with Europe are not associated with such benefits. This finding echoes the argument by @lutz2014, who suggest that European actors have historically adhered more strictly to economic orthodoxy—most visibly during the Eurozone crisis—despite such policies traditionally being associated with the United States under the so-called “Washington Consensus.” Although the European adoption of neoliberal economic doctrines became especially prominent after the crisis, it is notable that similar patterns are already evident in the pre-2010 data examined here.
 
@@ -377,9 +377,9 @@ scree_US
 
 # Fiscal Conditionality Analysis {#sec-fiscal .appendix}
 
-This appendix extends our analysis of IMF conditionality by examining alternative measures that focus specifically on fiscal policy requirements. Following @guimaraes2021, we consider not only the total number of conditions (as in our main analysis), but also the number of *fiscal* conditions and the required fiscal adjustment (RFA)[^14]—the extent of fiscal tightening mandated by IMF programmes, expressed as a percentage of GDP. We report RFA at two time horizons: one year after programme approval ($T+1$) and at the programme’s end year. Together, these measures provide a more nuanced understanding of the nature and stringency of IMF conditionality, particularly in the fiscal domain.
+This appendix extends our analysis of IMF conditionality by examining alternative measures that focus specifically on fiscal policy requirements. Following @guimaraes2021, we consider not only the total number of conditions (as in our main analysis), but also the number of *fiscal* conditions and the required fiscal adjustment (RFA)[^15]—the extent of fiscal tightening mandated by IMF programmes, expressed as a percentage of GDP. We report RFA at two time horizons: one year after programme approval ($T+1$) and at the programme’s end year. Together, these measures provide a more nuanced understanding of the nature and stringency of IMF conditionality, particularly in the fiscal domain.
 
-[^14]: To merge these variables with our dataset, aggregation is necessary: our data are at the five-year country level, whereas theirs are at the programme level. We sum the number of fiscal conditions and average the RFA variables.
+[^15]: To merge these variables with our dataset, aggregation is necessary: our data are at the five-year country level, whereas theirs are at the programme level. We sum the number of fiscal conditions and average the RFA variables.
 
 @tbl-results-fiscal reveals patterns that largely reinforce our main findings while adding important nuance. Consistent with our baseline results, US influence is significantly associated with fewer overall IMF conditions. This pattern extends to fiscal conditions, where US influence is associated with a substantial reduction, though this effect is only marginally significant ($p < 0.1$), likely due to the much smaller sample size ($N=31$ vs. $N=93$ for total conditions). Interestingly, European influence shows the opposite pattern: it is associated with a significant increase in fiscal conditions ($p < 0.05$), suggesting that European powers may advocate for more extensive fiscal reforms when they have influence over IMF lending decisions. This finding supports arguments in the current literature that Europe, if anything, has more fully internalised neoliberal economic orthodoxy and the principles of the "Washington Consensus" than the United States, and may view austerity-oriented policies as intrinsically beneficial [@lutz2014; @dyson2010].
 
