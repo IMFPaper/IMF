@@ -17,10 +17,6 @@ jobs:
     runs-on: ubuntu-22.04 # <= pin to jammy for better binaries
 
     env:
-      # Your specific group & collection from the URL you shared
-      ZOTERO_GROUP_ID: "5979835"
-      ZOTERO_COLLECTION_KEY: "HY6TKCRU"
-      ZOTERO_OUT_BIB_PATH: "extra/references.bib"
       RENV_CONFIG_REPOS_OVERRIDE: https://packagemanager.posit.co/cran/latest
       RENV_CONFIG_INSTALL_MODE: "binary"
 
@@ -48,10 +44,10 @@ jobs:
         uses: kv9898/actions-zotero-bibtex@v1
         with:
           api-key: ${{ secrets.ZOTERO_API_KEY }}
-          library-id: ${{ env.ZOTERO_GROUP_ID }}
-          coll-key: ${{ env.ZOTERO_COLLECTION_KEY }}
-          is-group: 'true'     # or leave default 'false' for user
-          out-bib-path: ${{ env.ZOTERO_OUT_BIB_PATH }}
+          library-id: "5979835"
+          coll-key: "HY6TKCRU"
+          is-group: "true"     # or leave default 'false' for user
+          out-bib-path: "extra/references.bib"
           
       # ------------------- R -----------------
       - name: Setup R
