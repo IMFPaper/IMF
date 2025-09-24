@@ -168,7 +168,7 @@ If you use this code or data, please cite:
 We welcome feedback and suggestions! Please:
 - Open an issue for questions about replication
 - Submit pull requests for corrections or improvements
-- Contact the corresponding author for data questions
+- Contact the corresponding author (@kv9898) for data questions
 
 ## 📄 License
 
