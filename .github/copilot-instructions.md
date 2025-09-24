@@ -24,7 +24,7 @@ This is an academic research repository for an International Monetary Fund (IMF)
 - **Quarto** for manuscript rendering to PDF
 - **Zotero** for bibliography management 
 - **GitHub Actions** for automated builds and releases
-- **LaTeX** for advanced typesetting via Quarto
+- **LaTeX (TinyTeX)** for advanced typesetting via Quarto
 - **Statistical packages**: `fixest` for econometric models, `modelsummary` for tables
 
 ## Development Guidelines
@@ -68,20 +68,7 @@ This is an academic research repository for an International Monetary Fund (IMF)
 
 ### Building the Manuscript
 ```bash
-# Install dependencies
-renv::restore()
-
-# Render manuscript to PDF
 quarto render manuscript/manuscript.qmd
-```
-
-### Running Statistical Analysis
-```bash
-# Run regression models
-Rscript code/fiscal.R
-
-# Generate tables
-# Tables are automatically saved to save/ directory
 ```
 
 ### GitHub Actions
@@ -121,9 +108,9 @@ Run this workflow to ensure your development environment matches the production 
 
 ## Security & Access
 
-- This is a **private repository for internal co-authors only**
+- This used to be a private repository for internal co-authors only, but was recently made public.
 - Zotero API key required for bibliography updates (stored in GitHub secrets)
-- No public distribution intended
+- Working towards mature public distribution
 
 ## Troubleshooting
 
