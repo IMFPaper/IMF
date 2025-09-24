@@ -64,14 +64,17 @@ Note that all PDF files are ignored by `.gitignore` and not tracked by Git, and 
 ## 📚 Citation Management
 
 Zotero is used as the reference manager.  
-Please **export the BibTeX file from Zotero into `extra/references.bib`** when new sources are added.  
+Please **export the BibTeX file from Zotero into `extra/references.bib`** with Better BibLaTeX when new sources are added.  
 Both `demo/` and `manuscript/` use this file — avoid duplicating citations elsewhere.
+
+- Please pin the key for each reference to ensure consistency when adding new sources.
+- Formula for reference key generation: `auth.lower + year`
 
 ---
 
 ## 🔁 Collaboration Guidelines
 
-Please _DO NOT_ commit directly to `main`.
+Please _DO NOT_ commit directly to `main`. Branch protection rules for `main` are enabled.
 
 - Always work on a separate branch.
 - Open a Pull Request (PR) when ready for review or merge.
