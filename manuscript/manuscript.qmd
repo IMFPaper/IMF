@@ -359,15 +359,21 @@ Finally, our findings suggest the value of applying a similar disaggregation of 
 To summarise, our analysis underscores that Western influence within the IMF is not monolithic but internally differentiated, with Europe shaping access to resources and the United States shaping the terms of their use. Recognising this asymmetry complicates prevailing narratives of IMF governance and highlights the need to take transatlantic politics seriously in studies of global financial institutions. More broadly, the paper demonstrates the value of disaggregating great power influence rather than treating blocs as unified actors. Doing so not only clarifies the institutional dynamics of the IMF, but also provides a framework for examining other organisations where overlapping alliances mask divergent interests. In this way, the findings contribute to a more nuanced understanding of how power operates in international economic governance and point toward the importance of looking inside, as well as outside, the Western coalition when considering the future of multilateralism.
 
 ::: {.data-availability}
-**Data Availability Statement**  The replication files for this paper are available at [https://github.com/IMFPaper/IMF](https://github.com/IMFPaper/IMF).
+**Data Availability Statement**
+
+The replication files for this paper are available at [https://github.com/IMFPaper/IMF](https://github.com/IMFPaper/IMF).
 :::
 
 ::: {.funding}
-**Funding Statement**  This research is not funded.
+**Funding Statement**
+
+This research is not funded.
 :::
 
 ::: {.competing-interests}
-**Competing Interests**  The authors declare none.
+**Competing Interests**
+
+The authors declare none.
 :::
 
 \newpage
