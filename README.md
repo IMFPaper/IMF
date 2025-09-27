@@ -48,13 +48,15 @@ This repository contains the replication materials for our paper examining wheth
 3. **Run the analysis**:
    ```r
    # Generate principal components and main results
-   source("code/PCA.R")          # Principal component analysis
-   source("code/continent.R")    # Main regression models  
-   source("code/fiscal.R")       # Robustness check with fiscal data
+   source("code/continent.R")    # Add continental information for each country
+   source("code/PCA.R")          # Principal component analysis and main results
    
    # Generate additional regional analyses
    source("code/is_Europe.R")    # European borrowers analysis
    source("code/is_Africa.R")    # African borrowers analysis
+
+   # Robustness check with fiscal conditionality measures
+   source("code/fiscal.R")       # Robustness check with fiscal data
    ```
 
 4. **Build the manuscript**:
@@ -66,8 +68,8 @@ This repository contains the replication materials for our paper examining wheth
 
 ```
 ├── code/                    # R scripts for analysis
-│   ├── PCA.R               # Principal component analysis
-│   ├── continent.R         # Main regression models
+│   ├── PCA.R               # Principal component analysis and main results
+│   ├── continent.R         # Add continental information to raw data
 │   ├── fiscal.R            # Robustness check with fiscal data
 │   ├── is_Europe.R         # European borrowers analysis  
 │   └── is_Africa.R         # African borrowers analysis
