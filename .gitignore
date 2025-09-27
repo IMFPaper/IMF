@@ -9,3 +9,5 @@
 
 *.bib
 /.luarc.json
+
+code/by_continent.R
