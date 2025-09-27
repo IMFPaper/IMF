@@ -70,8 +70,7 @@ This repository contains the replication materials for our paper examining wheth
 │   ├── continent.R         # Main regression models
 │   ├── fiscal.R            # Robustness check with fiscal data
 │   ├── is_Europe.R         # European borrowers analysis  
-│   ├── is_Africa.R         # African borrowers analysis
-│   └── by_continent.R      # Analysis by continent
+│   └── is_Africa.R         # African borrowers analysis
 ├── data/                   # Datasets
 │   ├── panel_data.rds      # Main panel dataset (1980-2010)
 │   ├── panel_data_pca.rds  # Data with PCA components
