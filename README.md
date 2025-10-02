@@ -156,7 +156,7 @@ All package versions are locked in `renv.lock` for reproducibility.
 If you use this code or data, please cite:
 
 ```bibtex
-@unpublished{yang2025european,
+@unpublished{yang2025,
   title={European or American? A re-examination of the transatlantic influence over the IMF},
   author={Yang, Dianyi and Hu, Tong and Chen, Zhenyi},
   year={2025},
