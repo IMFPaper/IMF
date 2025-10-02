@@ -105,7 +105,8 @@ This repository contains the replication materials for our paper examining wheth
 ├── .Rprofile               # R profile for renv
 ├── COLLABORATE.md          # Instructions for collaboration (internal use)
 ├── README.md               # This file
-└── renv.lock               # R package versions for reproducibility
+├── renv.lock               # R package versions for reproducibility
+└── LICENSE                 # MIT License
 ```
 
 ## 📋 Reproduction Pipeline
