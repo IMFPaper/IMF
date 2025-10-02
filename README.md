@@ -76,23 +76,36 @@ This repository contains the replication materials for our paper examining wheth
 ├── data/                   # Datasets
 │   ├── panel_data.rds      # Main panel dataset (1980-2010)
 │   ├── panel_data_pca.rds  # Data with PCA components
+│   ├── panel_data_fiscal.rds # Data with fiscal data
+│   ├── panel_data_raw      # Original data from Lipscy & Lee (2018)
 │   ├── fiscal.dta          # Fiscal adjustment data
 │   └── continents.json     # Country-continent mapping
 ├── manuscript/             # Paper source and output
+│   ├── _extensions/        # Contains the ORCID Quarto template
 │   ├── manuscript.qmd      # Quarto manuscript source
 │   └── manuscript.pdf      # Generated paper (build locally)
 ├── demo/                   # Presentation materials
-│   └── demo.qmd           # Quarto Beamer slides
-├── save/                   # Saved model objects
-│   ├── regModels.RData     # Main regression results
-│   ├── regTable.RData      # Formatted tables
-│   └── PCA.RData          # Principal component results
+│   ├── images/             # Contains a screenshot used in slides
+│   └── demo.qmd            # Quarto Beamer slides
+├── save/                   # Saved R objects to be loaded
+│   ├── regModels*.RData   # Regression objects
+│   ├── regTable*.RData    # Regression tables
+│   ├── corr.RData          # Correlation matrices
+│   ├── scree.RData         # Scree plots
+│   └── PCA.RData           # Principal component results
 ├── helper/                 # Auxiliary scripts
-│   └── f_test*.R          # F-test scripts for model comparison
+│   └── f_test*.R           # Scripts for tests of equality of coefficients
 ├── extra/                  # Shared assets
 │   ├── references.bib      # Bibliography
-│   └── apa.csl            # Citation style
-└── renv.lock              # R package versions for reproducibility
+│   └── apa.csl             # Citation style
+├── _quarto.yml             # Quarto configuration shared by manuscript   
+│                             and demo
+├── .gitignore              # Git ignore file
+├── .gitattributes          # Git attributes file
+├── .Rprofile               # R profile for renv
+├── COLLABORATE.md          # Instructions for collaboration (internal use)
+├── README.md               # This file
+└── renv.lock               # R package versions for reproducibility
 ```
 
 ## 📋 Analysis Pipeline
