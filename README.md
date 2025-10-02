@@ -4,7 +4,7 @@
 
 This repository contains the replication materials for our paper examining whether the United States or Europe holds greater influence over the International Monetary Fund (IMF). Using panel data from 1980 to 2010, we construct separate measures of US and European influence and analyze their impact on IMF lending outcomes.
 
-## � Research Summary
+## 🔍 Research Summary
 
 **Research Question**: Does the United States or Europe hold greater influence over IMF lending decisions?
 
@@ -151,7 +151,7 @@ The reproduction follows this sequence:
 
 All package versions are locked in `renv.lock` for reproducibility.
 
-## � Data Description
+## 📊 Data Description
 
 The main dataset (`data/panel_data.rds`) contains:
 - **Coverage**: 190 countries, 1980-2010
@@ -169,7 +169,7 @@ Main findings are presented in the manuscript tables:
 - **Table 4**: Robustness checks with fiscal data
 - **Tables 5-6**: Regional analysis (Europe and Africa)
 
-## � Citation
+## 📑 Citation
 
 If you use this code or data, please cite:
 
