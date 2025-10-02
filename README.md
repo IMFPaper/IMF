@@ -112,30 +112,35 @@ This repository contains the replication materials for our paper examining wheth
 
 The analysis follows this sequence:
 
-1. **Data Preparation & PCA** (`code/PCA.R`):
-   - Loads raw panel data from 1980-2010
+1. **Data Preparation** (`code/continent.R`):
+   - Loads raw panel data from `data/panel_data_raw.dta`
+   - Adds continent information using `data/continents.json`
+   - Saves processed data to `data/panel_data.rds`
+
+2. **Main Analysis** (`code/PCA.R`):
+   - Loads processed data from `data/panel_data.rds`
+   - Calculates correlation matrices
    - Constructs US and European influence measures using PCA of:
      - UN General Assembly voting alignment
      - Bilateral trade relationships  
      - Banking exposure
-   - Saves components to `save/PCA.RData`
-
-2. **Main Analysis** (`code/continent.R`):
+   - Saves processed data with PCA components to `data/panel_data_pca.rds`
+   - Make scree plots
+   - Save plot, regression and table objects to `save/`
+   - EDA plots (not included in manuscript)
    - Estimates Tobit and Probit models for four IMF outcomes:
      - Loan-to-GDP ratios
      - Program participation rates
      - Loan approval likelihood
      - Number of structural conditions
-   - Saves results to `save/regModels.RData` and `save/regTable.RData`
 
 3. **Robustness Checks**:
    - **Fiscal conditionality** (`code/fiscal.R`): Uses required fiscal adjustments as DV
-   - **Regional analysis** (`code/is_Europe.R`, `code/is_Africa.R`): Tests for regional favoritism
-   - **Continental breakdown** (`code/by_continent.R`): Analyzes effects by continent
+   - **Regional analysis** (`code/is_Europe.R`, `code/is_Africa.R`): Tests for regional favouritism
 
-4. **Statistical Tests** (`helper/f_test*.R`):
-   - F-tests comparing model specifications
-   - Validates PCA component selection
+4. **Generate Manuscript** (`manuscript/manuscript.qmd`):
+   - Compiles results into a PDF manuscript using Quarto
+   - Tables and figures are auto-generated from saved R objects in `save/`
 
 ## 🔧 System Requirements
 
