@@ -151,24 +151,6 @@ The reproduction follows this sequence:
 
 All package versions are locked in `renv.lock` for reproducibility.
 
-## 📊 Data Description
-
-The main dataset (`data/panel_data.rds`) contains:
-- **Coverage**: 190 countries, 1980-2010
-- **IMF variables**: Loan amounts, program participation, conditions, approvals
-- **Influence measures**: UN voting alignment, trade flows, banking relationships
-- **Controls**: GDP, population, democracy scores, regional indicators
-
-Data sources include the IMF, World Bank, UN, and various academic datasets. See manuscript for detailed variable definitions and sources.
-
-## 🎯 Key Results
-
-Main findings are presented in the manuscript tables:
-- **Table 2**: Main regression results (loan volumes and participation)
-- **Table 3**: Loan approval and conditionality results  
-- **Table 4**: Robustness checks with fiscal data
-- **Tables 5-6**: Regional analysis (Europe and Africa)
-
 ## 📑 Citation
 
 If you use this code or data, please cite:
