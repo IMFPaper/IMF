@@ -108,9 +108,9 @@ This repository contains the replication materials for our paper examining wheth
 └── renv.lock               # R package versions for reproducibility
 ```
 
-## 📋 Analysis Pipeline
+## 📋 Reproduction Pipeline
 
-The analysis follows this sequence:
+The reproduction follows this sequence:
 
 1. **Data Preparation** (`code/continent.R`):
    - Loads raw panel data from `data/panel_data_raw.dta`
