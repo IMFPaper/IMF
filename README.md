@@ -142,12 +142,12 @@ The reproduction follows this sequence:
    - Compiles results into a PDF manuscript using Quarto
    - Tables and figures are auto-generated from saved R objects in `save/`
 
-## 🔧 System Requirements
+## 🔧 Dependency Requirements
 
-- **R**: Version 4.5+ 
-- **Key R packages**: `fixest`, `modelsummary`, `tidyverse`, `AER`, `haven`
+- **R**: Version 4.5+ (recommended, not tested on older versions)
+- **renv**: For package management in virtual environments
 - **Quarto**: For manuscript compilation
-- **LaTeX**: TinyTeX (installed automatically with Quarto)
+- **LaTeX**: TinyTeX (would be prompted to install by Quarto if not present)
 
 All package versions are locked in `renv.lock` for reproducibility.
 
