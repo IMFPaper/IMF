@@ -35,7 +35,6 @@ local({
 
       # Store temp_dir for subsequent tests
       assign("pca_temp_dir", temp_dir, envir = .GlobalEnv)
-      assign(".pca_test_setup_done", TRUE, envir = .GlobalEnv)
 
       # Basic check that script completed
       expect_true(file.exists(file.path(temp_dir, "save/corr.RData")))
@@ -185,6 +184,5 @@ withr::defer({
   if (exists("pca_temp_dir")) {
     unlink(pca_temp_dir, recursive = TRUE, force = TRUE)
     rm(pca_temp_dir, envir = .GlobalEnv)
-    rm(.pca_test_setup_done, envir = .GlobalEnv)
   }
 }, envir = .GlobalEnv)
