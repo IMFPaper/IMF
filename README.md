@@ -106,7 +106,8 @@ This repository contains the replication materials for our paper examining wheth
 │       ├── test-continent.R  # Tests for continent.R
 │       ├── test-PCA.R        # Tests for PCA.R
 │       ├── test-fiscal.R     # Tests for fiscal.R
-│       └── test-regional.R   # Tests for regional analyses
+│       ├── test-regional.R   # Tests for regional analyses
+│       └── test-manuscript.R # Tests for manuscript.qmd compilation
 ├── extra/                  # Shared assets
 │   ├── references.bib      # Bibliography
 │   └── apa.csl             # Citation style
@@ -170,8 +171,9 @@ The test suite verifies that:
 - **Main analysis** (`test-PCA.R`): PCA components, correlation matrices, scree plots, and main regression models are reproducible
 - **Fiscal robustness checks** (`test-fiscal.R`): Fiscal conditionality analysis generates consistent results
 - **Regional analysis** (`test-regional.R`): European and African borrower analyses are reproducible
+- **Manuscript compilation** (`test-manuscript.R`): Manuscript structure, data dependencies, tinytable formatting, and PDF rendering
 
-Each test re-runs the corresponding R script in a temporary workspace and compares outputs (datasets, model coefficients, tables) against the committed versions, ensuring that future package updates do not silently change results.
+Each test re-runs the corresponding R script in a temporary workspace and compares outputs (datasets, model coefficients, tables) against the committed versions, ensuring that future package updates do not silently change results. The manuscript test additionally verifies that all required data files exist, tinytable objects are properly formatted, and the manuscript can be rendered to PDF (when LaTeX environment is fully configured).
 
 ### Running Tests Locally
 
