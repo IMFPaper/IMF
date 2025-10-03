@@ -70,6 +70,33 @@ test_that("Panel data with fiscal variables is reproducible", {
   }
 })
 
+test_that("Fiscal Regression models are reproducible", {
+  skip_if_not(exists("fiscal_temp_dir"))
+  
+  expect_true(file.exists(here("save/regModels_fiscal.RData")),
+              info = "Original regModels_fiscal.RData not found - run code/fiscal.R to generate it")
+  expect_true(file.exists(file.path(fiscal_temp_dir, "save/regModels_fiscal.RData")),
+              info = "Regenerated regModels_fiscal.RData not found")
+
+  load(here("save/regModels_fiscal.RData"))
+  original_models <- regModels
+
+  load(file.path(fiscal_temp_dir, "save/regModels_fiscal.RData"))
+
+  # Check that same number of models exist
+  expect_equal(length(original_models), length(regModels))
+  expect_equal(names(original_models), names(regModels))
+
+  # Check coefficients for each model (allowing for small numerical differences)
+  for (model_name in names(original_models)) {
+    original_coef <- coef(original_models[[model_name]])
+    regenerated_coef <- coef(regModels[[model_name]])
+
+    expect_equal(original_coef, regenerated_coef, tolerance = 1e-8,
+                 label = paste("Coefficients for", model_name))
+  }
+})
+
 # Cleanup
 withr::defer({
   if (exists("fiscal_temp_dir")) {
