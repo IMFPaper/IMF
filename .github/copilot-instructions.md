@@ -15,6 +15,8 @@ This is an academic research repository for an International Monetary Fund (IMF)
 - `helper/` — Auxiliary scripts (e.g., F-test scripts)
 - `manuscript/` — Main manuscript source (`manuscript.qmd`) and Quarto extensions
 - `save/` — Saved R objects (models, regression outputs)
+- `tests/` — Test suite for reproducibility:
+  - `testthat/` — Unit tests for all analysis scripts
 - `Taiwan_paper/` — Archived legacy work
 - `renv/` and `renv.lock` — R package management with renv
 
@@ -26,6 +28,7 @@ This is an academic research repository for an International Monetary Fund (IMF)
 - **GitHub Actions** for automated builds and releases
 - **LaTeX (TinyTeX)** for advanced typesetting via Quarto
 - **Statistical packages**: `fixest` for econometric models, `modelsummary` for tables
+- **testthat** for automated testing and reproducibility verification
 
 ## Development Guidelines
 
@@ -52,6 +55,16 @@ This is an academic research repository for an International Monetary Fund (IMF)
 - Use consistent variable naming and coefficient mapping
 - Include F-tests for model comparisons in `helper/` scripts
 
+### Testing
+- All analysis scripts have corresponding tests in `tests/testthat/`
+- Tests verify reproducibility by re-running scripts and comparing outputs
+- Use `testthat::test_dir("tests/testthat")` to run all tests locally
+- Tests run automatically on push/PR via GitHub Actions (`.github/workflows/run-tests.yml`)
+- When modifying analysis code, ensure tests still pass
+- When adding new analysis scripts, consider adding corresponding tests
+- Tests use temporary workspaces to avoid polluting the repository
+- Package: `testthat` for test framework, `here` for path management, `withr` for temp directories
+
 ### Collaboration Workflow
 - **Never commit directly to `main`**
 - Always work on feature branches with descriptive names
@@ -71,8 +84,18 @@ This is an academic research repository for an International Monetary Fund (IMF)
 quarto render manuscript/manuscript.qmd
 ```
 
+### Running Tests
+```r
+# Run all tests
+testthat::test_dir("tests/testthat")
+
+# Run specific test file
+testthat::test_file("tests/testthat/test-PCA.R")
+```
+
 ### GitHub Actions
 - `build-manuscript.yml` — Automated manuscript building with Zotero → PDF pipeline
+- `run-tests.yml` — Runs testthat tests on Windows, Ubuntu, and macOS with R 4.5.1
 - `copilot-setup-steps.yml` — Validates the development environment setup
 
 ## Code Style & Conventions

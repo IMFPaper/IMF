@@ -64,6 +64,12 @@ This repository contains the replication materials for our paper examining wheth
    quarto render manuscript/manuscript.qmd
    ```
 
+5. **(Optional) Run tests**:
+   ```r
+   # Run all tests to verify reproducibility
+   testthat::test_dir("tests/testthat")
+   ```
+
 ## 📂 Repository Structure
 
 ```
@@ -95,6 +101,12 @@ This repository contains the replication materials for our paper examining wheth
 │   └── PCA.RData           # Principal component results
 ├── helper/                 # Auxiliary scripts
 │   └── f_test*.R           # Scripts for tests of equality of coefficients
+├── tests/                  # Test suite for reproducibility
+│   └── testthat/           # testthat unit tests
+│       ├── test-continent.R  # Tests for continent.R
+│       ├── test-PCA.R        # Tests for PCA.R
+│       ├── test-fiscal.R     # Tests for fiscal.R
+│       └── test-regional.R   # Tests for regional analyses
 ├── extra/                  # Shared assets
 │   ├── references.bib      # Bibliography
 │   └── apa.csl             # Citation style
@@ -142,6 +154,34 @@ The reproduction follows this sequence:
 4. **Generate Manuscript** (`manuscript/manuscript.qmd`):
    - Compiles results into a PDF manuscript using Quarto
    - Tables and figures are auto-generated from saved R objects in `save/`
+
+## 🧪 Tests
+
+This repository includes a comprehensive test suite using [testthat](https://testthat.r-lib.org/) to ensure reproducibility of all analysis scripts. Tests are automatically run on Windows, Ubuntu, and macOS via GitHub Actions.
+
+[![R Tests](https://github.com/imfpaper/imf/actions/workflows/run-tests.yml/badge.svg)](https://github.com/imfpaper/imf/actions/workflows/run-tests.yml)
+
+### Test Coverage
+
+The test suite verifies that:
+- **Data preparation** (`test-continent.R`): Continent mapping produces identical results
+- **Principal component analysis** (`test-PCA.R`): PCA components, correlation matrices, scree plots, and main regression models are reproducible
+- **Fiscal robustness checks** (`test-fiscal.R`): Fiscal conditionality analysis generates consistent results
+- **Regional analysis** (`test-regional.R`): European and African borrower analyses are reproducible
+
+Each test re-runs the corresponding R script in a temporary workspace and compares outputs (datasets, model coefficients, tables) against the committed versions, ensuring that future package updates do not silently change results.
+
+### Running Tests Locally
+
+```r
+# Run all tests
+testthat::test_dir("tests/testthat")
+
+# Run a specific test file
+testthat::test_file("tests/testthat/test-PCA.R")
+```
+
+Tests require that you have already run the analysis scripts at least once to generate the baseline outputs in `data/` and `save/` directories.
 
 ## 🔧 Dependency Requirements
 
