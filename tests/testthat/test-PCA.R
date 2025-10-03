@@ -166,12 +166,12 @@ test_that("Regression models are reproducible", {
 test_that("Regression table is reproducible", {
   skip_if_not(exists("pca_temp_dir"))
   
-  expect_true(file.exists("save/regTable.RData"),
+  expect_true(file.exists(here("save/regTable.RData")),
               info = "Original regTable.RData not found - run code/PCA.R to generate it")
   expect_true(file.exists(file.path(pca_temp_dir, "save/regTable.RData")),
               info = "Regenerated regTable.RData not found")
 
-  load("save/regTable.RData")
+  load(here("save/regTable.RData"))
   original_table <- resultsTable
 
   load(file.path(pca_temp_dir, "save/regTable.RData"))
