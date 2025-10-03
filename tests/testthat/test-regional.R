@@ -35,7 +35,7 @@ local({
       })
 
       # Store temp_dir for subsequent tests
-      assign("pca_temp_dir", temp_dir, envir = .GlobalEnv)
+      assign("regional_temp_dir", temp_dir, envir = .GlobalEnv)
 
       # Basic check that script completed
       expect_true(file.exists(file.path(temp_dir, "save/regModels_africa.RData")))
@@ -43,4 +43,25 @@ local({
       expect_true(file.exists(file.path(temp_dir, "save/regModels_europe.RData")))
       expect_true(file.exists(file.path(temp_dir, "save/regTable_europe.RData")))
     })
+})
+
+test_that("Africa Regression table is reproducible", {
+  skip_if_not(exists("regional_temp_dir"))
+  
+  expect_true(file.exists(here("save/regTable_africa.RData")),
+              info = "Original regTable_africa.RData not found - run code/PCA.R to generate it")
+  expect_true(file.exists(file.path(regional_temp_dir, "save/regTable_africa.RData")),
+              info = "Regenerated regTable_africa.RData not found")
+
+  load(here("save/regTable_africa.RData"))
+  original_table <- resultsTable
+
+  load(file.path(regional_temp_dir, "save/regTable_africa.RData"))
+
+  # Compare the actual table data, not the S4 object attributes
+  # Extract the data frame or character representation
+  original_output <- format(original_table, output = "latex")
+  regenerated_output <- format(resultsTable, output = "latex")
+  
+  expect_equal(original_output, regenerated_output)
 })
