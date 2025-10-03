@@ -65,3 +65,24 @@ test_that("Africa Regression table is reproducible", {
   
   expect_equal(original_output, regenerated_output)
 })
+
+test_that("Europe Regression table is reproducible", {
+  skip_if_not(exists("regional_temp_dir"))
+  
+  expect_true(file.exists(here("save/regTable_europe.RData")),
+              info = "Original regTable_europe.RData not found - run code/PCA.R to generate it")
+  expect_true(file.exists(file.path(regional_temp_dir, "save/regTable_europe.RData")),
+              info = "Regenerated regTable_europe.RData not found")
+
+  load(here("save/regTable_europe.RData"))
+  original_table <- resultsTable
+
+  load(file.path(regional_temp_dir, "save/regTable_europe.RData"))
+
+  # Compare the actual table data, not the S4 object attributes
+  # Extract the data frame or character representation
+  original_output <- format(original_table, output = "latex")
+  regenerated_output <- format(resultsTable, output = "latex")
+  
+  expect_equal(original_output, regenerated_output)
+})
