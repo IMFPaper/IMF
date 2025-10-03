@@ -112,12 +112,12 @@ test_that("Scree plot data is reproducible", {
 test_that("Panel data with PCA variables is reproducible", {
   skip_if_not(exists("pca_temp_dir"))
   
-  expect_true(file.exists("data/panel_data_pca.rds"),
+  expect_true(file.exists(here("data/panel_data_pca.rds")),
               info = "Original panel_data_pca.rds not found - run code/PCA.R to generate it")
   expect_true(file.exists(file.path(pca_temp_dir, "data/panel_data_pca.rds")),
               info = "Regenerated panel_data_pca.rds not found")
 
-  original_data <- readRDS("data/panel_data_pca.rds")
+  original_data <- readRDS(here("data/panel_data_pca.rds"))
   regenerated_data <- readRDS(file.path(pca_temp_dir, "data/panel_data_pca.rds"))
 
   # Check dimensions
