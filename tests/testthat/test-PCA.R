@@ -4,7 +4,6 @@ i_am("tests/testthat/test-PCA.R")
 
 # Setup: Run PCA.R once and store results for all subsequent tests
 local({
-  if (!exists(".pca_test_setup_done", envir = .GlobalEnv)) {
     test_that("PCA script setup and execution", {
       skip_if_not(file.exists(here("code/PCA.R")))
       skip_if_not(file.exists(here("data/panel_data.rds")))
@@ -46,7 +45,6 @@ local({
       expect_true(file.exists(file.path(temp_dir, "save/regModels.RData")))
       expect_true(file.exists(file.path(temp_dir, "save/regTable.RData")))
     })
-  }
 })
 
 test_that("Correlation matrices are reproducible", {
