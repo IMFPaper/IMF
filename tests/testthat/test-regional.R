@@ -7,7 +7,7 @@ local({
     test_that("is_Africa script setup and execution", {
 
       # Create temp workspace that persists across tests
-      temp_dir <- tempfile("pca_test_")
+      temp_dir <- tempfile("regional_test_")
       dir.create(temp_dir)
 
       # Copy required inputs
