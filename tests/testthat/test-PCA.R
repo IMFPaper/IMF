@@ -1,11 +1,13 @@
 library(testthat)
+library(here)
+i_am("tests/testthat/test-PCA.R")
 
 # Setup: Run PCA.R once and store results for all subsequent tests
 local({
   if (!exists(".pca_test_setup_done", envir = .GlobalEnv)) {
     test_that("PCA script setup and execution", {
-      skip_if_not(file.exists("code/PCA.R"))
-      skip_if_not(file.exists("data/panel_data.rds"))
+      skip_if_not(file.exists(here("code/PCA.R")))
+      skip_if_not(file.exists(here("data/panel_data.rds")))
 
       # Create temp workspace that persists across tests
       temp_dir <- tempfile("pca_test_")
