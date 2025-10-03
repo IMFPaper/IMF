@@ -175,8 +175,12 @@ test_that("Regression table is reproducible", {
 
   load(file.path(pca_temp_dir, "save/regTable.RData"))
 
-  # Check that table content is identical
-  expect_equal(original_table, resultsTable)
+  # Compare the actual table data, not the S4 object attributes
+  # Extract the data frame or character representation
+  original_output <- format(original_table, output = "latex")
+  regenerated_output <- format(resultsTable, output = "latex")
+  
+  expect_equal(original_output, regenerated_output)
 })
 
 # Cleanup
