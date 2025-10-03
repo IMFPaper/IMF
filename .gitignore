@@ -11,3 +11,4 @@
 /.luarc.json
 
 code/by_continent.R
+**/*.quarto_ipynb

@@ -11,6 +11,7 @@ rm(list = ls()) # Clear workspace
 
 library('tidyverse')
 library('jsonlite')
+library('haven')
 
 # Read data ----------------------------------------------------------------------------------------------------------------
 raw_data <- read_dta("data/panel_data_raw.dta")
