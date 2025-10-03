@@ -12,15 +12,14 @@ local({
       # Create temp workspace that persists across tests
       temp_dir <- tempfile("pca_test_")
       dir.create(temp_dir)
-      wd <- getwd()
 
       # Copy required inputs
       dir.create(file.path(temp_dir, "data"), recursive = TRUE)
       dir.create(file.path(temp_dir, "save"), recursive = TRUE)
       dir.create(file.path(temp_dir, "helper"), recursive = TRUE)
 
-      file.copy("data/panel_data.rds", file.path(temp_dir, "data/panel_data.rds"))
-      file.copy("helper/f_test.R", file.path(temp_dir, "helper/f_test.R"))
+      file.copy(here("data/panel_data.rds"), file.path(temp_dir, "data/panel_data.rds"))
+      file.copy(here("helper/f_test.R"), file.path(temp_dir, "helper/f_test.R"))
 
       # Run PCA.R in temp directory
       withr::with_dir(temp_dir, {
@@ -28,7 +27,7 @@ local({
           suppressWarnings({
             pdf(NULL)
             capture.output({
-              source(file.path(wd, "code/PCA.R"))
+              source(here("code/PCA.R"))
             })
             dev.off()
           })
