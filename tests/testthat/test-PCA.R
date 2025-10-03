@@ -139,12 +139,12 @@ test_that("Panel data with PCA variables is reproducible", {
 test_that("Regression models are reproducible", {
   skip_if_not(exists("pca_temp_dir"))
   
-  expect_true(file.exists("save/regModels.RData"),
+  expect_true(file.exists(here("save/regModels.RData")),
               info = "Original regModels.RData not found - run code/PCA.R to generate it")
   expect_true(file.exists(file.path(pca_temp_dir, "save/regModels.RData")),
               info = "Regenerated regModels.RData not found")
 
-  load("save/regModels.RData")
+  load(here("save/regModels.RData"))
   original_models <- regModels
 
   load(file.path(pca_temp_dir, "save/regModels.RData"))
