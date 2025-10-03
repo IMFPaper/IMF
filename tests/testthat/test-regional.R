@@ -72,6 +72,33 @@ test_that("Africa Regression models are reproducible", {
   }
 })
 
+test_that("Europe Regression models are reproducible", {
+  skip_if_not(exists("regional_temp_dir"))
+  
+  expect_true(file.exists(here("save/regModels_europe.RData")),
+              info = "Original regModels_europe.RData not found - run code/PCA.R to generate it")
+  expect_true(file.exists(file.path(regional_temp_dir, "save/regModels_europe.RData")),
+              info = "Regenerated regModels_europe.RData not found")
+
+  load(here("save/regModels_europe.RData"))
+  original_models <- regModels
+
+  load(file.path(regional_temp_dir, "save/regModels_europe.RData"))
+
+  # Check that same number of models exist
+  expect_equal(length(original_models), length(regModels))
+  expect_equal(names(original_models), names(regModels))
+
+  # Check coefficients for each model (allowing for small numerical differences)
+  for (model_name in names(original_models)) {
+    original_coef <- coef(original_models[[model_name]])
+    regenerated_coef <- coef(regModels[[model_name]])
+
+    expect_equal(original_coef, regenerated_coef, tolerance = 1e-8,
+                 label = paste("Coefficients for", model_name))
+  }
+})
+
 test_that("Africa Regression table is reproducible", {
   skip_if_not(exists("regional_temp_dir"))
   
