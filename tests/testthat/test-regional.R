@@ -143,6 +143,6 @@ test_that("Europe Regression table is reproducible", {
 withr::defer({
   if (exists("regional_temp_dir")) {
     unlink(regional_temp_dir, recursive = TRUE, force = TRUE)
-    rm(regional_emp_dir, envir = .GlobalEnv)
+    rm(regional_temp_dir, envir = .GlobalEnv)
   }
 }, envir = .GlobalEnv)
