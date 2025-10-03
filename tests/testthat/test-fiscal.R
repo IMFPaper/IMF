@@ -42,3 +42,11 @@ local({
       expect_true(file.exists(file.path(temp_dir, "save/regTable_fiscal.RData")))
     })
 })
+
+# Cleanup
+withr::defer({
+  if (exists("fiscal_temp_dir")) {
+    unlink(fiscal_temp_dir, recursive = TRUE, force = TRUE)
+    rm(fiscal_emp_dir, envir = .GlobalEnv)
+  }
+}, envir = .GlobalEnv)
