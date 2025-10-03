@@ -51,13 +51,13 @@ test_that("Correlation matrices are reproducible", {
   skip_if_not(exists("pca_temp_dir"))
   
   # Both files must exist
-  expect_true(file.exists("save/corr.RData"), 
+  expect_true(file.exists(here("save/corr.RData")), 
               info = "Original corr.RData not found - run code/PCA.R to generate it")
   expect_true(file.exists(file.path(pca_temp_dir, "save/corr.RData")),
               info = "Regenerated corr.RData not found")
 
   # Load and compare
-  load("save/corr.RData")
+  load(here("save/corr.RData"))
   original_corr_US <- corr_US
   original_corr_EU <- corr_EU
 
@@ -70,12 +70,12 @@ test_that("Correlation matrices are reproducible", {
 test_that("PCA results are reproducible", {
   skip_if_not(exists("pca_temp_dir"))
   
-  expect_true(file.exists("save/PCA.RData"),
+  expect_true(file.exists(here("save/PCA.RData")),
               info = "Original PCA.RData not found - run code/PCA.R to generate it")
   expect_true(file.exists(file.path(pca_temp_dir, "save/PCA.RData")),
               info = "Regenerated PCA.RData not found")
 
-  load("save/PCA.RData")
+  load(here("save/PCA.RData"))
   original_US <- US
   original_EU <- EU
 
@@ -93,12 +93,12 @@ test_that("PCA results are reproducible", {
 test_that("Scree plot data is reproducible", {
   skip_if_not(exists("pca_temp_dir"))
   
-  expect_true(file.exists("save/scree.RData"),
+  expect_true(file.exists(here("save/scree.RData")),
               info = "Original scree.RData not found - run code/PCA.R to generate it")
   expect_true(file.exists(file.path(pca_temp_dir, "save/scree.RData")),
               info = "Regenerated scree.RData not found")
 
-  load("save/scree.RData")
+  load(here("save/scree.RData"))
   original_scree_US <- scree_US
   original_scree_EU <- scree_EU
 
