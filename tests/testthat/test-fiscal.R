@@ -97,6 +97,27 @@ test_that("Fiscal Regression models are reproducible", {
   }
 })
 
+test_that("Fiscal Regression table is reproducible", {
+  skip_if_not(exists("fiscal_temp_dir"))
+  
+  expect_true(file.exists(here("save/regTable_fiscal.RData")),
+              info = "Original regTable_fiscal.RData not found - run code/fiscal.R to generate it")
+  expect_true(file.exists(file.path(fiscal_temp_dir, "save/regTable_fiscal.RData")),
+              info = "Regenerated regTable_fiscal.RData not found")
+
+  load(here("save/regTable_fiscal.RData"))
+  original_table <- resultsTable
+
+  load(file.path(fiscal_temp_dir, "save/regTable_fiscal.RData"))
+
+  # Compare the actual table data, not the S4 object attributes
+  # Extract the data frame or character representation
+  original_output <- format(original_table, output = "latex")
+  regenerated_output <- format(resultsTable, output = "latex")
+  
+  expect_equal(original_output, regenerated_output)
+})
+
 # Cleanup
 withr::defer({
   if (exists("fiscal_temp_dir")) {
