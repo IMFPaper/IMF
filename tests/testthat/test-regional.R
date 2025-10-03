@@ -18,7 +18,7 @@ local({
       file.copy(here("data/panel_data_pca.rds"), file.path(temp_dir, "data/panel_data_pca.rds"))
       file.copy(here("helper/f_test.R"), file.path(temp_dir, "helper/f_test.R"))
 
-      # Run PCA.R in temp directory
+      # Run scripts in temp directory
       withr::with_dir(temp_dir, {
         suppressMessages({
           suppressWarnings({
@@ -47,7 +47,7 @@ test_that("Africa Regression models are reproducible", {
   skip_if_not(exists("regional_temp_dir"))
   
   expect_true(file.exists(here("save/regModels_africa.RData")),
-              info = "Original regModels_africa.RData not found - run code/PCA.R to generate it")
+              info = "Original regModels_africa.RData not found - run code/is_Africa.R to generate it")
   expect_true(file.exists(file.path(regional_temp_dir, "save/regModels_africa.RData")),
               info = "Regenerated regModels_africa.RData not found")
 
@@ -74,7 +74,7 @@ test_that("Europe Regression models are reproducible", {
   skip_if_not(exists("regional_temp_dir"))
   
   expect_true(file.exists(here("save/regModels_europe.RData")),
-              info = "Original regModels_europe.RData not found - run code/PCA.R to generate it")
+              info = "Original regModels_europe.RData not found - run code/is_Europe.R to generate it")
   expect_true(file.exists(file.path(regional_temp_dir, "save/regModels_europe.RData")),
               info = "Regenerated regModels_europe.RData not found")
 
@@ -101,7 +101,7 @@ test_that("Africa Regression table is reproducible", {
   skip_if_not(exists("regional_temp_dir"))
   
   expect_true(file.exists(here("save/regTable_africa.RData")),
-              info = "Original regTable_africa.RData not found - run code/PCA.R to generate it")
+              info = "Original regTable_africa.RData not found - run code/is_Africa.R to generate it")
   expect_true(file.exists(file.path(regional_temp_dir, "save/regTable_africa.RData")),
               info = "Regenerated regTable_africa.RData not found")
 
@@ -122,7 +122,7 @@ test_that("Europe Regression table is reproducible", {
   skip_if_not(exists("regional_temp_dir"))
   
   expect_true(file.exists(here("save/regTable_europe.RData")),
-              info = "Original regTable_europe.RData not found - run code/PCA.R to generate it")
+              info = "Original regTable_europe.RData not found - run code/is_Europe.R to generate it")
   expect_true(file.exists(file.path(regional_temp_dir, "save/regTable_europe.RData")),
               info = "Regenerated regTable_europe.RData not found")
 

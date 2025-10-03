@@ -20,7 +20,7 @@ local({
       file.copy(here("save/regModels.RData"), file.path(temp_dir, "save/regModels.RData"))
       file.copy(here("helper/f_test_fiscal.R"), file.path(temp_dir, "helper/f_test_fiscal.R"))
 
-      # Run PCA.R in temp directory
+      # Run fiscal.R in temp directory
       withr::with_dir(temp_dir, {
         suppressMessages({
           suppressWarnings({
