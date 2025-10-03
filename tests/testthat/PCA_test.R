@@ -50,151 +50,135 @@ local({
 
 test_that("Correlation matrices are reproducible", {
   skip_if_not(exists("pca_temp_dir"))
+  
+  # Both files must exist
+  expect_true(file.exists("save/corr.RData"), 
+              info = "Original corr.RData not found - run code/PCA.R to generate it")
+  expect_true(file.exists(file.path(pca_temp_dir, "save/corr.RData")),
+              info = "Regenerated corr.RData not found")
 
-  # Load original and regenerated correlation data
-  if (file.exists("save/corr.RData")) {
-    load("save/corr.RData")
-    original_corr_US <- corr_US
-    original_corr_EU <- corr_EU
+  # Load and compare
+  load("save/corr.RData")
+  original_corr_US <- corr_US
+  original_corr_EU <- corr_EU
 
-    load(file.path(pca_temp_dir, "save/corr.RData"))
+  load(file.path(pca_temp_dir, "save/corr.RData"))
 
-    expect_equal(original_corr_US, corr_US, tolerance = 1e-10)
-    expect_equal(original_corr_EU, corr_EU, tolerance = 1e-10)
-  } else {
-    skip("Original corr.RData not found")
-  }
+  expect_equal(original_corr_US, corr_US, tolerance = 1e-10)
+  expect_equal(original_corr_EU, corr_EU, tolerance = 1e-10)
 })
 
 test_that("PCA results are reproducible", {
   skip_if_not(exists("pca_temp_dir"))
+  
+  expect_true(file.exists("save/PCA.RData"),
+              info = "Original PCA.RData not found - run code/PCA.R to generate it")
+  expect_true(file.exists(file.path(pca_temp_dir, "save/PCA.RData")),
+              info = "Regenerated PCA.RData not found")
 
-  if (file.exists("save/PCA.RData")) {
-    load("save/PCA.RData")
-    original_US <- US
-    original_EU <- EU
+  load("save/PCA.RData")
+  original_US <- US
+  original_EU <- EU
 
-    load(file.path(pca_temp_dir, "save/PCA.RData"))
+  load(file.path(pca_temp_dir, "save/PCA.RData"))
 
-    # Compare PCA standard deviations (eigenvalues)
-    expect_equal(original_US$sdev, US$sdev, tolerance = 1e-10)
-    expect_equal(original_EU$sdev, EU$sdev, tolerance = 1e-10)
+  # Compare PCA standard deviations (eigenvalues)
+  expect_equal(original_US$sdev, US$sdev, tolerance = 1e-10)
+  expect_equal(original_EU$sdev, EU$sdev, tolerance = 1e-10)
 
-    # Compare loadings (may have sign differences, so check absolute values)
-    expect_equal(abs(original_US$rotation), abs(US$rotation), tolerance = 1e-10)
-    expect_equal(abs(original_EU$rotation), abs(EU$rotation), tolerance = 1e-10)
-  } else {
-    skip("Original PCA.RData not found")
-  }
+  # Compare loadings (may have sign differences, so check absolute values)
+  expect_equal(abs(original_US$rotation), abs(US$rotation), tolerance = 1e-10)
+  expect_equal(abs(original_EU$rotation), abs(EU$rotation), tolerance = 1e-10)
 })
 
 test_that("Scree plot data is reproducible", {
   skip_if_not(exists("pca_temp_dir"))
+  
+  expect_true(file.exists("save/scree.RData"),
+              info = "Original scree.RData not found - run code/PCA.R to generate it")
+  expect_true(file.exists(file.path(pca_temp_dir, "save/scree.RData")),
+              info = "Regenerated scree.RData not found")
 
-  if (file.exists("save/scree.RData")) {
-    load("save/scree.RData")
-    original_scree_US <- scree_US
-    original_scree_EU <- scree_EU
+  load("save/scree.RData")
+  original_scree_US <- scree_US
+  original_scree_EU <- scree_EU
 
-    load(file.path(pca_temp_dir, "save/scree.RData"))
+  load(file.path(pca_temp_dir, "save/scree.RData"))
 
-    # Compare plot data (ggplot objects)
-    expect_equal(original_scree_US$data, scree_US$data, tolerance = 1e-10)
-    expect_equal(original_scree_EU$data, scree_EU$data, tolerance = 1e-10)
-  } else {
-    skip("Original scree.RData not found")
-  }
+  # Compare plot data (ggplot objects)
+  expect_equal(original_scree_US$data, scree_US$data, tolerance = 1e-10)
+  expect_equal(original_scree_EU$data, scree_EU$data, tolerance = 1e-10)
 })
 
 test_that("Panel data with PCA variables is reproducible", {
   skip_if_not(exists("pca_temp_dir"))
+  
+  expect_true(file.exists("data/panel_data_pca.rds"),
+              info = "Original panel_data_pca.rds not found - run code/PCA.R to generate it")
+  expect_true(file.exists(file.path(pca_temp_dir, "data/panel_data_pca.rds")),
+              info = "Regenerated panel_data_pca.rds not found")
 
-  if (file.exists("data/panel_data_pca.rds")) {
-    original_data <- readRDS("data/panel_data_pca.rds")
-    regenerated_data <- readRDS(file.path(
-      pca_temp_dir,
-      "data/panel_data_pca.rds"
-    ))
+  original_data <- readRDS("data/panel_data_pca.rds")
+  regenerated_data <- readRDS(file.path(pca_temp_dir, "data/panel_data_pca.rds"))
 
-    # Check dimensions
-    expect_equal(dim(original_data), dim(regenerated_data))
-    expect_equal(names(original_data), names(regenerated_data))
+  # Check dimensions
+  expect_equal(dim(original_data), dim(regenerated_data))
+  expect_equal(names(original_data), names(regenerated_data))
 
-    # Check PCA variables specifically (allowing for potential sign flips)
-    expect_equal(
-      abs(original_data$us),
-      abs(regenerated_data$us),
-      tolerance = 1e-10
-    )
-    expect_equal(
-      abs(original_data$eu),
-      abs(regenerated_data$eu),
-      tolerance = 1e-10
-    )
-    expect_equal(
-      abs(original_data$pca),
-      abs(regenerated_data$pca),
-      tolerance = 1e-10
-    )
+  # Check PCA variables specifically (allowing for potential sign flips)
+  expect_equal(abs(original_data$us), abs(regenerated_data$us), tolerance = 1e-10)
+  expect_equal(abs(original_data$eu), abs(regenerated_data$eu), tolerance = 1e-10)
+  expect_equal(abs(original_data$pca), abs(regenerated_data$pca), tolerance = 1e-10)
 
-    # Check non-PCA variables are identical
-    non_pca_vars <- setdiff(names(original_data), c("us", "eu", "pca"))
-    for (var in non_pca_vars) {
-      expect_equal(
-        original_data[[var]],
-        regenerated_data[[var]],
-        tolerance = 1e-12
-      )
-    }
-  } else {
-    skip("Original panel_data_pca.rds not found")
+  # Check non-PCA variables are identical
+  non_pca_vars <- setdiff(names(original_data), c("us", "eu", "pca"))
+  for (var in non_pca_vars) {
+    expect_equal(original_data[[var]], regenerated_data[[var]], tolerance = 1e-12)
   }
 })
 
 test_that("Regression models are reproducible", {
   skip_if_not(exists("pca_temp_dir"))
+  
+  expect_true(file.exists("save/regModels.RData"),
+              info = "Original regModels.RData not found - run code/PCA.R to generate it")
+  expect_true(file.exists(file.path(pca_temp_dir, "save/regModels.RData")),
+              info = "Regenerated regModels.RData not found")
 
-  if (file.exists("save/regModels.RData")) {
-    load("save/regModels.RData")
-    original_models <- regModels
+  load("save/regModels.RData")
+  original_models <- regModels
 
-    load(file.path(pca_temp_dir, "save/regModels.RData"))
+  load(file.path(pca_temp_dir, "save/regModels.RData"))
 
-    # Check that same number of models exist
-    expect_equal(length(original_models), length(regModels))
-    expect_equal(names(original_models), names(regModels))
+  # Check that same number of models exist
+  expect_equal(length(original_models), length(regModels))
+  expect_equal(names(original_models), names(regModels))
 
-    # Check coefficients for each model (allowing for small numerical differences)
-    for (model_name in names(original_models)) {
-      original_coef <- coef(original_models[[model_name]])
-      regenerated_coef <- coef(regModels[[model_name]])
+  # Check coefficients for each model (allowing for small numerical differences)
+  for (model_name in names(original_models)) {
+    original_coef <- coef(original_models[[model_name]])
+    regenerated_coef <- coef(regModels[[model_name]])
 
-      expect_equal(
-        original_coef,
-        regenerated_coef,
-        tolerance = 1e-8,
-        label = paste("Coefficients for", model_name)
-      )
-    }
-  } else {
-    skip("Original regModels.RData not found")
+    expect_equal(original_coef, regenerated_coef, tolerance = 1e-8,
+                 label = paste("Coefficients for", model_name))
   }
 })
 
 test_that("Regression table is reproducible", {
   skip_if_not(exists("pca_temp_dir"))
+  
+  expect_true(file.exists("save/regTable.RData"),
+              info = "Original regTable.RData not found - run code/PCA.R to generate it")
+  expect_true(file.exists(file.path(pca_temp_dir, "save/regTable.RData")),
+              info = "Regenerated regTable.RData not found")
 
-  if (file.exists("save/regTable.RData")) {
-    load("save/regTable.RData")
-    original_table <- resultsTable
+  load("save/regTable.RData")
+  original_table <- resultsTable
 
-    load(file.path(pca_temp_dir, "save/regTable.RData"))
+  load(file.path(pca_temp_dir, "save/regTable.RData"))
 
-    # Check that table content is identical
-    expect_equal(original_table, resultsTable)
-  } else {
-    skip("Original regTable.RData not found")
-  }
+  # Check that table content is identical
+  expect_equal(original_table, resultsTable)
 })
 
 # Cleanup
