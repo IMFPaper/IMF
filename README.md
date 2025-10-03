@@ -165,7 +165,7 @@ This repository includes a comprehensive test suite using [testthat](https://tes
 
 The test suite verifies that:
 - **Data preparation** (`test-continent.R`): Continent mapping produces identical results
-- **Principal component analysis** (`test-PCA.R`): PCA components, correlation matrices, scree plots, and main regression models are reproducible
+- **Main analysis** (`test-PCA.R`): PCA components, correlation matrices, scree plots, and main regression models are reproducible
 - **Fiscal robustness checks** (`test-fiscal.R`): Fiscal conditionality analysis generates consistent results
 - **Regional analysis** (`test-regional.R`): European and African borrower analyses are reproducible
 
