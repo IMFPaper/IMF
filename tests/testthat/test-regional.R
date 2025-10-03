@@ -5,8 +5,6 @@ i_am("tests/testthat/test-regional.R")
 # Setup: Run is_Africa.R and is_Europe.R once and store results for all subsequent tests
 local({
     test_that("is_Africa script setup and execution", {
-      skip_if_not(file.exists(here("code/is_Africa.R")))
-      skip_if_not(file.exists(here("data/panel_data_pca.rds")))
 
       # Create temp workspace that persists across tests
       temp_dir <- tempfile("pca_test_")
