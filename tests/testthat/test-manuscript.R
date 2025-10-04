@@ -1,6 +1,7 @@
 library(testthat)
 library(here)
 i_am("tests/testthat/test-manuscript.R")
+testthat::local_edition(3)
 
 test_that("manuscript.qmd file exists and is readable", {
   expect_true(
