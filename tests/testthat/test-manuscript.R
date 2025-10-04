@@ -176,6 +176,15 @@ test_that("R code chunks in manuscript.qmd execute correctly and match snapshots
           NULL
         }
 
+        # Avoid floating point issues in ARM MacOS
+        if (!is.null(latex_output)) {
+          latex_output <- gsub(
+            "\\\\num\\{-0\\.00\\}",
+            "\\\\num{0.00}",
+            latex_output
+          )
+        }
+        
         snapshot_data <- list(
           chunk_name = chunk_name,
           code = chunk_code_combined,
