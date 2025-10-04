@@ -129,6 +129,9 @@ test_that("R code chunks in manuscript.qmd execute correctly and match snapshots
     # Create a clean environment for chunk execution
     chunk_env <- new.env(parent = .GlobalEnv)
 
+    # Suppress Rplots.pdf creation
+    pdf(NULL)
+
     # Execute each chunk and snapshot outputs
     for (chunk_name in names(chunks)) {
       chunk_code <- chunks[[chunk_name]]
@@ -172,7 +175,7 @@ test_that("R code chunks in manuscript.qmd execute correctly and match snapshots
         } else {
           NULL
         }
-        
+
         snapshot_data <- list(
           chunk_name = chunk_name,
           code = chunk_code_combined,
@@ -209,9 +212,12 @@ test_that("R code chunks in manuscript.qmd execute correctly and match snapshots
           }
         )
       }
-      
+
       # Snapshot the chunk execution
       expect_snapshot(snapshot_data, cran = FALSE, variant = chunk_name)
     }
+
+    # Close the PDF device
+    dev.off()
   })
 })
