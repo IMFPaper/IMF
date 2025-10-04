@@ -138,6 +138,9 @@ test_that("R code chunks in manuscript.qmd execute correctly and match snapshots
         next
       }
 
+      # Check if this is a table chunk (starts with tbl-)
+      is_table_chunk <- grepl("^tbl-", chunk_name)
+
       # Concatenate lines of the chunk into a single string
       chunk_code_combined <- paste(chunk_code, collapse = "\n")
 
@@ -153,35 +156,60 @@ test_that("R code chunks in manuscript.qmd execute correctly and match snapshots
         )
       })
 
-      # Create snapshot data
-      snapshot_data <- list(
-        chunk_name = chunk_name,
-        code = chunk_code_combined,
-        output = output,
-        result = if (exists("result")) {
+      # Create snapshot data based on chunk type
+      if (is_table_chunk) {
+        # For table chunks, capture the LaTeX output
+        latex_output <- if (exists("result") && !is.null(result)) {
           if (inherits(result, "list") && !is.null(result$error)) {
             result
-          } else if (is.null(result)) {
-            NULL
+          } else if (inherits(result, "tinytable")) {
+            # Capture LaTeX representation
+            capture.output(print(result, output = "latex"))
           } else {
-            # Capture structure for non-null results
-            list(
-              class = class(result),
-              summary = if (is.data.frame(result)) {
-                list(
-                  nrow = nrow(result),
-                  ncol = ncol(result),
-                  colnames = colnames(result)
-                )
-              } else {
-                capture.output(str(result, max.level = 2))
-              }
-            )
+            # Try to convert to character/print for other table types
+            capture.output(print(result))
           }
         } else {
           NULL
         }
-      )
+        
+        snapshot_data <- list(
+          chunk_name = chunk_name,
+          code = chunk_code_combined,
+          latex_output = latex_output
+        )
+      } else {
+        # For non-table chunks, use the summary approach
+        snapshot_data <- list(
+          chunk_name = chunk_name,
+          code = chunk_code_combined,
+          output = output,
+          result = if (exists("result")) {
+            if (inherits(result, "list") && !is.null(result$error)) {
+              result
+            } else if (is.null(result)) {
+              NULL
+            } else {
+              # Capture structure for non-null results
+              list(
+                class = class(result),
+                summary = if (is.data.frame(result)) {
+                  list(
+                    nrow = nrow(result),
+                    ncol = ncol(result),
+                    colnames = colnames(result)
+                  )
+                } else {
+                  capture.output(str(result, max.level = 2))
+                }
+              )
+            }
+          } else {
+            NULL
+          }
+        )
+      }
+      
       # Snapshot the chunk execution
       expect_snapshot(snapshot_data, cran = FALSE, variant = chunk_name)
     }
