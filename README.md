@@ -182,7 +182,7 @@ Each test re-runs the corresponding R script in a temporary workspace and compar
 testthat::test_dir("tests/testthat")
 
 # Run a specific test file
-testthat::test_file("tests/testthat/test-PCA.R")
+testthat::test_file("tests/testthat/test-manuscript.R")
 ```
 
 Tests require that you have already run the analysis scripts at least once to generate the baseline outputs in `data/` and `save/` directories.
