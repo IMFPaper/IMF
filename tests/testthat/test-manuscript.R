@@ -138,11 +138,14 @@ test_that("R code chunks in manuscript.qmd execute correctly and match snapshots
         next
       }
 
+      # Concatenate lines of the chunk into a single string
+      chunk_code_combined <- paste(chunk_code, collapse = "\n")
+
       # Capture output and any side effects
       output <- capture.output({
         result <- tryCatch(
           {
-            eval(parse(text = chunk_code), envir = chunk_env)
+            eval(parse(text = chunk_code_combined), envir = chunk_env)
           },
           error = function(e) {
             list(error = e$message)
@@ -153,7 +156,7 @@ test_that("R code chunks in manuscript.qmd execute correctly and match snapshots
       # Create snapshot data
       snapshot_data <- list(
         chunk_name = chunk_name,
-        code = chunk_code,
+        code = chunk_code_combined,
         output = output,
         result = if (exists("result")) {
           if (inherits(result, "list") && !is.null(result$error)) {
