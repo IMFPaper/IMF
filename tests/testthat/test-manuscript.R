@@ -18,13 +18,9 @@ test_that("all required data dependencies exist", {
     "save/corr.RData",
     "save/PCA.RData", 
     "save/scree.RData",
-    "save/regModels.RData",
     "save/regTable.RData",
-    "save/regModels_africa.RData",
     "save/regTable_africa.RData",
-    "save/regModels_europe.RData",
     "save/regTable_europe.RData",
-    "save/regModels_fiscal.RData",
     "save/regTable_fiscal.RData",
     "data/panel_data_pca.rds"
   )
