@@ -118,6 +118,8 @@ This repository contains the replication materials for our paper examining wheth
 ├── COLLABORATE.md          # Instructions for collaboration (internal use)
 ├── README.md               # This file
 ├── renv.lock               # R package versions for reproducibility
+├── DESCRIPTION             # Minimal package metadata (enables IDE/Positron testing pane; not a distributable R package)
+├── Rbuildignore            # Auto-generated file by devtools
 └── LICENSE                 # MIT License
 ```
 
