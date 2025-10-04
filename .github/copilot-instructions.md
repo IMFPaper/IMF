@@ -64,6 +64,8 @@ This is an academic research repository for an International Monetary Fund (IMF)
 - When adding new analysis scripts, consider adding corresponding tests
 - Tests use temporary workspaces to avoid polluting the repository
 - Package: `testthat` for test framework, `here` for path management, `withr` for temp directories
+- Repository uses a minimal `DESCRIPTION` file to enable IDE testing integration (Positron/RStudio testing pane)
+- This is NOT a distributed R package, just a development convenience for running tests
 
 ### Collaboration Workflow
 - **Never commit directly to `main`**
