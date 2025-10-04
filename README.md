@@ -185,6 +185,12 @@ testthat::test_file("tests/testthat/test-PCA.R")
 
 Tests require that you have already run the analysis scripts at least once to generate the baseline outputs in `data/` and `save/` directories.
 
+### 🧪 Development Setup
+
+This repository includes a `DESCRIPTION` file to enable Positron/RStudio's integrated testing pane. While not a true R package, this minimal package structure allows the IDE to recognize and run the testthat test suite seamlessly.
+
+**Note**: The `DESCRIPTION` file is for development convenience only and does not indicate that this is a distributed R package. The repository remains a research compendium with replication materials.
+
 ## 🔧 Dependency Requirements
 
 - **R**: Version 4.5+ (recommended, not tested on older versions)
