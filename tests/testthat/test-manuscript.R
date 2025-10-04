@@ -8,7 +8,7 @@ test_that("manuscript.qmd file exists and is readable", {
   
   # Check that file can be read
   manuscript_content <- readLines(here("manuscript/manuscript.qmd"), warn = FALSE)
-  expect_gt(length(manuscript_content), 100,
+  expect_gt(length(manuscript_content), 400,
             label = "manuscript.qmd should have substantial content")
 })
 
