@@ -164,7 +164,8 @@ Specifically, we construct our independent variables using three indicators comm
 
 [^8]: See @broz2006; @lipscy2017; @oatley2004.
 
-```{r percentage_variance}
+```{r}
+#| label: percentage_variance
 load('save/PCA.RData')
 US_PC1_percentage <- US$sdev[1]^2 / sum(US$sdev^2) * 100
 EU_PC1_percentage <- EU$sdev[1]^2 / sum(EU$sdev^2) * 100
@@ -216,6 +217,7 @@ dsummary(
     (`Reserves (months of imports)` = reserv1) +
     (OECD = oecd1) ~ 
     Mean + SD + Min + (Q1 = P25) + Median + (Q3 = P75) + Max + N,
+  output = "latex",
   data = dta
 ) |> tinytable::theme_latex(resize_width = 1, resize_direction = "down")
 ```
