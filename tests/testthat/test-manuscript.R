@@ -79,3 +79,74 @@ test_that("manuscript.qmd loads all required data files correctly", {
   }
 })
 
+test_that("R code chunks in manuscript.qmd execute correctly and match snapshots", {
+  # Read manuscript file
+  manuscript_path <- here("manuscript/manuscript.qmd")
+  manuscript_content <- readLines(manuscript_path, warn = FALSE)
+  
+  source(here("tests/testthat/helper-r-chunk.R"))
+  
+  # Extract all R chunks
+  chunks <- extract_r_chunks(manuscript_content)
+  expect_gt(length(chunks), 0, label = "Should find at least one R chunk")
+  
+  # Set working directory to project root for chunk execution
+  old_wd <- getwd()
+  setwd(here())
+  on.exit(setwd(old_wd), add = TRUE)
+  
+  # Create a clean environment for chunk execution
+  chunk_env <- new.env(parent = .GlobalEnv)
+  
+  # Execute each chunk and snapshot outputs
+  for (chunk_name in names(chunks)) {
+    chunk_code <- chunks[[chunk_name]]
+    
+    # Skip empty chunks
+    if (length(chunk_code) == 0 || all(trimws(chunk_code) == "")) {
+      next
+    }
+    
+    # Capture output and any side effects
+    output <- capture.output({
+      result <- tryCatch({
+        eval(parse(text = chunk_code), envir = chunk_env)
+      }, error = function(e) {
+        list(error = e$message)
+      })
+    })
+    
+    # Create snapshot data
+    snapshot_data <- list(
+      chunk_name = chunk_name,
+      code = chunk_code,
+      output = output,
+      result = if (exists("result")) {
+        if (inherits(result, "list") && !is.null(result$error)) {
+          result
+        } else if (is.null(result)) {
+          NULL
+        } else {
+          # Capture structure for non-null results
+          list(
+            class = class(result),
+            summary = if (is.data.frame(result)) {
+              list(
+                nrow = nrow(result),
+                ncol = ncol(result),
+                colnames = colnames(result)
+              )
+            } else {
+              capture.output(str(result, max.level = 2))
+            }
+          )
+        }
+      } else {
+        NULL
+      }
+    )
+    
+    # Snapshot the chunk execution
+    expect_snapshot(snapshot_data, cran = FALSE, variant = chunk_name)
+  }
+})
