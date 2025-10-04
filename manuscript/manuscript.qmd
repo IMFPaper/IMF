@@ -217,6 +217,7 @@ dsummary(
     (`Reserves (months of imports)` = reserv1) +
     (OECD = oecd1) ~ 
     Mean + SD + Min + (Q1 = P25) + Median + (Q3 = P75) + Max + N,
+  output = "latex",
   data = dta
 ) |> tinytable::theme_latex(resize_width = 1, resize_direction = "down")
 ```
