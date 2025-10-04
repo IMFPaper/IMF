@@ -68,7 +68,8 @@ test_that("manuscript.qmd loads all required data files correctly", {
     "save/regTable.RData",
     "save/regTable_africa.RData",
     "save/regTable_europe.RData",
-    "save/regTable_fiscal.RData"
+    "save/regTable_fiscal.RData",
+    "data/panel_data_pca.rds"
   )
   
   for (file in expected_loads) {
