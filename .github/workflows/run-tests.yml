@@ -59,6 +59,11 @@ jobs:
           echo "CPPFLAGS=-I$(brew --prefix)/include -I$(brew --prefix libpng)/include" >> $GITHUB_ENV
           echo "LDFLAGS=-L$(brew --prefix)/lib -L$(brew --prefix libpng)/lib" >> $GITHUB_ENV
       
+      - name: Restore renv packages
+        uses: r-lib/actions/setup-renv@v2
+        with:
+          cache-version: 2
+          
       - name: Run tests
         run: |
           Rscript -e "testthat::test_dir('tests/testthat')"
