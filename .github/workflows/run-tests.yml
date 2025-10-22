@@ -54,9 +54,7 @@ jobs:
         if: runner.os == 'macOS'
         run: |
           brew update
-          brew install libpng pkg-config
-          # help pkg-config find libpng
-          echo "PKG_CONFIG_PATH=$(brew --prefix libpng)/lib/pkgconfig:$(brew --prefix)/lib/pkgconfig" >> $GITHUB_ENV
+          brew install pkg-config cairo
       
       - name: Restore renv packages
         uses: r-lib/actions/setup-renv@v2
