@@ -49,6 +49,15 @@ jobs:
             libpng-dev \
             libtiff5-dev \
             libjpeg-dev
+
+      - name: Setup system dependencies (MacOS)
+        uses: r-lib/actions/setup-r-dependencies@v2
+        if: runner.os == 'macOS'
+        with:
+          install-system-requirements: true
+          # any package that pulls in svglite is fine; this makes the action install libpng
+          # extra-packages: any::svglite
+          # cache: false
       
       - name: Restore renv packages
         uses: r-lib/actions/setup-renv@v2
