@@ -55,11 +55,19 @@ jobs:
         run: |
           brew update
           brew install pkg-config libpng cairo freetype harfbuzz fribidi
-          # Make sure the compiler can find headers/libs & pkg-config sees them
           echo "SDKROOT=$(xcrun --sdk macosx --show-sdk-path)" >> $GITHUB_ENV
-          echo "PKG_CONFIG_PATH=$(brew --prefix)/lib/pkgconfig:$(brew --prefix libpng)/lib/pkgconfig:$(brew --prefix cairo)/lib/pkgconfig:$(brew --prefix freetype)/lib/pkgconfig:$(brew --prefix harfbuzz)/lib/pkgconfig:$(brew --prefix fribidi)/lib/pkgconfig" >> $GITHUB_ENV
-          echo "CPPFLAGS=-I$(brew --prefix)/include -I$(brew --prefix libpng)/include" >> $GITHUB_ENV
-          echo "LDFLAGS=-L$(brew --prefix)/lib -L$(brew --prefix libpng)/lib" >> $GITHUB_ENV
+          echo "PATH=$(brew --prefix libpng)/bin:$PATH" >> $GITHUB_ENV
+          echo "PKG_CONFIG_PATH=$(brew --prefix libpng)/lib/pkgconfig:$(brew --prefix)/lib/pkgconfig" >> $GITHUB_ENV
+          # Export compile/link flags derived from pkg-config
+          echo "PKG_CPPFLAGS=$(pkg-config --cflags libpng)" >> $GITHUB_ENV
+          echo "PKG_LIBS=$(pkg-config --libs libpng)" >> $GITHUB_ENV
+
+      - name: Sanity check (macOS)
+        if: runner.os == 'macOS'
+        run: |
+          echo "pkg-config: $(pkg-config --modversion libpng)"
+          echo "PKG_CPPFLAGS=$PKG_CPPFLAGS"
+          echo "PKG_LIBS=$PKG_LIBS"
       
       - name: Restore renv packages
         uses: r-lib/actions/setup-renv@v2
