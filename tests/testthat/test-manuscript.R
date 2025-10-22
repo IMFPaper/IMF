@@ -86,6 +86,8 @@ test_that("manuscript.qmd contains expected sections", {
 })
 
 test_that("manuscript.qmd loads all required data files correctly", {
+  Sys.setenv(NOT_CRAN = "true")
+
   # Read the manuscript file
   manuscript_content <- readLines(
     here("manuscript/manuscript.qmd"),
