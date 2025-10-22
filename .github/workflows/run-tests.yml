@@ -86,20 +86,6 @@ jobs:
             echo "PKG_CPPFLAGS += ${PNG_CFLAGS}"
             echo "PKG_LIBS     += ${PNG_LIBS}"
           } >> ~/.R/Makevars
-
-      - name: Debug paths (macOS)
-        if: runner.os == 'macOS'
-        run: |
-          set -euxo pipefail
-          echo "pkg-config libpng version: $(pkg-config --modversion libpng)"
-          echo "pkg-config cflags: $(pkg-config --cflags libpng)"
-          echo "pkg-config libs  : $(pkg-config --libs libpng)"
-          echo "--- ~/.R/Makevars ---"
-          cat ~/.R/Makevars || true
-          echo "R CMD config CPPFLAGS: $(R CMD config CPPFLAGS || true)"
-          echo "R CMD config LDFLAGS : $(R CMD config LDFLAGS  || true)"
-          ls -l $(brew --prefix)/lib/libpng* || true
-
       
       - name: Restore renv packages
         uses: r-lib/actions/setup-renv@v2
