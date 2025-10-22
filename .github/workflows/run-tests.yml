@@ -51,13 +51,12 @@ jobs:
             libjpeg-dev
 
       - name: Setup system dependencies (MacOS)
-        uses: r-lib/actions/setup-r-dependencies@v2
         if: runner.os == 'macOS'
-        with:
-          install-system-requirements: true
-          # any package that pulls in svglite is fine; this makes the action install libpng
-          # extra-packages: any::svglite
-          # cache: false
+        run: |
+          brew update
+          brew install libpng pkg-config
+          # help pkg-config find libpng
+          echo "PKG_CONFIG_PATH=$(brew --prefix libpng)/lib/pkgconfig:$(brew --prefix)/lib/pkgconfig" >> $GITHUB_ENV
       
       - name: Restore renv packages
         uses: r-lib/actions/setup-renv@v2
