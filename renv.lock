@@ -5056,7 +5056,7 @@
     },
     "resultcheck": {
       "Package": "resultcheck",
-      "Version": "0.1.0",
+      "Version": "0.1.0.9000",
       "Source": "GitHub",
       "Title": "Result Stability Checks for Empirical R Projects",
       "Authors@R": "person(\"Dianyi\", \"Yang\", , \"dianyi.yang@politics.ox.ac.uk\", role = c(\"aut\", \"cre\"), comment = c(ORCID = \"0009-0004-4652-3429\"))",
@@ -5083,7 +5083,7 @@
       "RemoteUsername": "kv9898",
       "RemotePkgRef": "kv9898/resultcheck",
       "RemoteRef": "HEAD",
-      "RemoteSha": "5f67875e54baaba4d232512873a506e83f7013a9",
+      "RemoteSha": "5a5c7faa6dac70955bec3249d3a58a19b98ee2d7",
       "NeedsCompilation": "no",
       "Author": "Dianyi Yang [aut, cre] (ORCID: <https://orcid.org/0009-0004-4652-3429>)",
       "Maintainer": "Dianyi Yang <dianyi.yang@politics.ox.ac.uk>"
