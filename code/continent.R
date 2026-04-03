@@ -32,5 +32,7 @@ data <- raw_data |>
   left_join(continent_df, by = "country") |> 
   relocate(continent, .after = isocode)
 
+resultcheck::snapshot(data, "panel_data")
+
 # Save data ------------------------------------------------------------------------------------------------------------------
 write_rds(data, "data/panel_data.rds")

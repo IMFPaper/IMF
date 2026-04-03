@@ -1,31 +1,16 @@
 library(testthat)
-library(here)
-i_am("tests/testthat/test-continent.R")
+library(resultcheck)
 
-test_that("Reproduce `data/panel_data.rds` (regenerate if needed)", {
-  # Create temp workspace
-  temp_dir <- withr::local_tempdir()
+test_that("continent.R produces stable results", {
+  sandbox <- setup_sandbox(c("data/panel_data_raw.dta", "data/continents.json"))
+  on.exit(cleanup_sandbox(sandbox), add = TRUE)
 
-  # Copy inputs needed by continent.R
-  dir.create(file.path(temp_dir, "data"), recursive = TRUE)
-  file.copy(
-    here("data/panel_data_raw.dta"),
-    file.path(temp_dir, "data/panel_data_raw.dta")
+  # Errors immediately if any snapshot inside analysis.R doesn't match.
+  run_in_sandbox("code/continent.R", sandbox)
+
+  # Verify output files were written.
+  expect_true(
+    file.exists(file.path(sandbox$path, "data/panel_data.rds")),
+    info = "panel_data.rds not found"
   )
-  file.copy(
-    here("data/continents.json"),
-    file.path(temp_dir, "data/continents.json")
-  )
-
-  # Run continent.R in temp directory
-  withr::with_dir(temp_dir, {
-    source(here("code/continent.R"))
-  })
-
-  # Load both versions
-  original <- readRDS(here("data/panel_data.rds"))
-  regenerated <- readRDS(file.path(temp_dir, "data/panel_data.rds"))
-
-  # Compare
-  expect_identical(original, regenerated)
 })
