@@ -12,8 +12,8 @@ note{ }={Standard errors clustered at the country level. Values in square bracke
 colspec={Q[]Q[]Q[]Q[]Q[]},
 hline{2}={1-5}{solid, black, 0.05em},
 hline{26}={1-5}{solid, black, 0.05em},
-hline{1}={1-5}{solid, black, 0.1em},
-hline{30}={1-5}{solid, black, 0.1em},
+hline{1}={1-5}{solid, black, 0.08em},
+hline{30}={1-5}{solid, black, 0.08em},
 column{2-5}={}{halign=c},
 column{1}={}{halign=l},
 }                     %% tabularray inner close

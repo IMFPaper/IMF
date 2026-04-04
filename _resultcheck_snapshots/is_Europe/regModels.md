@@ -158,24 +158,24 @@ List of 4
   .. ..- attr(*, "dimnames")=List of 2
   .. .. ..$ : chr [1:19] "(Intercept)" "us" "eu" "is_european" ...
   .. .. ..$ : chr [1:4] "Estimate" "Std. Error" "z value" "Pr(>|z|)"
-  .. ..- attr(*, "type")= chr "Clustered (shcode)"
+  .. ..- attr(*, "vcov_type")= chr "Clustered (shcode)"
   ..$ se               : Named num [1:19] 2.38 0.165 0.601 0.305 0.089 ...
   .. ..- attr(*, "names")= chr [1:19] "(Intercept)" "us" "eu" "is_european" ...
-  .. ..- attr(*, "type")= chr "Clustered (shcode)"
+  .. ..- attr(*, "vcov_type")= chr "Clustered (shcode)"
   ..$ sq.cor           : num 0.324
   ..$ deviance         : num 465
   ..$ loglik           : num -232
   ..$ ll_null          : num -337
   ..$ pseudo_r2        : num 0.256
   ..$ iterations       : int 12
-  ..$ cov.scaled       : num [1:19, 1:19] 5.6648 -0.0831 0.3624 -0.1164 0.0536 ...
+  ..$ cov.scaled       : 'fixest_vcov' num [1:19, 1:19] 5.6648 -0.0831 0.3624 -0.1164 0.0536 ...
   .. ..- attr(*, "G")= int 121
   .. ..- attr(*, "dimnames")=List of 2
   .. .. ..$ : chr [1:19] "(Intercept)" "us" "eu" "is_european" ...
   .. .. ..$ : chr [1:19] "(Intercept)" "us" "eu" "is_european" ...
   .. ..- attr(*, "min_cluster_size")= int 121
   .. ..- attr(*, "df.t")= num 120
-  .. ..- attr(*, "type")= chr "Clustered (shcode)"
+  .. ..- attr(*, "vcov_type")= chr "Clustered (shcode)"
   .. ..- attr(*, "ssc")=List of 6
   .. .. ..$ K.adj  : logi TRUE
   .. .. ..$ K.fixef: chr "nonnested"
@@ -183,7 +183,9 @@ List of 4
   .. .. ..$ G.df   : chr "min"
   .. .. ..$ t.df   : chr "min"
   .. .. ..$ K.exact: logi FALSE
-  .. .. ..- attr(*, "class")= chr "ssc.type"
+  .. .. ..- attr(*, "class")= chr "ssc_type"
+  .. .. ..- attr(*, "vcov_label")= chr "Clustered"
+  .. .. ..- attr(*, "available")= chr [1:2] "K" "G"
   .. ..- attr(*, "df.K")= num 19
   ..$ summary          : logi TRUE
   ..$ summary_flags    :List of 1
