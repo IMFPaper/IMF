@@ -95,6 +95,7 @@ regModels <- list(
   'IMF loan approval' = approval,
   'Number of IMF conditions' = condition
 )
+resultcheck::snapshot(regModels, "regModels")
 save(regModels, file = 'save/regModels_africa.RData')
 
 # load('save/regModels_africa.RData') # Load the models again if needed
@@ -146,5 +147,7 @@ getTable <- function(output = "html") {
 getTable() # for previewing the table in IDE
 
 resultsTable <- getTable("latex")
+
+resultcheck::snapshot(resultsTable, "regTable", method = "print")
 
 save(resultsTable, file = 'save/regTable_africa.RData') # Save the table
