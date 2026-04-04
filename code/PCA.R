@@ -40,6 +40,8 @@ corr_EU <- data |>
   cor(use = 'pairwise.complete.obs')
 corrplot(corr_EU, method = 'color', addCoef.col = 'darkgrey', tl.col = "black")
 
+resultcheck::snapshot(corr_US, "corr_US")
+resultcheck::snapshot(corr_EU, "corr_EU")
 save(corr_US, corr_EU, file = "save/corr.RData")
 
 # Replicate Lipscy & Lee's (2018) original PCA analysis in R ------------------------------------------------------------------------------------------------------------------
@@ -81,6 +83,8 @@ EU <- data |>
   prcomp(scale = T)
 summary(EU)
 
+resultcheck::snapshot(US, "US_PCA")
+resultcheck::snapshot(EU, "EU_PCA")
 save(US, EU, file = "save/PCA.RData") # Save PCA results
 
 ## scree plots -------------------------------------------------------------------------------------------------------------------------------------
@@ -128,6 +132,9 @@ save(US, EU, file = "save/PCA.RData") # Save PCA results
   theme_bw() +
   theme(panel.grid.minor.x = element_blank()))
 
+resultcheck::snapshot(scree_US, "scree_US")
+resultcheck::snapshot(scree_EU, "scree_EU")
+
 save(scree_US, scree_EU, file = "save/scree.RData") # Save scree plot results
 
 ## Create primary component variables for regression ---------------------------------------------------------------------------------------------------------------------------
@@ -135,6 +142,8 @@ save(scree_US, scree_EU, file = "save/scree.RData") # Save scree plot results
 data$us <- predict(US, data)[, 1] |> scale()
 data$eu <- predict(EU, data)[, 1] |> scale()
 data$pca <- -predict(PCA, data)[, 1]
+
+resultcheck::snapshot(data, "panel_data_pca")
 
 write_rds(data, "data/panel_data_pca.rds")
 # data <- read_rds("data/panel_data_pca.rds") # Reload data with PCA variables
@@ -233,6 +242,7 @@ regModels <- list(
   'IMF loan approval' = approval,
   'Number of IMF conditions' = condition
 )
+resultcheck::snapshot(regModels, "regModels")
 save(regModels, file = 'save/regModels.RData')
 
 # load('save/regModels.RData') # Load the models again if needed
@@ -283,6 +293,8 @@ getTable <- function(output = "html") {
 getTable() # for previewing the table in IDE
 
 resultsTable <- getTable("latex")
+
+resultcheck::snapshot(resultsTable, "regTable", method = "print")
 
 save(resultsTable, file = 'save/regTable.RData') # Save the table
 
