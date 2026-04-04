@@ -4557,7 +4557,7 @@
       "NeedsCompilation": "no",
       "Author": "Gábor Csárdi [aut, cre], Rich FitzJohn [aut], Posit Software, PBC [cph, fnd]",
       "Maintainer": "Gábor Csárdi <csardi.gabor@gmail.com>",
-      "Repository": "CRAN"
+      "Repository": "https://packagemanager.posit.co/cran/latest"
     },
     "ps": {
       "Package": "ps",
@@ -5000,7 +5000,7 @@
       "NeedsCompilation": "no",
       "Author": "Kevin Ushey [aut, cre] (ORCID: <https://orcid.org/0000-0003-2880-7407>), Hadley Wickham [aut] (ORCID: <https://orcid.org/0000-0003-4757-117X>), Posit Software, PBC [cph, fnd]",
       "Maintainer": "Kevin Ushey <kevin@rstudio.com>",
-      "Repository": "CRAN"
+      "Repository": "https://packagemanager.posit.co/cran/latest"
     },
     "reprex": {
       "Package": "reprex",
@@ -5056,7 +5056,7 @@
     },
     "resultcheck": {
       "Package": "resultcheck",
-      "Version": "0.1.0.9000",
+      "Version": "0.1.1.9000",
       "Source": "GitHub",
       "Title": "Result Stability Checks for Empirical R Projects",
       "Authors@R": "person(\"Dianyi\", \"Yang\", , \"dianyi.yang@politics.ox.ac.uk\", role = c(\"aut\", \"cre\"), comment = c(ORCID = \"0009-0004-4652-3429\"))",
@@ -5067,7 +5067,8 @@
       "RoxygenNote": "7.3.3",
       "Imports": [
         "withr",
-        "rprojroot"
+        "rprojroot",
+        "yaml"
       ],
       "Suggests": [
         "knitr",
@@ -5077,16 +5078,14 @@
       ],
       "URL": "https://kv9898.github.io/resultcheck/",
       "VignetteBuilder": "knitr",
+      "Author": "Dianyi Yang [aut, cre] (ORCID: <https://orcid.org/0009-0004-4652-3429>)",
+      "Maintainer": "Dianyi Yang <dianyi.yang@politics.ox.ac.uk>",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
-      "RemoteRepo": "resultcheck",
       "RemoteUsername": "kv9898",
-      "RemotePkgRef": "kv9898/resultcheck",
-      "RemoteRef": "HEAD",
-      "RemoteSha": "5a5c7faa6dac70955bec3249d3a58a19b98ee2d7",
-      "NeedsCompilation": "no",
-      "Author": "Dianyi Yang [aut, cre] (ORCID: <https://orcid.org/0009-0004-4652-3429>)",
-      "Maintainer": "Dianyi Yang <dianyi.yang@politics.ox.ac.uk>"
+      "RemoteRepo": "resultcheck",
+      "RemoteRef": "main",
+      "RemoteSha": "95c6c30d170364006e11f62e73eb3050a0200559"
     },
     "rlang": {
       "Package": "rlang",
