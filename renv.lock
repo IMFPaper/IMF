@@ -5269,14 +5269,13 @@
     },
     "resultcheck": {
       "Package": "resultcheck",
-      "Version": "0.1.1.9000",
-      "Source": "GitHub",
+      "Version": "0.1.4",
+      "Source": "Repository",
       "Title": "Result Stability Checks for Empirical R Projects",
-      "Authors@R": "person(\"Dianyi\", \"Yang\", , \"dianyi.yang@politics.ox.ac.uk\", role = c(\"aut\", \"cre\"), comment = c(ORCID = \"0009-0004-4652-3429\"))",
+      "Authors@R": "person(\"Dianyi\", \"Yang\", , \"dianyi.yang@politics.ox.ac.uk\", role = c(\"aut\", \"cre\", \"ctb\"), comment = c(ORCID = \"0009-0004-4652-3429\"))",
       "Description": "Lightweight helpers for checking whether empirical results remain  substantively unchanged across code revisions, platform differences,  and package updates. The package supports regression-style testing of  derived datasets, statistical model outputs, tables, and plots, helping  researchers detect unintended result drift early and distinguish material  from non-material changes in empirical workflows.",
       "License": "MIT + file LICENSE",
       "Encoding": "UTF-8",
-      "Roxygen": "list(markdown = TRUE)",
       "RoxygenNote": "7.3.3",
       "Imports": [
         "withr",
@@ -5289,16 +5288,13 @@
         "testthat (>= 3.0.0)",
         "waldo"
       ],
-      "URL": "https://kv9898.github.io/resultcheck/",
+      "URL": "https://github.com/kv9898/resultcheck/, https://kv9898.github.io/resultcheck/",
+      "BugReports": "https://github.com/kv9898/resultcheck/issues",
       "VignetteBuilder": "knitr",
-      "Author": "Dianyi Yang [aut, cre] (ORCID: <https://orcid.org/0009-0004-4652-3429>)",
+      "NeedsCompilation": "no",
+      "Author": "Dianyi Yang [aut, cre, ctb] (ORCID: <https://orcid.org/0009-0004-4652-3429>)",
       "Maintainer": "Dianyi Yang <dianyi.yang@politics.ox.ac.uk>",
-      "RemoteType": "github",
-      "RemoteHost": "api.github.com",
-      "RemoteUsername": "kv9898",
-      "RemoteRepo": "resultcheck",
-      "RemoteRef": "main",
-      "RemoteSha": "95c6c30d170364006e11f62e73eb3050a0200559"
+      "Repository": "CRAN"
     },
     "rlang": {
       "Package": "rlang",
