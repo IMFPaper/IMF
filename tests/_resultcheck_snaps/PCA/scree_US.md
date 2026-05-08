@@ -1,8 +1,8 @@
 # Snapshot: ggplot2::ggplot
 
-## Object
+## print
 
-## Structure
+## str
 <ggplot2::ggplot>
  @ data       :'data.frame':	3 obs. of  2 variables:
  .. $ var: num  0.493 0.299 0.208
