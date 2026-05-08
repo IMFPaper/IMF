@@ -148,6 +148,6 @@ getTable() # for previewing the table in IDE
 
 resultsTable <- getTable("latex")
 
-resultcheck::snapshot(resultsTable, "regTable", method = "print")
+resultcheck::snapshot(resultsTable, "regTable", method = print)
 
 save(resultsTable, file = 'save/regTable_africa.RData') # Save the table

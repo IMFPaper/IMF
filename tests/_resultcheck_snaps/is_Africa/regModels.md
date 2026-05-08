@@ -1,6 +1,91 @@
 # Snapshot: list
 
-## List Structure
+## print
+$`IMF loan to GDP ratio`
+
+Call:
+tobit(formula = imfloannew100 ~ us + eu * is_african + shstaffl + 
+    shquotal + lnrgdpnew + lnrgdpnewsq + rgdpchnew + rgdpchnewsquare + 
+    growth1new + reserv1 + oecd1 + year1980 + year1985 + year1990 + 
+    year1995 + year2000, left = 0, right = Inf, data = data, 
+    cluster = shcode)
+
+Coefficients:
+    (Intercept)               us               eu       is_african         shstaffl         shquotal  
+        9.55324          0.29991          1.96605         -0.97262          0.33327          0.99145  
+      lnrgdpnew      lnrgdpnewsq        rgdpchnew  rgdpchnewsquare       growth1new          reserv1  
+        0.36173         -0.05225          0.69578         -0.07872         -0.12953         -0.17488  
+          oecd1         year1980         year1985         year1990         year1995         year2000  
+       -1.81535          0.93979          0.34746         -0.18481         -0.40826          0.51454  
+  eu:is_african  
+       -2.18907  
+
+Scale: 2.116 
+
+
+$`IMF participation rate`
+
+Call:
+tobit(formula = imf_p ~ us + eu * is_african + shstaffl + shquotal + 
+    lnrgdpnew + lnrgdpnewsq + rgdpchnew + rgdpchnewsquare + growth1new + 
+    reserv1 + oecd1 + year1980 + year1985 + year1990 + year1995 + 
+    year2000, left = 0, right = 1, data = data, cluster = shcode)
+
+Coefficients:
+    (Intercept)               us               eu       is_african         shstaffl         shquotal  
+       -0.75475          0.09936          0.48361         -0.43215          0.07271          0.10518  
+      lnrgdpnew      lnrgdpnewsq        rgdpchnew  rgdpchnewsquare       growth1new          reserv1  
+        0.43506         -0.02515          0.15770         -0.01890         -0.02908         -0.03392  
+          oecd1         year1980         year1985         year1990         year1995         year2000  
+       -0.61015          0.51721          0.36382          0.26655          0.16162          0.28538  
+  eu:is_african  
+       -1.06825  
+
+Scale: 0.4453 
+
+
+$`IMF loan approval`
+GLM estimation, family = binomial(link = "probit"), Dep. Var.: imf5a
+Observations: 522
+Standard-errors: Clustered (shcode) 
+             Estimate Std. Error   z value  Pr(>|z|)    
+(Intercept) -2.161909   2.504841 -0.863092 0.3880868    
+us           0.167778   0.166224  1.009352 0.3128057    
+eu           1.043188   0.462642  2.254850 0.0241427 *  
+is_african  -0.727802   0.446571 -1.629757 0.1031528    
+shstaffl     0.121393   0.090064  1.347852 0.1777061    
+shquotal     0.242922   0.197783  1.228222 0.2193638    
+lnrgdpnew    0.968198   0.330395  2.930426 0.0033850 ** 
+lnrgdpnewsq -0.055674   0.018406 -3.024838 0.0024877 ** 
+... 11 coefficients remaining (display them with summary() or use argument n)
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+Log-Likelihood: -232.0   Adj. Pseudo R2: 0.257972
+           BIC:  582.9     Squared Cor.: 0.328264
+
+$`Number of IMF conditions`
+
+Call:
+tobit(formula = tc ~ us + eu * is_african + shstaffl + shquotal + 
+    lnrgdpnew + lnrgdpnewsq + rgdpchnew + rgdpchnewsquare + growth1new + 
+    reserv1 + oecd1 + year1980 + year1985 + year1990 + year1995 + 
+    year2000, left = 0, right = Inf, data = data, cluster = shcode)
+
+Coefficients:
+    (Intercept)               us               eu       is_african         shstaffl         shquotal  
+     -281.41940         -3.51501          3.11660         11.32477         -1.66871        -11.91205  
+      lnrgdpnew      lnrgdpnewsq        rgdpchnew  rgdpchnewsquare       growth1new          reserv1  
+       41.88395         -1.51435         -0.24030          0.04491         -1.10325         -0.12996  
+          oecd1         year1980         year1985         year1990         year1995         year2000  
+        5.88529        -53.66789        -52.87287        -55.51511        -49.62264        -45.16987  
+  eu:is_african  
+        2.29069  
+
+Scale: 6.758 
+
+
+
+## str
 List of 4
  $ IMF loan to GDP ratio   :List of 18
   ..$ coefficients     : Named num [1:19] 9.553 0.3 1.966 -0.973 0.333 ...

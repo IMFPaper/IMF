@@ -1,6 +1,6 @@
 # Snapshot: tinytable
 
-## Object
+## print
 \begin{table}
 \centering
 \begin{talltblr}[         %% tabularray outer open
