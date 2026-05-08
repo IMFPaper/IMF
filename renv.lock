@@ -5269,7 +5269,7 @@
     },
     "resultcheck": {
       "Package": "resultcheck",
-      "Version": "0.1.4",
+      "Version": "0.2.0",
       "Source": "Repository",
       "Title": "Result Stability Checks for Empirical R Projects",
       "Authors@R": "person(\"Dianyi\", \"Yang\", , \"dianyi.yang@politics.ox.ac.uk\", role = c(\"aut\", \"cre\", \"ctb\"), comment = c(ORCID = \"0009-0004-4652-3429\"))",
@@ -5283,8 +5283,10 @@
         "yaml"
       ],
       "Suggests": [
+        "broom",
         "knitr",
         "rmarkdown",
+        "rstudioapi",
         "testthat (>= 3.0.0)",
         "waldo"
       ],
@@ -5294,7 +5296,7 @@
       "NeedsCompilation": "no",
       "Author": "Dianyi Yang [aut, cre, ctb] (ORCID: <https://orcid.org/0009-0004-4652-3429>)",
       "Maintainer": "Dianyi Yang <dianyi.yang@politics.ox.ac.uk>",
-      "Repository": "CRAN"
+      "Repository": "RSPM"
     },
     "rlang": {
       "Package": "rlang",
