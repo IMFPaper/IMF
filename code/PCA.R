@@ -294,7 +294,7 @@ getTable() # for previewing the table in IDE
 
 resultsTable <- getTable("latex")
 
-resultcheck::snapshot(resultsTable, "regTable", method = "print")
+resultcheck::snapshot(resultsTable, "regTable", method = print)
 
 save(resultsTable, file = 'save/regTable.RData') # Save the table
 

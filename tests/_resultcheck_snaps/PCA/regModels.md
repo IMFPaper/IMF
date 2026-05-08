@@ -1,6 +1,84 @@
 # Snapshot: list
 
-## List Structure
+## print
+$`IMF loan to GDP ratio`
+
+Call:
+tobit(formula = imfloannew100 ~ us + eu + shstaffl + shquotal + 
+    lnrgdpnew + lnrgdpnewsq + rgdpchnew + rgdpchnewsquare + growth1new + 
+    reserv1 + oecd1 + year1980 + year1985 + year1990 + year1995 + 
+    year2000, left = 0, right = Inf, data = data, cluster = shcode)
+
+Coefficients:
+    (Intercept)               us               eu         shstaffl         shquotal        lnrgdpnew  
+        9.59259          0.31759          1.92170          0.32468          0.97162          0.27317  
+    lnrgdpnewsq        rgdpchnew  rgdpchnewsquare       growth1new          reserv1            oecd1  
+       -0.04721          0.70142         -0.07884         -0.12800         -0.17189         -1.74973  
+       year1980         year1985         year1990         year1995         year2000  
+        1.06551          0.56057         -0.06837         -0.41648          0.51078  
+
+Scale: 2.116 
+
+
+$`IMF participation rate`
+
+Call:
+tobit(formula = imf_p ~ us + eu + shstaffl + shquotal + lnrgdpnew + 
+    lnrgdpnewsq + rgdpchnew + rgdpchnewsquare + growth1new + 
+    reserv1 + oecd1 + year1980 + year1985 + year1990 + year1995 + 
+    year2000, left = 0, right = 1, data = data, cluster = shcode)
+
+Coefficients:
+    (Intercept)               us               eu         shstaffl         shquotal        lnrgdpnew  
+       -0.58208          0.10801          0.45614          0.06806          0.10276          0.37962  
+    lnrgdpnewsq        rgdpchnew  rgdpchnewsquare       growth1new          reserv1            oecd1  
+       -0.02239          0.15823         -0.01895         -0.02851         -0.03360         -0.57477  
+       year1980         year1985         year1990         year1995         year2000  
+        0.57205          0.46106          0.31793          0.15317          0.27821  
+
+Scale: 0.454 
+
+
+$`IMF loan approval`
+GLM estimation, family = binomial(link = "probit"), Dep. Var.: imf5a
+Observations: 522
+Standard-errors: Clustered (shcode) 
+             Estimate Std. Error   z value   Pr(>|z|)    
+(Intercept) -2.286050   2.332759 -0.979977 0.32709736    
+us           0.185453   0.166724  1.112335 0.26599407    
+eu           0.970997   0.472719  2.054066 0.03996932 *  
+shstaffl     0.115892   0.089840  1.289975 0.19705931    
+shquotal     0.218099   0.187973  1.160270 0.24593890    
+lnrgdpnew    0.906289   0.322416  2.810932 0.00493982 ** 
+lnrgdpnewsq -0.051650   0.018170 -2.842594 0.00447480 ** 
+rgdpchnew    0.385317   0.116862  3.297194 0.00097656 ***
+... 9 coefficients remaining (display them with summary() or use argument n)
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+Log-Likelihood: -234.4   Adj. Pseudo R2: 0.256791
+           BIC:  575.2     Squared Cor.: 0.317723
+
+$`Number of IMF conditions`
+
+Call:
+tobit(formula = tc ~ us + eu + shstaffl + shquotal + lnrgdpnew + 
+    lnrgdpnewsq + rgdpchnew + rgdpchnewsquare + growth1new + 
+    reserv1 + oecd1 + year1980 + year1985 + year1990 + year1995 + 
+    year2000, left = 0, right = Inf, data = data, cluster = shcode)
+
+Coefficients:
+    (Intercept)               us               eu         shstaffl         shquotal        lnrgdpnew  
+      -231.1645          -5.2790           1.3637          -1.6300         -11.5223          33.5981  
+    lnrgdpnewsq        rgdpchnew  rgdpchnewsquare       growth1new          reserv1            oecd1  
+        -1.1284          -1.3661           0.1628          -1.0779          -0.2073           7.8480  
+       year1980         year1985         year1990         year1995         year2000  
+       -55.6008         -53.6085         -56.6855         -49.4571         -46.8537  
+
+Scale: 7.552 
+
+
+
+## str
 List of 4
  $ IMF loan to GDP ratio   :List of 18
   ..$ coefficients     : Named num [1:17] 9.593 0.318 1.922 0.325 0.972 ...

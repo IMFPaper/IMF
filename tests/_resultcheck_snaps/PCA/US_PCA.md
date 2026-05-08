@@ -1,6 +1,16 @@
 # Snapshot: prcomp
 
-## List Structure
+## print
+Standard deviations (1, .., p=3):
+[1] 1.2165526 0.9463413 0.7902138
+
+Rotation (n x k) = (3 x 3):
+                 PC1        PC2         PC3
+frusanew   0.4234389  0.9052079 -0.03602981
+ustradenew 0.6366785 -0.3256480 -0.69899492
+usq4       0.6444688 -0.2730423  0.71421842
+
+## str
 List of 5
  $ sdev    : num [1:3] 1.217 0.946 0.79
  $ rotation: num [1:3, 1:3] 0.423 0.637 0.644 0.905 -0.326 ...
