@@ -1,6 +1,91 @@
 # Snapshot: list
 
-## List Structure
+## print
+$`IMF loan to GDP ratio`
+
+Call:
+tobit(formula = imfloannew100 ~ us + eu * is_european + shstaffl + 
+    shquotal + lnrgdpnew + lnrgdpnewsq + rgdpchnew + rgdpchnewsquare + 
+    growth1new + reserv1 + oecd1 + year1980 + year1985 + year1990 + 
+    year1995 + year2000, left = 0, right = Inf, data = data, 
+    cluster = shcode)
+
+Coefficients:
+    (Intercept)               us               eu      is_european         shstaffl         shquotal  
+       11.08136          0.14218          4.30569         -1.22013          0.30082          1.28673  
+      lnrgdpnew      lnrgdpnewsq        rgdpchnew  rgdpchnewsquare       growth1new          reserv1  
+        0.62360         -0.07616          0.71687         -0.08077         -0.12631         -0.17628  
+          oecd1         year1980         year1985         year1990         year1995         year2000  
+       -1.44108          1.61402          1.27908          0.44031         -0.17154          0.47446  
+ eu:is_european  
+       -2.49680  
+
+Scale: 2.077 
+
+
+$`IMF participation rate`
+
+Call:
+tobit(formula = imf_p ~ us + eu * is_european + shstaffl + shquotal + 
+    lnrgdpnew + lnrgdpnewsq + rgdpchnew + rgdpchnewsquare + growth1new + 
+    reserv1 + oecd1 + year1980 + year1985 + year1990 + year1995 + 
+    year2000, left = 0, right = 1, data = data, cluster = shcode)
+
+Coefficients:
+    (Intercept)               us               eu      is_european         shstaffl         shquotal  
+       -0.33472          0.07725          0.85560         -0.21390          0.06478          0.15912  
+      lnrgdpnew      lnrgdpnewsq        rgdpchnew  rgdpchnewsquare       growth1new          reserv1  
+        0.44707         -0.02785          0.16726         -0.02000         -0.02800         -0.03434  
+          oecd1         year1980         year1985         year1990         year1995         year2000  
+       -0.49182          0.65686          0.57518          0.39871          0.19109          0.27386  
+ eu:is_european  
+       -0.48907  
+
+Scale: 0.4493 
+
+
+$`IMF loan approval`
+GLM estimation, family = binomial(link = "probit"), Dep. Var.: imf5a
+Observations: 522
+Standard-errors: Clustered (shcode) 
+             Estimate Std. Error   z value  Pr(>|z|)    
+(Intercept) -1.752247   2.380094 -0.736209 0.4616036    
+us           0.121383   0.165196  0.734783 0.4624717    
+eu           1.673183   0.600955  2.784205 0.0053659 ** 
+is_european -0.321276   0.304691 -1.054429 0.2916864    
+shstaffl     0.111863   0.089023  1.256562 0.2089122    
+shquotal     0.327789   0.196822  1.665405 0.0958319 .  
+lnrgdpnew    1.025316   0.326308  3.142177 0.0016770 ** 
+lnrgdpnewsq -0.061642   0.018947 -3.253335 0.0011406 ** 
+... 11 coefficients remaining (display them with summary() or use argument n)
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+Log-Likelihood: -232.5   Adj. Pseudo R2: 0.256516
+           BIC:  583.9     Squared Cor.: 0.324047
+
+$`Number of IMF conditions`
+
+Call:
+tobit(formula = tc ~ us + eu * is_european + shstaffl + shquotal + 
+    lnrgdpnew + lnrgdpnewsq + rgdpchnew + rgdpchnewsquare + growth1new + 
+    reserv1 + oecd1 + year1980 + year1985 + year1990 + year1995 + 
+    year2000, left = 0, right = Inf, data = data, cluster = shcode)
+
+Coefficients:
+    (Intercept)               us               eu      is_european         shstaffl         shquotal  
+     -208.44487         -5.83452        -11.69776          7.73355         -1.57988        -12.71247  
+      lnrgdpnew      lnrgdpnewsq        rgdpchnew  rgdpchnewsquare       growth1new          reserv1  
+       26.05526         -0.70276         -1.41842          0.19210         -1.00507         -0.09972  
+          oecd1         year1980         year1985         year1990         year1995         year2000  
+       15.31281        -58.80114        -57.57186        -59.50260        -50.06499        -46.57529  
+ eu:is_european  
+       14.05343  
+
+Scale: 7.357 
+
+
+
+## str
 List of 4
  $ IMF loan to GDP ratio   :List of 18
   ..$ coefficients     : Named num [1:19] 11.081 0.142 4.306 -1.22 0.301 ...
