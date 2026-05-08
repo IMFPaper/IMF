@@ -1,6 +1,29 @@
 # Snapshot: tbl_df
 
-## Structure
+## print
+# A tibble: 1,071 × 74
+   shcode shcode61 country     importcountrycode  isocode continent ifscode panel imfloannew imf_p imf5a    pa
+    <dbl>    <dbl> <chr>       <chr>              <chr>   <chr>       <dbl> <dbl>      <dbl> <dbl> <dbl> <dbl>
+ 1     79       NA Afghanistan AFGHANISTAN, I.R.… AFG     Asia           NA  1975         NA 0.200     1    NA
+ 2     79       NA Afghanistan AFGHANISTAN, I.R.… AFG     Asia           NA  1980          0 0         0    NA
+ 3     79       NA Afghanistan AFGHANISTAN, I.R.… AFG     Asia           NA  1985          0 0         0    NA
+ 4     79       NA Afghanistan AFGHANISTAN, I.R.… AFG     Asia           NA  1990         NA 0         0    NA
+ 5     79       NA Afghanistan AFGHANISTAN, I.R.… AFG     Asia           NA  1995         NA 0         0    NA
+ 6     79       NA Afghanistan AFGHANISTAN, I.R.… AFG     Asia           NA  2000         NA 0         0    NA
+ 7     79       NA Afghanistan AFGHANISTAN, I.R.… AFG     Asia           NA  2005         NA 0         0     3
+ 8      2        1 Angola      Angola             AGO     Africa        614  1975          0 0         0    NA
+ 9      2        1 Angola      Angola             AGO     Africa        614  1980          0 0         0    NA
+10      2        1 Angola      Angola             AGO     Africa        614  1985          0 0         0    NA
+# ℹ 1,061 more rows
+# ℹ 62 more variables: pc <dbl>, tc <dbl>, bt <dbl>, currencyvaluation <dbl>, reserv1 <dbl>,
+#   growth1new <dbl>, rgdpchnew <dbl>, lnrgdpnew <dbl>, shstaff <dbl>, shstaffl <dbl>, shquota <dbl>,
+#   shquotal <dbl>, oecd1 <dbl>, frusanew <dbl>, frdfgnew <dbl>, year <dbl>, usq4 <dbl>, ukq4 <dbl>,
+#   frq4 <dbl>, gmq4 <dbl>, jpq4 <dbl>, gdpnew <dbl>, ustradenew <dbl>, eutradenew <dbl>, aseanp3 <dbl>,
+#   oilexporter <dbl>, reservewgoldmillion <dbl>, exportmil <dbl>, importmil <dbl>, rgdpchnewsquare <dbl>,
+#   lnrgdpnewsq <dbl>, year1975 <dbl>, year1980 <dbl>, year1985 <dbl>, year1995 <dbl>, year2000 <dbl>, …
+# ℹ Use `print(n = ...)` to see more rows
+
+## str
 tibble [1,071 × 74] (S3: tbl_df/tbl/data.frame)
  $ shcode                 : num [1:1071] 79 79 79 79 79 79 79 2 2 2 ...
   ..- attr(*, "format.stata")= chr "%ty"
@@ -184,26 +207,3 @@ tibble [1,071 × 74] (S3: tbl_df/tbl/data.frame)
  $ imfloannew100          : num [1:1071] NA 0 0 NA NA NA NA 0 0 0 ...
   ..- attr(*, "format.stata")= chr "%9.0g"
  - attr(*, "notes")= chr [1:24] "23" "December 2009" "dataset from SOURCE http://personal.lse.ac.uk/ilzetzki/research/IRRBack.htm, coded for stata as in Catini, Pani"| __truncated__ "The course classification codes are (gcode): 1-No separate legal tender; 1-Pre announced peg or currency board "| __truncated__ ...
-
-## Data
-# A tibble: 1,071 × 74
-   shcode shcode61 country     importcountrycode  isocode continent ifscode panel imfloannew imf_p imf5a    pa
-    <dbl>    <dbl> <chr>       <chr>              <chr>   <chr>       <dbl> <dbl>      <dbl> <dbl> <dbl> <dbl>
- 1     79       NA Afghanistan AFGHANISTAN, I.R.… AFG     Asia           NA  1975         NA 0.200     1    NA
- 2     79       NA Afghanistan AFGHANISTAN, I.R.… AFG     Asia           NA  1980          0 0         0    NA
- 3     79       NA Afghanistan AFGHANISTAN, I.R.… AFG     Asia           NA  1985          0 0         0    NA
- 4     79       NA Afghanistan AFGHANISTAN, I.R.… AFG     Asia           NA  1990         NA 0         0    NA
- 5     79       NA Afghanistan AFGHANISTAN, I.R.… AFG     Asia           NA  1995         NA 0         0    NA
- 6     79       NA Afghanistan AFGHANISTAN, I.R.… AFG     Asia           NA  2000         NA 0         0    NA
- 7     79       NA Afghanistan AFGHANISTAN, I.R.… AFG     Asia           NA  2005         NA 0         0     3
- 8      2        1 Angola      Angola             AGO     Africa        614  1975          0 0         0    NA
- 9      2        1 Angola      Angola             AGO     Africa        614  1980          0 0         0    NA
-10      2        1 Angola      Angola             AGO     Africa        614  1985          0 0         0    NA
-# ℹ 1,061 more rows
-# ℹ 62 more variables: pc <dbl>, tc <dbl>, bt <dbl>, currencyvaluation <dbl>, reserv1 <dbl>,
-#   growth1new <dbl>, rgdpchnew <dbl>, lnrgdpnew <dbl>, shstaff <dbl>, shstaffl <dbl>, shquota <dbl>,
-#   shquotal <dbl>, oecd1 <dbl>, frusanew <dbl>, frdfgnew <dbl>, year <dbl>, usq4 <dbl>, ukq4 <dbl>,
-#   frq4 <dbl>, gmq4 <dbl>, jpq4 <dbl>, gdpnew <dbl>, ustradenew <dbl>, eutradenew <dbl>, aseanp3 <dbl>,
-#   oilexporter <dbl>, reservewgoldmillion <dbl>, exportmil <dbl>, importmil <dbl>, rgdpchnewsquare <dbl>,
-#   lnrgdpnewsq <dbl>, year1975 <dbl>, year1980 <dbl>, year1985 <dbl>, year1995 <dbl>, year2000 <dbl>, …
-# ℹ Use `print(n = ...)` to see more rows
