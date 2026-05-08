@@ -21,7 +21,6 @@ library("kableExtra")
 library('modelsummary')
 library("parameters")
 library("haven")
-library("resultcheck")
 
 # Clean data -----------------------------------------------------------------------------------------------------------
 fiscal <- read_dta("data/fiscal.dta") # Load rfa data
@@ -69,7 +68,7 @@ data_new <- data |>
   left_join(fiscal_sum, by = c("country_lower", "panel")) |> 
   select(-country_lower)
 
-snapshot(data_new, "data_new") # check the new data
+resultcheck::snapshot(data_new, "data_new") # check the new data
 saveRDS(data_new, "data/panel_data_fiscal.rds") # save the new data
 # data_new <- read_rds("data/panel_data_fiscal.rds") # reload to avoid any potential issues
 
@@ -137,7 +136,7 @@ regModels <- list(
   'RFA ($T$+1)' = rfa1,
   'RFA (end year)' = rfa2
 )
-snapshot(regModels, "regModels_fiscal") # check the models
+resultcheck::snapshot(regModels, "regModels_fiscal") # check the models
 save(regModels, file = 'save/regModels_fiscal.RData')
 
 ## F-tests generation -----------------------------------------------------------------------------------------------------------------------------------------
@@ -186,5 +185,5 @@ getTable() # for previewing the table in IDE
 
 resultsTable <- getTable("latex")
 
-snapshot(resultsTable, "regTable_fiscal", method = "print") # check the table
+resultcheck::snapshot(resultsTable, "regTable_fiscal", method = print) # check the table
 save(resultsTable, file = 'save/regTable_fiscal.RData') # Save the table

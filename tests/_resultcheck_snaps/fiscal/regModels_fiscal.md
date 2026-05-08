@@ -1,6 +1,92 @@
 # Snapshot: list
 
-## List Structure
+## print
+$`Number of IMF conditions`
+
+Call:
+tobit(formula = tc ~ us + eu + shstaffl + shquotal + lnrgdpnew + 
+    lnrgdpnewsq + rgdpchnew + rgdpchnewsquare + growth1new + 
+    reserv1 + oecd1 + year1980 + year1985 + year1990 + year1995 + 
+    year2000, left = 0, right = Inf, data = data, cluster = shcode)
+
+Coefficients:
+    (Intercept)               us               eu         shstaffl         shquotal        lnrgdpnew  
+      -231.1645          -5.2790           1.3637          -1.6300         -11.5223          33.5981  
+    lnrgdpnewsq        rgdpchnew  rgdpchnewsquare       growth1new          reserv1            oecd1  
+        -1.1284          -1.3661           0.1628          -1.0779          -0.2073           7.8480  
+       year1980         year1985         year1990         year1995         year2000  
+       -55.6008         -53.6085         -56.6855         -49.4571         -46.8537  
+
+Scale: 7.552 
+
+
+$`Number of Fiscal conditions`
+
+Call:
+tobit(formula = numb_fiscal ~ us + eu + shstaffl + shquotal + 
+    lnrgdpnew + lnrgdpnewsq + rgdpchnew + rgdpchnewsquare + growth1new + 
+    reserv1 + oecd1 + year1995 + year2000, left = 0, right = Inf, 
+    data = data_new, cluster = shcode)
+
+Coefficients:
+    (Intercept)               us               eu         shstaffl         shquotal        lnrgdpnew  
+       -21.6022         -14.6673          18.5203          -0.2644          -2.4856          -0.7554  
+    lnrgdpnewsq        rgdpchnew  rgdpchnewsquare       growth1new          reserv1            oecd1  
+         0.2389          -4.7266           0.6184          -0.3348          -0.9526         -11.3693  
+       year1995         year2000  
+         2.7664           9.8762  
+
+Scale: 5.208 
+
+
+$`RFA ($T$+1)`
+OLS estimation, Dep. Var.: rfa1
+Observations: 30
+Standard-errors: Clustered (shcode) 
+                  Estimate Std. Error   t value  Pr(>|t|)    
+(Intercept)     -57.941785  28.246662 -2.051279 0.0559774 .  
+us                8.595110   3.967095  2.166601 0.0447641 *  
+eu               -5.282259   3.014967 -1.752013 0.0977889 .  
+shstaffl         -0.415921   0.847048 -0.491025 0.6296875    
+shquotal          0.486534   0.919903  0.528896 0.6037151    
+lnrgdpnew        13.912546   6.253294  2.224835 0.0399219 *  
+lnrgdpnewsq      -0.723745   0.320577 -2.257632 0.0374125 *  
+rgdpchnew        -2.499050   1.456026 -1.716350 0.1042623    
+rgdpchnewsquare   0.229019   0.157095  1.457834 0.1631127    
+growth1new        0.064177   0.210939  0.304247 0.7646326    
+reserv1           0.311635   0.273706  1.138575 0.2706720    
+oecd1            10.664295   2.782724  3.832322 0.0013339 ** 
+year1995         -3.563488   1.648997 -2.161004 0.0452569 *  
+year2000         -3.242293   2.222661 -1.458744 0.1628651    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+RMSE: 1.80884   Adj. R2: 0.272963
+
+$`RFA (end year)`
+OLS estimation, Dep. Var.: rfa2
+Observations: 30
+Standard-errors: Clustered (shcode) 
+                  Estimate Std. Error   t value Pr(>|t|) 
+(Intercept)     -41.211250  27.270597 -1.511197  0.14910 
+us                2.496989   5.400304  0.462379  0.64967 
+eu                0.359729   5.198253  0.069202  0.94564 
+shstaffl         -0.590355   1.469460 -0.401750  0.69287 
+shquotal         -0.227855   1.004581 -0.226816  0.82327 
+lnrgdpnew         7.234946   7.685587  0.941365  0.35970 
+lnrgdpnewsq      -0.309385   0.427880 -0.723065  0.47947 
+rgdpchnew        -2.581661   1.914769 -1.348289  0.19526 
+rgdpchnewsquare   0.237756   0.206560  1.151024  0.26566 
+growth1new        0.243698   0.353092  0.690184  0.49939 
+reserv1           0.298323   0.412728  0.722808  0.47962 
+oecd1             8.253071   5.552694  1.486318  0.15551 
+year1995          0.769754   2.812866  0.273655  0.78765 
+year2000         -1.153449   2.823741 -0.408483  0.68802 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+RMSE: 2.41778   Adj. R2: 0.010679
+
+
+## str
 List of 4
  $ Number of IMF conditions   :List of 18
   ..$ coefficients     : Named num [1:17] -231.16 -5.28 1.36 -1.63 -11.52 ...
