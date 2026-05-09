@@ -95,7 +95,7 @@ testthat::test_file("tests/testthat/test-PCA.R")
 
 ### GitHub Actions
 - `build-manuscript.yml` — Automated manuscript building with Zotero → PDF pipeline
-- `run-tests.yml` — Runs testthat tests on Windows, Ubuntu, and macOS with R 4.5.1
+- `run-tests.yml` — Runs testthat tests on Windows, Ubuntu, and macOS with R 4.6.0
 - `copilot-setup-steps.yml` — Validates the development environment setup
 
 ## Code Style & Conventions
