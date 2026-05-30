@@ -5,8 +5,8 @@ header-includes: |
 date: last-modified
 author:
 - name: Dianyi Yang
-# - name: Tong Hu // name placeholders subject to change
-# - name: Zhenyi Chen
+- name: Tong Hu
+- name: Zhenyi Chen
 format:
   beamer:
     theme: Madrid
