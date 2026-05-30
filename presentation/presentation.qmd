@@ -1,7 +1,7 @@
 ---
 title: European or American? A re-examination of the transatlantic influence over the IMF
 header-includes: |
-  \AtBeginDocument{\title[European or American]{European or American? A re-examination of the transatlantic influence over the IMF}}
+  \AtBeginDocument{\title[European or American (BISA 2026)]{European or American? A re-examination of the transatlantic influence over the IMF}}
 date: last-modified
 author:
 - name: Dianyi Yang
