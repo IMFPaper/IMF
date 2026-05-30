@@ -2,7 +2,7 @@
 .DS_Store
 /.quarto/
 
-/demo/*.pdf
+/presentation/*.pdf
 /manuscript/*.pdf
 /manuscript/*.tex
 /manuscript/manuscript_files
