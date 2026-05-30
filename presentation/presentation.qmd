@@ -3,6 +3,8 @@ title: European or American? A re-examination of the transatlantic influence ove
 header-includes: |
   \AtBeginDocument{\title[European or American (BISA 2026)]{European or American? A re-examination of the transatlantic influence over the IMF}}
 date: last-modified
+date-format: |
+    | DD MMMM YYYY
 author:
 - name: Dianyi Yang
 - name: Tong Hu
