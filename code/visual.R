@@ -42,9 +42,9 @@ pvals_plot <- plot_data |>
     ) |>
     mutate(
         stars = case_when(
-            p_value < 0.001 ~ '~"***"',
-            p_value < 0.01   ~ '~"**"',
-            p_value < 0.05   ~ '~"*"',
+            p_value < 0.01 ~ '~"***"',
+            p_value < 0.05   ~ '~"**"',
+            p_value < 0.10   ~ '~"*"',
             TRUE ~ ""
         ),
         label = paste0("p == ", formatC(p_value, format = "f", digits = 3), stars),
