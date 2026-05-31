@@ -193,6 +193,25 @@ Stronger US alignment is associated with:
 
 $\Rightarrow$ American influence appears concentrated in the \alert{design} of IMF programmes rather than lending access.
 
+## Explaining Europe's influence: Colonial ties?
+
+@stone2004 argues that Britain and France sometimes intervened on behalf of former colonies in Africa.
+
+**Test**
+
+Interact European alignment with African recipient status: $\text{EUP} \times \text{Africa}$
+
+**Findings**
+
+- European alignment remains positively associated with loan approval, loan size, and participation.
+- The $\text{EUP} \times \text{Africa}$ interaction term is generally negative and statistically insignificant.
+
+**Interpretation**
+
+$\Rightarrow$ European influence does not appear to be driven primarily by post-colonial favouritism.
+
+$\Rightarrow$ Consistent with a broader institutional form of influence.
+
 ## References {.unnumbered .allowframebreaks}
 
 ::: {#refs}
