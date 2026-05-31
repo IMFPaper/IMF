@@ -193,6 +193,23 @@ Stronger US alignment is associated with:
 
 $\Rightarrow$ American influence appears concentrated in the \alert{design} of IMF programmes rather than lending access.
 
+## Possible Interpretation
+
+**Europeans as key defenders of the "Washington Consensus"?**
+
+- Closer ties with Europe are not associated with fewer conditions.
+- One possible explanation is that European actors view fiscal discipline and structural reform as *desirable* policy outcomes rather than concessions to be relaxed for political partners.
+    - Unwilling rather than unable to reduce conditionality.
+    - Echoes @lutz2014, who argue that European actors have often adhered more strongly to orthodox economic principles than their U.S. counterparts.
+
+$\Rightarrow$ European influence may facilitate access to IMF resources without softening programme discipline.
+
+**Caveat**
+
+\alert{This interpretation is suggestive rather than directly tested.}
+
+What qualitative evidence or case studies might help evaluate this argument?
+
 ## Explaining Europe's influence: Colonial ties?
 
 @stone2004 argues that Britain and France sometimes intervened on behalf of former colonies in Africa.
