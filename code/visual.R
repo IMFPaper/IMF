@@ -2,6 +2,7 @@
 library('tidyverse')
 library('modelsummary')
 library('AER')
+library('ggsignif')
 
 data <- read_rds('data/panel_data_pca.rds')
 load("save/regModels.RData")
@@ -28,27 +29,54 @@ pvals_df <- tibble(
 plot_data <- coef_df |>
     left_join(pvals_df, by = "outcome")
 
+pvals_plot <- plot_data |>
+    group_by(outcome) |>
+    summarize(
+        p_value = first(p_value),
+        y_pos = max(conf.high, estimate, na.rm = TRUE) +
+            0.08 * diff(range(c(conf.low, conf.high, estimate), na.rm = TRUE)),
+        .groups = "drop"
+    ) |>
+    mutate(
+        stars = case_when(
+            p_value < 0.001 ~ "***",
+            p_value < 0.01 ~ "**",
+            p_value < 0.05 ~ "*",
+            TRUE ~ ""
+        ),
+        label = paste0("p=", formatC(p_value, format = "f", digits = 3), stars),
+        xmin = 1,
+        xmax = 2
+    )
+
 (coef_plot <- ggplot(
     plot_data,
-    aes(x = term, y = estimate, color = term)
+    aes(x = term, y = estimate, shape = term)
 ) +
-    geom_point(position = position_dodge(width = 0.4)) +
+    geom_point(color = "black", position = position_dodge(width = 0.4)) +
     geom_errorbar(
         aes(ymin = conf.low, ymax = conf.high),
         width = 0.2,
+        color = "black",
         position = position_dodge(width = 0.4)
     ) +
-    facet_wrap(~outcome, ncol = 2, scales = "free_y") +
-    geom_text(
-        data = pvals_df,
-        aes(
-            x = 1.5,
-            y = Inf,
-            label = sprintf("p(us=eu)=%.3f", p_value)
-        ),
+    geom_signif(
+        data = pvals_plot,
+        aes(xmin = xmin, xmax = xmax, y_position = y_pos, annotations = label),
+        manual = TRUE,
         inherit.aes = FALSE,
-        vjust = 1.2,
-        size = 3
+        color = "black",
+        tip_length = 0.01,
+        textsize = 3
     ) +
-    labs(x = NULL, y = "Coefficient", color = NULL) +
-    theme_minimal())
+    facet_wrap(~outcome, ncol = 2, scales = "free_y") +
+    coord_flip() +
+    labs(y = "Coefficient", x = NULL, shape = NULL) +
+    theme_classic() +
+    theme(
+        legend.position = "bottom",
+        axis.text = element_text(color = "black"),
+        axis.title = element_text(color = "black"),
+        strip.text = element_text(color = "black"),
+        plot.title = element_text(color = "black")
+    ))
