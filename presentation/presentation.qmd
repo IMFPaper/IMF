@@ -120,7 +120,7 @@ resultsTable |> tinytable::theme_latex(resize_width = 0.81, resize_direction = "
 
     -   This finding echoes @lutz2014, who argue that European actors have historically adhered more strictly to the principles of the Washington Consensus than their US counterparts.
 
-## References {.unnumbered}
+## References {.unnumbered .allowframebreaks}
 
 ::: {#refs}
 :::
