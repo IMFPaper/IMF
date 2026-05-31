@@ -149,7 +149,27 @@ $\Rightarrow$ Constructing a single latent measure of **U.S. alignment** and a s
 
     -   Reserves, OECD
 
--   Hypotheses
+## Model Specification
+
+$$
+Y^*_{it} = \alpha + \beta_1 \text{USA}_{it} + \beta_2 \text{EUP}_{it} + \gamma^\top \mathbf{P}_{it} + \delta^\top \mathbf{Z}_{it} + \lambda_t + \epsilon_{it}
+$$
+
+where:
+
+-   $\text{USA}_{it}$, $\text{EUP}_{it}$​: PCA-based alignment measures
+-   $\mathbf{P}_{it}$: GDP and GDP per capita controls (including quadratic terms) [@barro2005; @lipscy2018].
+-   $\mathbf{Z}_{it}$: macroeconomic and institutional controls
+-   $\lambda_t$: five-year period fixed effects.
+
+**Estimation**
+
+IMF lending outcomes are heavily left-censored at zero.
+
+-   \alert{Tobit} (continuous outcomes): loan size, participation rate, conditionality
+-   \alert{Probit} (binary outcome): loan approval
+
+## Hypotheses
 
     -   $H_1$: Either the US or Europe has more influence over the IMF.
 
