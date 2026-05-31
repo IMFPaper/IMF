@@ -111,6 +111,28 @@ dta <- read_rds('data/panel_data_pca.rds')
 
     - Banking sector exposure
 
+## Dimension Reduction: PCA
+
+The three alignment proxies are likely to be highly correlated. Including them separately may therefore produce **unstable coefficient estimates** and reduce statistical power.
+
+- Solution: \alert{Principal Component Analysis (PCA)} [@dunteman2008].
+
+PCA extracts the common variation across:
+
+- UN voting similarity
+- Trade intensity
+- Banking exposure
+
+$\Rightarrow$ Constructing a single latent measure of **U.S. alignment** and a single latent measure of **European alignment**.
+
+## Control Variables
+
+- Proxies for borrower influence
+
+    - Number of nationals employed as IMF economists
+
+    - IMF quota.
+
 ## Empirical Strategy
 
 -   Dependent variables
