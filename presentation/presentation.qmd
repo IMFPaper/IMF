@@ -75,7 +75,15 @@ Who has more influence over the IMF — the U.S. or Europe?
 
 ## Empirical Strategy
 
+```{r}
+#| label: read-data
+library(tidyverse)
+dta <- read_rds('data/panel_data_pca.rds')
+```
+
 -   Data source/empirical inspiration: @lipscy2018 (1980-2010)
+
+    -   covers `r dta |> pull(country) |> unique() |> length()` countries between `r dta |> pull(panel) |> min() + 5` and `r dta |> pull(panel) |> max() + 5`.
 
     -   but their focus is the effect on self-insurance
 
