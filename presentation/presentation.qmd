@@ -19,13 +19,26 @@ format:
           \colorlet{beamer@blendedblue}{myblue}
 ---
 
-## Background
+## Background (1/2)
 
--   The International Monetary Fund (IMF) and the World Bank were established toward the end of World War II as part of the Bretton Woods agreement in 1944 [@jensen2004].
+-   Bretton Woods agreement in 1944: established the International Monetary Fund (IMF) and the World Bank [@jensen2004].
 
--   Believed US dominance in the beginning,
+    -   World Bank: focuses on economic assistance for *development* projects.
+    -   IMF: initially focused on *exchange rate stability* and *balance-of-payment* crises.
 
--   "Gentlemen's agreement": the IMF managing director being a European, and the World Bank president being an American [@keating2024; @weiss2023].
+-   "Gentlemen's agreement" [@keating2024; @weiss2023]: 
+
+    - the IMF managing director being a \alert{European};
+    - the World Bank president being an American.
+
+## Background (2/2)
+
+-   IMF gradually expanded its role into *structural adjustment* and *domestic economic governance*, attaching \alert{conditions} to its loans [@barnett2004].
+
+    - Neoclassical "sound economic" policies: fiscal austerity, trade liberalization, privatization, deregulation [@nelson2014].
+    - Yet many have documented *negative* consequences [@garuda2000; @lang2020; @oberdabernig2013; @dreher2006; @przeworski2000; @casper2017; @hartzell2010].
+
+- Neo-colonialism critique: serving the interests of the \alert{West} [@stone2011; @barnett2004; @cain2022; @chen2021; @hickel2020; @moyo2024].
 
 ## Research Question
 
@@ -105,7 +118,8 @@ Who has more influence over the IMF, the US or Europe?
 
 ```{r results}
 load('save/regTable.RData')
-resultsTable |> tinytable::theme_latex(resize_width = 0.81, resize_direction = "down")
+resultsTable |>
+  tinytable::theme_latex(resize_width = 0.81, resize_direction = "down")
 ```
 
 ## Interpretation of Results
