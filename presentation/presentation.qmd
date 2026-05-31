@@ -212,6 +212,25 @@ $\Rightarrow$ European influence does not appear to be driven primarily by post-
 
 $\Rightarrow$ Consistent with a broader institutional form of influence.
 
+## Explaining European Influence: Continental preference?
+
+European governments may be more willing to support IMF lending to fellow European countries.
+
+- Especially plausible given later Troika arrangements during the Eurozone crisis.
+
+**Test**: Interaction term $\text{EUP} \times \text{European Recipient}$
+
+**Findings**
+
+- European effects remain positive and significant.
+- $\text{EUP} \times \text{European Recipient}$ is generally does not favour fellow European borrowers.
+
+**Interpretation**
+
+$\Rightarrow$ European influence does not appear primarily driven by preferential treatment of European borrowers.
+
+$\Rightarrow$ Consistent with a broader institutional form of influence.
+
 ## References {.unnumbered .allowframebreaks}
 
 ::: {#refs}
