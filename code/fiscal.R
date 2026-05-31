@@ -44,12 +44,13 @@ fiscal <- fiscal |>
 ## summarise to 5 year intervals -----------------------------------------------------------------------------------------------------
 fiscal_sum <- fiscal |>
   mutate(panel = case_when(
-    approval >= 1980 & approval < 1985 ~ 1980,
-    approval >= 1985 & approval < 1990 ~ 1985,
-    approval >= 1990 & approval < 1995 ~ 1990,
-    approval >= 1995 & approval < 2000 ~ 1995,
-    approval >= 2000 & approval < 2005 ~ 2000,
-    approval >= 2005 & approval < 2010 ~ 2005,
+    approval >= 1975 & approval < 1980 ~ 1980,
+    approval >= 1980 & approval < 1985 ~ 1985,
+    approval >= 1985 & approval < 1990 ~ 1990,
+    approval >= 1990 & approval < 1995 ~ 1995,
+    approval >= 1995 & approval < 2000 ~ 2000,
+    approval >= 2000 & approval < 2005 ~ 2005,
+    approval >= 2005 & approval < 2010 ~ 2010,
     TRUE ~ NA_real_
   )) |>
   group_by(countryn, panel) |>
