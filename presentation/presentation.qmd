@@ -40,9 +40,21 @@ format:
 
 - Neo-colonialism critique: serving the interests of the \alert{West} [@stone2011; @barnett2004; @cain2022; @chen2021; @hickel2020; @moyo2024].
 
-## Research Question
+## Core Research Question
 
-Who has more influence over the IMF, the US or Europe?
+But the “West” is not a monolith.
+
+- Western actors may have divergent interests and disagree among themselves on lending decisions [@stone2011, p.51].
+
+\begin{block}{Central Puzzle:}
+
+Who has more influence over the IMF — the U.S. or Europe?
+
+\end{block}
+
+- What do you think?
+
+## Some new page
 
 -   US?
 
