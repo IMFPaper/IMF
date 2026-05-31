@@ -10,7 +10,7 @@ load("save/regModels.RData")
 # Extract coefficients ----
 coef_df <- regModels |>
     map_dfr(get_estimates, .id = "outcome") |>
-    filter(term %in% c("us", "eu")) |> 
+    filter(term %in% c("us", "eu")) |>
     mutate(
         term = dplyr::recode(term, "us" = "USA", "eu" = "EUP"),
     )
@@ -43,16 +43,20 @@ pvals_plot <- plot_data |>
     mutate(
         stars = case_when(
             p_value < 0.01 ~ '~"***"',
-            p_value < 0.05   ~ '~"**"',
-            p_value < 0.10   ~ '~"*"',
+            p_value < 0.05 ~ '~"**"',
+            p_value < 0.10 ~ '~"*"',
             TRUE ~ ""
         ),
-        label = paste0("p == ", formatC(p_value, format = "f", digits = 3), stars),
+        label = paste0(
+            "p == ",
+            formatC(p_value, format = "f", digits = 3),
+            stars
+        ),
     )
 
 (coef_plot <- ggplot(
     plot_data,
-    aes(x = term, y = estimate, shape = term)
+    aes(x = term, y = estimate)
 ) +
     geom_point(color = "black", position = position_dodge(width = 0.4)) +
     geom_hline(yintercept = 0, linetype = "dashed") +
@@ -65,7 +69,13 @@ pvals_plot <- plot_data |>
     geom_signif(
         data = pvals_plot,
         comparisons = list(c("USA", "EUP")),
-        mapping = aes(xmin = 1, xmax = 2, y_position = y_pos, annotations = label, tip_length = 0.04),
+        mapping = aes(
+            xmin = 1,
+            xmax = 2,
+            y_position = y_pos,
+            annotations = label,
+            tip_length = 0.04
+        ),
         manual = TRUE,
         inherit.aes = FALSE,
         color = "black",
@@ -76,7 +86,4 @@ pvals_plot <- plot_data |>
     facet_wrap(~outcome, ncol = 2, scales = "free") +
     coord_flip() +
     labs(y = "Coefficient", x = NULL, shape = NULL) +
-    theme_bw() +
-    theme(
-        legend.position = "bottom"
-    ))
+    theme_bw())
