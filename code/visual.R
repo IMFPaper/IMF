@@ -57,6 +57,7 @@ pvals_plot <- plot_data |>
     aes(x = term, y = estimate, shape = term)
 ) +
     geom_point(color = "black", position = position_dodge(width = 0.4)) +
+    geom_hline(yintercept = 0, linetype = "dashed") +
     geom_errorbar(
         aes(ymin = conf.low, ymax = conf.high),
         width = 0.2,
