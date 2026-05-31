@@ -10,7 +10,10 @@ load("save/regModels.RData")
 # Extract coefficients ----
 coef_df <- regModels |>
     map_dfr(get_estimates, .id = "outcome") |>
-    filter(term %in% c("us", "eu"))
+    filter(term %in% c("us", "eu")) |> 
+    mutate(
+        term = dplyr::recode(term, "us" = "USA", "eu" = "EUP"),
+    )
 
 # Extract p-values for equality test ----
 get_eq_p_value <- function(model) {
@@ -39,12 +42,12 @@ pvals_plot <- plot_data |>
     ) |>
     mutate(
         stars = case_when(
-            p_value < 0.001 ~ "***",
-            p_value < 0.01 ~ "**",
-            p_value < 0.05 ~ "*",
+            p_value < 0.001 ~ '~"***"',
+            p_value < 0.01   ~ '~"**"',
+            p_value < 0.05   ~ '~"*"',
             TRUE ~ ""
         ),
-        label = paste0("p=", formatC(p_value, format = "f", digits = 3), stars),
+        label = paste0("p == ", formatC(p_value, format = "f", digits = 3), stars),
         xmin = 1,
         xmax = 2
     )
@@ -62,14 +65,16 @@ pvals_plot <- plot_data |>
     ) +
     geom_signif(
         data = pvals_plot,
+        comparisons = list(c("USA", "EUP")),
         aes(xmin = xmin, xmax = xmax, y_position = y_pos, annotations = label),
         manual = TRUE,
         inherit.aes = FALSE,
         color = "black",
         tip_length = 0.01,
-        textsize = 3
+        textsize = 3,
+        parse = TRUE
     ) +
-    facet_wrap(~outcome, ncol = 2, scales = "free_x") +
+    facet_wrap(~outcome, ncol = 2, scales = "free") +
     coord_flip() +
     labs(y = "Coefficient", x = NULL, shape = NULL) +
     theme_bw() +
