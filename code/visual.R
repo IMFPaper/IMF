@@ -72,7 +72,7 @@ pvals_plot <- plot_data |>
     facet_wrap(~outcome, ncol = 2, scales = "free_y") +
     coord_flip() +
     labs(y = "Coefficient", x = NULL, shape = NULL) +
-    theme_classic() +
+    theme_bw() +
     theme(
         legend.position = "bottom",
         axis.text = element_text(color = "black"),
