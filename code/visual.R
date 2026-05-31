@@ -1,13 +1,22 @@
-# load packages and data ----
+######## INFO ########
+# Authors: Dianyi Yang
+# R Script
+# Purpose: This script extracts coefficients and creates coefficient plots with significance annotations.
+# Inputs:  data/panel_data_pca.rds
+#          save/regModels.RData
+# Outputs: save/coef_plot.rds
+
+# SETUP ----------------------------------------------------------------------------------------------------------------
+
 library('tidyverse')
 library('modelsummary')
 library('AER')
 library('ggsignif')
 
-data <- read_rds('data/panel_data_pca.rds')
-load("save/regModels.RData")
+data <- read_rds('data/panel_data_pca.rds') # Load PCA-augmented panel data
+load("save/regModels.RData") # Load regression models
 
-# Extract coefficients ----
+# Extract coefficients --------------------------------------------------------------------------------------------------------------------------
 coef_df <- regModels |>
     map_dfr(get_estimates, .id = "outcome") |>
     filter(term %in% c("us", "eu")) |>
@@ -15,7 +24,7 @@ coef_df <- regModels |>
         term = dplyr::recode(term, "us" = "USA", "eu" = "EUP"),
     )
 
-# Extract p-values for equality test ----
+# Extract p-values for equality test --------------------------------------------------------------------------------------------------------------------------
 get_eq_p_value <- function(model) {
     if (inherits(model, "tobit")) {
         lht(model, test = "F", "us=eu")[2, 4]
@@ -28,7 +37,7 @@ pvals_df <- tibble(
     p_value = map_dbl(regModels, get_eq_p_value)
 )
 
-# prepare data for plotting ----
+# Prepare data for plotting --------------------------------------------------------------------------------------------------------------------------
 plot_data <- coef_df |>
     left_join(pvals_df, by = "outcome")
 resultcheck::snapshot(plot_data, "plot_data")
@@ -56,7 +65,7 @@ pvals_plot <- plot_data |>
     )
 resultcheck::snapshot(pvals_plot, "pvals_plot")
 
-# Make the plot ----
+# Make the coefficient plot --------------------------------------------------------------------------------------------------------------------------
 (coef_plot <- ggplot(
     plot_data,
     aes(x = term, y = estimate)
