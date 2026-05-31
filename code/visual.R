@@ -48,8 +48,6 @@ pvals_plot <- plot_data |>
             TRUE ~ ""
         ),
         label = paste0("p == ", formatC(p_value, format = "f", digits = 3), stars),
-        xmin = 1,
-        xmax = 2
     )
 
 (coef_plot <- ggplot(
@@ -67,7 +65,7 @@ pvals_plot <- plot_data |>
     geom_signif(
         data = pvals_plot,
         comparisons = list(c("USA", "EUP")),
-        aes(xmin = xmin, xmax = xmax, y_position = y_pos, annotations = label),
+        mapping = aes(xmin = 1, xmax = 2, y_position = y_pos, annotations = label, tip_length = 0.04),
         manual = TRUE,
         inherit.aes = FALSE,
         color = "black",
