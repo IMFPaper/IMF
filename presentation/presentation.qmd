@@ -123,7 +123,9 @@ PCA extracts the common variation across:
 - Trade intensity
 - Banking exposure
 
-$\Rightarrow$ Constructing a single latent measure of **U.S. alignment** and a single latent measure of **European alignment**.
+$\Rightarrow$ Constructing a single latent measure of **U.S. alignment** and a single latent measure of **European alignment**[^1].
+
+[^1]: We operationalize "Europe" as the United Kingdom, France, and Germany — the three largest European economies with the most institutional weight in the IMF.
 
 ## Empirical Strategy (2/3)
 
