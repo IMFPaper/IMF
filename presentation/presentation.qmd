@@ -73,7 +73,7 @@ Who has more influence over the IMF — the U.S. or Europe?
     -   Consensus-based governance
     -   Closed-door negotiations
 
-## Empirical Strategy
+## Empirical Strategy (1/2)
 
 :::{.callout-note}
 ## Key assumption
@@ -87,7 +87,7 @@ $\Rightarrow$ We proxy U.S. and European influence using measures of political a
 The available data do not allow us to distinguish between active influence (e.g., lobbying or direct political pressure) and passive influence (e.g., IMF efforts to maintain good relations with powerful member states).
 :::
 
-## Proxies for influence
+## Empirical Strategy (2/2)
 
 ```{r}
 #| label: read-data
@@ -95,23 +95,21 @@ library(tidyverse)
 dta <- read_rds('data/panel_data_pca.rds')
 ```
 
--   Data source/empirical inspiration: @lipscy2018 (1980-2010)
+-   Data source: @lipscy2018
 
-    -   covers `r dta |> pull(country) |> unique() |> length()` countries between `r dta |> pull(panel) |> min() + 5` and `r dta |> pull(panel) |> max() + 5`.
+    -   `r dta |> pull(country) |> unique() |> length()` countries, `r dta |> pull(panel) |> min() + 5` - `r dta |> pull(panel) |> max() + 5`
 
-    -   but their focus is the effect on self-insurance
+    -   Focus: IMF lending as global financial insurance
 
-    -   did not separate Europe from the US - 'Western influence'
+    -   Treats US and European ties as a single measure of "Western influence"
 
--   Proxies for influence (merged through PCA)
+-   Proxies for political and economic alignment
 
-    -   Number of nationals employed as IMF economists
+    - UN General Assembly voting similarity
 
-    -   IMF quota.
+    - Bilateral trade intensity
 
-    -   US: UN affinity score with US, trade volume with US, US bank lending
-
-    -   European: UN affinity score with European powers, trade volume with European powers, European bank lending
+    - Banking sector exposure
 
 ## Empirical Strategy
 
