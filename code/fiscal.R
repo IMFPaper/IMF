@@ -88,14 +88,13 @@ rhs <- c(
   "rgdpchnewsquare",
   "growth1new",
   "reserv1",
-  "oecd1",
-  # "year1980", // dropped as fiscal data starts from 1999
-  # "year1985",
-  # "year1990",
-  "year1995",
-  "year2000"
+  "oecd1"
 )
-make_formula <- function(outcome) {
+make_formula <- function(outcome, period_fe = TRUE) {
+  if (period_fe) {
+    # dropped 1980-1985 as fiscal data starts from 1999, and 2010 as it is the reference category
+    rhs <- c(rhs, "year1995", "year2000", "year2005")
+  }
   as.formula(paste(outcome, paste(rhs, collapse = " + "), sep = " ~ "))
 }
 
