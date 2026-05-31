@@ -173,10 +173,6 @@ IMF lending outcomes are heavily left-censored at zero.
 
 -   $H_2$: The US/Europe exerts a statistically significant influence on IMF lending decisions, controlling for European/American influence.
 
-## Results from [@lipscy2018]
-
-![](images/clipboard-2567109775.png)
-
 ## Preliminary Results
 
 ```{r results}
