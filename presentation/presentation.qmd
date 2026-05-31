@@ -73,7 +73,7 @@ Who has more influence over the IMF — the U.S. or Europe?
     -   Consensus-based governance
     -   Closed-door negotiations
 
-## Empirical Strategy (1/2)
+## Empirical Strategy (1/3)
 
 :::{.callout-note}
 ## Key assumption
@@ -87,7 +87,7 @@ $\Rightarrow$ We proxy U.S. and European influence using measures of political a
 The available data do not allow us to distinguish between active influence (e.g., lobbying or direct political pressure) and passive influence (e.g., IMF efforts to maintain good relations with powerful member states).
 :::
 
-## Empirical Strategy (2/2)
+## Empirical Strategy (2/3)
 
 ```{r}
 #| label: read-data
@@ -125,25 +125,21 @@ PCA extracts the common variation across:
 
 $\Rightarrow$ Constructing a single latent measure of **U.S. alignment** and a single latent measure of **European alignment**.
 
-## Control Variables
+## Empirical Strategy (2/3)
 
-- Proxies for borrower influence
-
-    - Number of nationals employed as IMF economists
-
-    - IMF quota.
-
-## Empirical Strategy
-
--   Dependent variables
+- Outcome Variables:
 
     -   IMF loan to GDP ratio, IMF participation rate
 
     -   IMF loan approval, IMF conditions
 
--   Independent variables
+- Control Variables:
 
-    -   IMF influence proxies
+    - Proxies for borrower influence
+
+        - Number of nationals employed as IMF economists
+
+        - IMF quota.
 
     -   GDP, Growth
 
