@@ -31,6 +31,7 @@ pvals_df <- tibble(
 # prepare data for plotting ----
 plot_data <- coef_df |>
     left_join(pvals_df, by = "outcome")
+resultcheck::snapshot(plot_data, "plot_data")
 
 pvals_plot <- plot_data |>
     group_by(outcome) |>
@@ -53,7 +54,9 @@ pvals_plot <- plot_data |>
             stars
         ),
     )
+resultcheck::snapshot(pvals_plot, "pvals_plot")
 
+# Make the plot ----
 (coef_plot <- ggplot(
     plot_data,
     aes(x = term, y = estimate)
@@ -87,3 +90,5 @@ pvals_plot <- plot_data |>
     coord_flip() +
     labs(y = "Coefficient", x = NULL, shape = NULL) +
     theme_bw())
+resultcheck::snapshot(coef_plot, "coef_plot")
+write_rds(coef_plot, "save/coef_plot.rds")
