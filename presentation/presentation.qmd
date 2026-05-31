@@ -165,33 +165,33 @@ IMF lending outcomes are heavily left-censored at zero.
 -   \alert{Tobit} (continuous outcomes): loan size, participation rate, conditionality
 -   \alert{Probit} (binary outcome): loan approval
 
-## Hypotheses
+## Main Results
 
--   $H_1$: Either the US or Europe has more influence over the IMF.
-
-    -   Test of equality of the US and EU coefficients.
-
--   $H_2$: The US/Europe exerts a statistically significant influence on IMF lending decisions, controlling for European/American influence.
-
-## Preliminary Results
-
-```{r results}
-load('save/regTable.RData')
-resultsTable |>
-  tinytable::theme_latex(resize_width = 0.81, resize_direction = "down")
+```{r}
+#| label: fig-coef-main
+coef_plot <- read_rds("save/coef_plot.rds")
+coef_plot
 ```
 
-## Interpretation of Results
+## Results Interpretation
 
--   $H_1$: The evidence supports the hypothesis that Europe exerts greater influence over the IMF than the United States, particularly in determining loan amounts and participation rates.
+**Europe: Institutional influence**
 
--   $H_2$: The results offer a more nuanced view.
+Stronger European alignment is associated with:
 
-    -   European influence is statistically significant in shaping the loan-to-GDP ratio, participation rate, and loan approval.
+- higher loan approval rates
+- larger loan sizes
+- greater programme participation
 
-    -   In contrast, US influence is **only** significant in reducing the number of IMF conditions.
+$\Rightarrow$ European influence appears concentrated in \alert{access} to IMF resources.
 
-    -   This finding echoes @lutz2014, who argue that European actors have historically adhered more strictly to the principles of the Washington Consensus than their US counterparts.
+**United States: Programmatic influence**
+
+Stronger US alignment is associated with:
+
+- fewer IMF conditions
+
+$\Rightarrow$ American influence appears concentrated in the \alert{design} of IMF programmes rather than lending access.
 
 ## References {.unnumbered .allowframebreaks}
 
