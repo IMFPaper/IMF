@@ -104,7 +104,7 @@ msummary(condition, stars = TRUE)
 
 ## Tobit Total number of IMF conditions (new data) ----------------------------------------------------------------------------------------------------------------------
 fiscal_condition <- tobit(
-  make_formula("numb_fiscal"),
+  make_formula("numb_fiscal", period_fe = FALSE),
   data = data_new,
   left = 0,
   right = Inf,
