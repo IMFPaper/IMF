@@ -74,9 +74,5 @@ pvals_plot <- plot_data |>
     labs(y = "Coefficient", x = NULL, shape = NULL) +
     theme_bw() +
     theme(
-        legend.position = "bottom",
-        axis.text = element_text(color = "black"),
-        axis.title = element_text(color = "black"),
-        strip.text = element_text(color = "black"),
-        plot.title = element_text(color = "black")
+        legend.position = "bottom"
     ))
