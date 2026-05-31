@@ -21,22 +21,22 @@ format:
 
 ## Background (1/2)
 
--   Bretton Woods agreement in 1944: established the International Monetary Fund (IMF) and the World Bank [@jensen2004].
+- Bretton Woods agreement in 1944: established the International Monetary Fund (IMF) and the World Bank [@jensen2004].
 
-    -   World Bank: focuses on economic assistance for *development* projects.
-    -   IMF: initially focused on *exchange rate stability* and *balance-of-payment* crises.
+  - World Bank: focuses on economic assistance for *development* projects.
+  - IMF: initially focused on *exchange rate stability* and *balance-of-payment* crises.
 
--   "Gentlemen's agreement" [@keating2024; @weiss2023]: 
+- "Gentlemen's agreement" [@keating2024; @weiss2023]:
 
-    - the IMF managing director being a \alert{European};
-    - the World Bank president being an American.
+  - the IMF managing director being a \alert{European};
+  - the World Bank president being an American.
 
 ## Background (2/2)
 
--   IMF gradually expanded its role into *structural adjustment* and *domestic economic governance*, attaching \alert{conditions} to its loans [@barnett2004].
+- IMF gradually expanded its role into *structural adjustment* and *domestic economic governance*, attaching \alert{conditions} to its loans [@barnett2004].
 
-    - Neoclassical "sound economic" policies: fiscal austerity, trade liberalization, privatization, deregulation [@nelson2014].
-    - Yet many have documented *negative* consequences [@garuda2000; @lang2020; @oberdabernig2013; @dreher2006; @przeworski2000; @casper2017; @hartzell2010].
+  - Neoclassical "sound economic" policies: fiscal austerity, trade liberalization, privatization, deregulation [@nelson2014].
+  - Yet many have documented *negative* consequences [@garuda2000; @lang2020; @oberdabernig2013; @dreher2006; @przeworski2000; @casper2017; @hartzell2010].
 
 - Neo-colonialism critique: serving the interests of the \alert{West} [@stone2011; @barnett2004; @cain2022; @chen2021; @hickel2020; @moyo2024].
 
@@ -56,26 +56,26 @@ Who has more influence over the IMF — the U.S. or Europe?
 
 ## Competing Claims
 
--   The case for U.S. dominance:
+- The case for U.S. dominance:
 
-    -   Hegemon of the Bretton Woods system
-    -   Headquarters in Washington, D.C. [@stone2011, p.57]
-    -   Veto power and the largest single-country vote share
+  - Hegemon of the Bretton Woods system
+  - Headquarters in Washington, D.C. [@stone2011, p.57]
+  - Veto power and the largest single-country vote share
 
--   The case for European dominance:
+- The case for European dominance:
 
-    -   European managing director
-    -   Larger combined voting share
-    -   Coordination mechanisms: SCIMF and EURIMF [@lutz2014]
+  - European managing director
+  - Larger combined voting share
+  - Coordination mechanisms: SCIMF and EURIMF [@lutz2014]
 
--   Difficulties in comparison:
+- Difficulties in comparison:
 
-    -   Consensus-based governance
-    -   Closed-door negotiations
+  - Consensus-based governance
+  - Closed-door negotiations
 
 ## Empirical Strategy (1/3)
 
-:::{.callout-note}
+::: callout-note
 ## Key assumption
 
 Western powers are more likely to support favourable IMF lending outcomes for countries with which they maintain closer political and economic relationships.
@@ -83,7 +83,7 @@ Western powers are more likely to support favourable IMF lending outcomes for co
 
 $\Rightarrow$ We proxy U.S. and European influence using measures of political and economic alignment and assess whether these are *systematically associated* with IMF lending outcomes [@barro2005; @lipscy2018].
 
-:::{.callout-warning}
+::: callout-warning
 The available data do not allow us to distinguish between active influence (e.g., lobbying or direct political pressure) and passive influence (e.g., IMF efforts to maintain good relations with powerful member states).
 :::
 
@@ -95,21 +95,21 @@ library(tidyverse)
 dta <- read_rds('data/panel_data_pca.rds')
 ```
 
--   Data source: @lipscy2018
+- Data source: @lipscy2018
 
-    -   `r dta |> pull(country) |> unique() |> length()` countries, `r dta |> pull(panel) |> min() + 5` - `r dta |> pull(panel) |> max() + 5`
+  - `r dta |> pull(country) |> unique() |> length()` countries, `r dta |> pull(panel) |> min() + 5` - `r dta |> pull(panel) |> max() + 5`
 
-    -   Focus: IMF lending as global financial insurance
+  - Focus: IMF lending as global financial insurance
 
-    -   Treats US and European ties as a single measure of "Western influence"
+  - Treats US and European ties as a single measure of "Western influence"
 
--   Proxies for political and economic alignment
+- Proxies for political and economic alignment
 
-    - UN General Assembly voting similarity
+  - UN General Assembly voting similarity
 
-    - Bilateral trade intensity
+  - Bilateral trade intensity
 
-    - Banking sector exposure
+  - Banking sector exposure
 
 ## Dimension Reduction: PCA
 
@@ -129,41 +129,39 @@ $\Rightarrow$ Constructing a single latent measure of **U.S. alignment** and a s
 
 - Outcome Variables:
 
-    -   IMF loan to GDP ratio, IMF participation rate
+  - IMF loan to GDP ratio, IMF participation rate
 
-    -   IMF loan approval, IMF conditions
+  - IMF loan approval, IMF conditions
 
 - Control Variables:
 
-    - Proxies for borrower influence
+  - Proxies for borrower influence
 
-        - Number of nationals employed as IMF economists
+    - Number of nationals employed as IMF economists
 
-        - IMF quota.
+    - IMF quota.
 
-    -   GDP, Growth
+  - GDP, Growth
 
-    -   Reserves, OECD
+  - Reserves, OECD
 
 ## Model Specification
 
-$$
-Y^*_{it} = \alpha + \beta_1 \text{USA}_{it} + \beta_2 \text{EUP}_{it} + \gamma^\top \mathbf{P}_{it} + \delta^\top \mathbf{Z}_{it} + \lambda_t + \epsilon_{it}
-$$
+$$Y^*_{it} = \alpha + \beta_1 \text{USA}_{it} + \beta_2 \text{EUP}_{it} + \gamma^\top \mathbf{P}_{it} + \delta^\top \mathbf{Z}_{it} + \lambda_t + \epsilon_{it}$$
 
 where:
 
--   $\text{USA}_{it}$, $\text{EUP}_{it}$​: PCA-based alignment measures
--   $\mathbf{P}_{it}$: GDP and GDP per capita controls (including quadratic terms) [@barro2005; @lipscy2018].
--   $\mathbf{Z}_{it}$: macroeconomic and institutional controls
--   $\lambda_t$: five-year period fixed effects.
+- $\text{USA}_{it}$, $\text{EUP}_{it}$​: PCA-based alignment measures
+- $\mathbf{P}_{it}$: GDP and GDP per capita controls (including quadratic terms) [@barro2005; @lipscy2018].
+- $\mathbf{Z}_{it}$: macroeconomic and institutional controls
+- $\lambda_t$: five-year period fixed effects.
 
 **Estimation**
 
 IMF lending outcomes are heavily left-censored at zero.
 
--   \alert{Tobit} (continuous outcomes): loan size, participation rate, conditionality
--   \alert{Probit} (binary outcome): loan approval
+- \alert{Tobit} (continuous outcomes): loan size, participation rate, conditionality
+- \alert{Probit} (binary outcome): loan approval
 
 ## Main Results
 
@@ -199,8 +197,8 @@ $\Rightarrow$ American influence appears concentrated in the \alert{design} of I
 
 - Closer ties with Europe are not associated with fewer conditions.
 - One possible explanation is that European actors view fiscal discipline and structural reform as *desirable* policy outcomes rather than concessions to be relaxed for political partners.
-    - Unwilling rather than unable to reduce conditionality.
-    - Echoes @lutz2014, who argue that European actors have often adhered more strongly to orthodox economic principles than their U.S. counterparts.
+  - Unwilling rather than unable to reduce conditionality.
+  - Echoes @lutz2014, who argue that European actors have often adhered more strongly to orthodox economic principles than their U.S. counterparts.
 
 $\Rightarrow$ European influence may facilitate access to IMF resources without softening programme discipline.
 
