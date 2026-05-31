@@ -69,7 +69,7 @@ pvals_plot <- plot_data |>
         tip_length = 0.01,
         textsize = 3
     ) +
-    facet_wrap(~outcome, ncol = 2, scales = "free_y") +
+    facet_wrap(~outcome, ncol = 2, scales = "free_x") +
     coord_flip() +
     labs(y = "Coefficient", x = NULL, shape = NULL) +
     theme_bw() +
