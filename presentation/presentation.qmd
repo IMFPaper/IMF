@@ -248,6 +248,29 @@ $\Rightarrow$ European influence does not appear primarily driven by preferentia
 
 $\Rightarrow$ Consistent with a broader institutional form of influence.
 
+## Thank You
+
+\vspace{1em}
+
+Thank you for listening!
+
+\vspace{1.5em}
+
+I particularly welcome feedback on:
+
+\vspace{0.5em}
+
+- Europe and neoliberal orthodoxy
+- Case studies that could help evaluate the argument
+- Alternative mechanisms or interpretations
+- Relevant qualitative or historical evidence
+
+\vspace{1em}
+
+\begin{center}
+\texttt{\small dianyi.yang@politics.ox.ac.uk}
+\end{center}
+
 ## References {.unnumbered .allowframebreaks}
 
 ::: {#refs}
