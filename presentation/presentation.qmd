@@ -129,7 +129,7 @@ $\Rightarrow$ Constructing a single latent measure of **U.S. alignment** and a s
 
 ## Empirical Strategy (3/3)
 
-- Outcome Variables:
+- Outcome Variables[^2]:
 
   - IMF loan to GDP ratio, IMF participation rate
 
@@ -146,6 +146,8 @@ $\Rightarrow$ Constructing a single latent measure of **U.S. alignment** and a s
   - GDP, Growth
 
   - Reserves, OECD
+
+[^2]: We only include Stand-By Arrangements (SBA) and Extended Fund Facility (EFF) programmes for comparability with prior studies [@lipscy2018; @barro2005; @dreher2006].
 
 ## Model Specification
 
